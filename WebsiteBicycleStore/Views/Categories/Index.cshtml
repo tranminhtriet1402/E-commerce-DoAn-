@@ -34,8 +34,13 @@
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
                         @Session["EmailAdmin"]
                         <span class="caret"></span>
-                    </a>            
+                    </a>
                 </li>
+                @if (@Session["EmailAdmin"] != null)
+                {
+                    <li><a href="@Url.Action("LogOut", "Login_SignUp")">Log Out</a></li>
+
+                }
             </ul>
         </div><!-- /.navbar-collapse -->
     </div><!-- /.container-fluid -->
