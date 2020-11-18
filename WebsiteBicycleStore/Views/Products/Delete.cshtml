@@ -1,0 +1,143 @@
+﻿@model WebsiteBicycleStore.Models.Product
+
+@{
+    ViewBag.Title = "Delete";
+    Layout = "~/Views/AdminLayout.cshtml";
+}
+
+
+<nav class="navbar navbar-default navbar-static-top">
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="#">
+                Quản Lý Website Bán Xe Đạp
+            </a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            <form class="navbar-form navbar-left" method="GET" role="search">
+                <div class="form-group">
+                    <input type="text" name="q" class="form-control" placeholder="Search">
+                </div>
+                <button type="submit" class="btn btn-default"><i class="glyphicon glyphicon-search"></i></button>
+            </form>
+            <ul class="nav navbar-nav navbar-right">
+                <li><a href="/Home/Index" target="_blank">Visit Site</a></li>
+                <li class="dropdown ">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+                        @Session["EmailAdmin"]
+                        <span class="caret"></span>
+                    </a>
+                </li>
+            </ul>
+        </div><!-- /.navbar-collapse -->
+    </div><!-- /.container-fluid -->
+</nav>
+<div class="container-fluid main-container">
+    <div class="col-md-2 sidebar">
+        <ul class="nav nav-pills nav-stacked">
+            <li><a href="/Users/Index">Khách Hàng</a></li>
+            <li class="active"><a href="/Products/Index">Sản Phẩm</a></li>
+            <li><a href="/Categories/Index">Loại Sản Phẩm</a></li>
+            <li><a href="/Orders/Index">Đơn Hàng</a></li>
+            <li><a href="/OrderDetails/Index">Chi Tiết Đơn hàng</a></li>
+        </ul>
+    </div>
+    <div class="col-md-10 content">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                Sản Phẩm
+            </div>
+            <div class="panel-body">
+                <h3>Are you sure you want to delete this?</h3>
+                <div>
+                    <hr />
+                    <dl class="dl-horizontal">
+                        <dt>
+                            @Html.DisplayNameFor(model => model.NameProduct)
+                        </dt>
+
+                        <dd>
+                            @Html.DisplayFor(model => model.NameProduct)
+                        </dd>
+
+                        <dt>
+                            @Html.DisplayNameFor(model => model.UnitPrice)
+                        </dt>
+
+                        <dd>
+                            @Html.DisplayFor(model => model.UnitPrice)
+                        </dd>
+
+                        <dt>
+                            @Html.DisplayNameFor(model => model.Images)
+                        </dt>
+
+                        <dd>
+                            <img src="@Url.Content(Model.Images)" style="width:100px;height:100px" />
+                        </dd>
+
+                        <dt>
+                            @Html.DisplayNameFor(model => model.ProductDate)
+                        </dt>
+
+                        <dd>
+                            @Html.DisplayFor(model => model.ProductDate)
+                        </dd>
+
+                        <dt>
+                            @Html.DisplayNameFor(model => model.Available)
+                        </dt>
+
+                        <dd>
+                            @Html.DisplayFor(model => model.Available)
+                        </dd>
+
+                        <dt>
+                            @Html.DisplayNameFor(model => model.Descriptions)
+                        </dt>
+
+                        <dd>
+                            @Html.DisplayFor(model => model.Descriptions)
+                        </dd>
+
+                        <dt>
+                            @Html.DisplayNameFor(model => model.Category.NameCategory)
+                        </dt>
+
+                        <dd>
+                            @Html.DisplayFor(model => model.Category.NameCategory)
+                        </dd>
+
+                    </dl>
+
+                    @using (Html.BeginForm())
+                    {
+                        @Html.AntiForgeryToken()
+
+                        <div class="form-actions no-color">
+                            <input type="submit" value="Delete" class="btn btn-default" /> |
+                            @Html.ActionLink("Back to List", "Index")
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+    <footer class="pull-left footer">
+        <p class="col-md-12">
+            <hr class="divider">
+            Copyright &COPY; 2015 <a href="http://www.pingpong-labs.com">Gravitano</a>
+        </p>
+    </footer>
+</div>
+
+

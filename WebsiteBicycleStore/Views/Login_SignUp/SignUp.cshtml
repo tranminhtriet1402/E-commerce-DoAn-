@@ -1,0 +1,78 @@
+﻿@model WebsiteBicycleStore.Models.User
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>SignUp</title>
+    <link href="~/Content/loginsignup.css" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css?family=Nunito:400,600,700,800&display=swap" rel="stylesheet">
+    <style>
+    </style>
+
+</head>
+<body>
+       
+    <div class="cont">
+        @*Xử lý Đăng Nhập*@
+        @using (Html.BeginForm("SignUp", "Login_SignUp", FormMethod.Post))
+        {
+            @Html.AntiForgeryToken()
+            <div class="form sign-in">
+                <h2>Sign Up</h2>
+                    <label>
+                        <span>First Name</span>
+                        @Html.TextBoxFor(m => m.FirstName)
+                    </label>
+                    <label>
+                        <span>Last Name</span>
+                        @Html.TextBoxFor(m => m.LastName)
+                    </label>
+                    <label>
+                        <span>Email</span>
+                        @Html.TextBoxFor(m => m.Email)
+                    </label>
+                    <label>
+                        <span>Password</span>
+                        @Html.PasswordFor(m => m.Password)
+                    </label>
+                    <label>
+                        <span>Confirm Password</span>
+                        <input type="password" name="confirmpassword">
+                    </label>
+                 @if (ViewBag.error != null)
+                            {
+                               
+                                    <label> @ViewBag.error</label>
+                               
+                            }
+                            else
+                            {
+                         <label>  @Html.ValidationMessageFor(m => m.Password)</label>
+                               
+                            }
+                     @if (ViewBag.error1 != null)
+                            {
+                                <label>
+                                    @ViewBag.error1
+                                </label>
+                            }     
+                    <button @*type="button"*@ class="submit">Sign Up Now</button>
+                    <label style="width:auto">Nếu bạn đã có tài khoản ? <a href="/Login_SignUp/Login">Sign In</a></label>
+
+                
+            </div>
+        }
+
+
+
+
+
+    </div>
+
+</body>
+</html>

@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="b2316fcfc585470b9413521e11c620e7" Name="Diagram1">
+        <EntityTypeShape EntityType="DB_BicycleStoreModel.Category" Width="1.5" PointX="0.75" PointY="7.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="DB_BicycleStoreModel.User" Width="1.5" PointX="0.75" PointY="1.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="DB_BicycleStoreModel.Order" Width="1.5" PointX="3" PointY="1" />
+        <EntityTypeShape EntityType="DB_BicycleStoreModel.OrderDetail" Width="1.5" PointX="5.25" PointY="1.125" />
+        <AssociationConnector Association="DB_BicycleStoreModel.FK__OrderDeta__Quant__4E88ABD4" />
+        <AssociationConnector Association="DB_BicycleStoreModel.FK__Orders__Descript__4CA06362" />
+        <EntityTypeShape EntityType="DB_BicycleStoreModel.Product" Width="1.5" PointX="3" PointY="7" />
+        <AssociationConnector Association="DB_BicycleStoreModel.FK__Products__IDCate__49C3F6B7" />
+        <AssociationConnector Association="DB_BicycleStoreModel.FK__OrderDeta__IDPro__4F7CD00D" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

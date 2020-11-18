@@ -1,0 +1,113 @@
+﻿@model WebsiteBicycleStore.Models.User
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/AdminLayout.cshtml";
+}
+
+<nav class="navbar navbar-default navbar-static-top">
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="#">
+                Quản Lý Website Bán Xe Đạp
+            </a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            <form class="navbar-form navbar-left" method="GET" role="search">
+                <div class="form-group">
+                    <input type="text" name="q" class="form-control" placeholder="Search">
+                </div>
+                <button type="submit" class="btn btn-default"><i class="glyphicon glyphicon-search"></i></button>
+            </form>
+            <ul class="nav navbar-nav navbar-right">
+                <li><a href="/Home/Index" target="_blank">Visit Site</a></li>
+                <li class="dropdown ">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+                        @Session["EmailAdmin"]
+                        <span class="caret"></span>
+                    </a>
+                </li>
+            </ul>
+        </div><!-- /.navbar-collapse -->
+    </div><!-- /.container-fluid -->
+</nav>
+<div class="container-fluid main-container">
+    <div class="col-md-2 sidebar">
+        <ul class="nav nav-pills nav-stacked">
+            <li class="active"><a href="/Users/Index">Khách Hàng</a></li>
+            <li><a href="/Products/Index">Sản Phẩm</a></li>
+            <li><a href="/Categories/Index">Loại Sản Phẩm</a></li>
+            <li><a href="/Orders/Index">Đơn Hàng</a></li>
+            <li><a href="/OrderDetails/Index">Chi Tiết Đơn hàng</a></li>
+        </ul>
+    </div>
+    <div class="col-md-10 content">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                Đơn hàng
+            </div>
+            <div class="panel-body">
+                <div>
+                    <h4>Thông tin khách hàng @Html.DisplayFor(model => model.LastName)</h4>
+                    <hr />
+                    <dl class="dl-horizontal">
+                        <dt>
+                            @Html.DisplayNameFor(model => model.FirstName)
+                        </dt>
+
+                        <dd>
+                            @Html.DisplayFor(model => model.FirstName)
+                        </dd>
+
+                        <dt>
+                            @Html.DisplayNameFor(model => model.LastName)
+                        </dt>
+
+                        <dd>
+                            @Html.DisplayFor(model => model.LastName)
+                        </dd>
+
+                        <dt>
+                            @Html.DisplayNameFor(model => model.Email)
+                        </dt>
+
+                        <dd>
+                            @Html.DisplayFor(model => model.Email)
+                        </dd>
+
+                        <dt>
+                            @Html.DisplayNameFor(model => model.Password)
+                        </dt>
+
+                        <dd>
+                            @Html.DisplayFor(model => model.Password)
+                        </dd>
+
+                    </dl>
+                </div>
+                <p>
+                    @Html.ActionLink("Edit", "Edit", new { id = Model.IDUser }) |
+                    @Html.ActionLink("Back to List", "Index")
+                </p>
+            </div>
+
+
+        </div>
+    </div>
+    <footer class="pull-left footer">
+        <p class="col-md-12">
+            <hr class="divider">
+            Copyright &COPY; 2015 <a href="http://www.pingpong-labs.com">Gravitano</a>
+        </p>
+    </footer>
+</div>
+

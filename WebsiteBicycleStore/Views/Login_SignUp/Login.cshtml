@@ -1,0 +1,58 @@
+﻿@model WebsiteBicycleStore.Models.User
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Login</title>
+    <link href="~/Content/loginsignup.css" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css?family=Nunito:400,600,700,800&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="cont">
+        @*Xử lý Đăng Nhập*@
+        @using (Html.BeginForm("Login", "Login_SignUp", FormMethod.Post))
+        {
+            @Html.AntiForgeryToken()
+            <div class="form sign-in">
+                <h2>Sign In</h2>
+
+                <label>
+                    <span>Email Address</span>
+                    @Html.TextBoxFor(m => m.Email)
+                </label>
+                <label>
+                    <span>Password</span>
+                    @Html.PasswordFor(m => m.Password)
+                </label>
+                 @if (ViewBag.loidangnhap!=null)
+                            {
+                             <label>@ViewBag.loidangnhap</label>
+                            }
+                       
+               
+                <button class="submit" @*type="button"*@>Sign In</button>
+                <label  style="width:auto">Nếu bạn chưa có tài khoản ? <a href="/Login_SignUp/SignUp">Sign Up</a></label>
+                
+                <div class="social-media">
+                    <ul>
+                        <li><img src="~/Content/images/facebook.png"></li>
+                        <li><img src="~/Content/images/instagram.png"></li>
+                        <li><img src="~/Content/images/linkedin.png"></li>
+                        <li><img src="~/Content/images/twitter.png"></li>
+                    </ul>
+                </div>
+            </div>
+        }
+        
+                
+
+
+        
+    </div>
+</body>
+</html>
