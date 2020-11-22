@@ -1,5 +1,87 @@
-﻿
+﻿@model IEnumerable<WebsiteBicycleStore.Models.Product>
 @{
-    ViewBag.Title = "Index";
-    Layout = "~/Views/_LayoutPage1.cshtml";
+    Layout = null;
 }
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Index</title>
+    <link href="~/Content/trangchustyle.css" rel="stylesheet" />
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" />
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="header">
+        <div class="container">
+            <div class="=navbar">
+                <div class="logo">
+                    <img src="~/Content/images/Logo.png" style="width:125px" />
+                </div>
+                <nav>
+                    <ul>
+                        <li><a href="#">Home</a></li>
+                        <li><a href="#">Product</a></li>
+                        <li><a href="#">Login</a></li>
+                        <li><a href="#">Home</a></li>
+                        <li><img src="~/Content/images/cart.png" style="width:30px;height:30px" /></li>
+
+                    </ul>
+                </nav>
+
+            </div>
+            <div class="row">
+                <div class="col-md-2">
+                    <h1>Give Your Workout <br />A New Bike!</h1>
+                    <p>Best For You Best For Sports</p>
+                    <a href="" class="btn">Explore Now &#8594;</a>
+                </div>
+                <div class="col-md-2">
+                    <img src="~/Content/images/banner.jpg" />
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!--categories-->
+    <div class="categories">
+        <div class="small-container">
+            <div class="row">
+                <div class="col-md-3">
+                    <img src="~/Content/images/xedapdua_cate.jpg" style="width:400px;height:400px" />
+                </div>
+                <div class="col-md-3">
+                    <img src="~/Content/images/xedapdiahinh_cate.jpg" style="width:400px;height:400px" />
+                </div>
+                <div class="col-md-3">
+                    <img src="~/Content/images/xedapduongpho_cate.jpg" style="width:400px;height:400px" />
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <!--Product-->
+    <div class="categories">
+        <div class="small-container">
+            <h2 class="title">Sản Phẩm</h2>
+            <div class="row">
+                @foreach (var item in Model)
+                {
+                    <div class="col-4">
+                        <img src="@Url.Content(item.Images)" style="height:200px;width:200px" />
+                        <h4>@Html.DisplayFor(modelItem => item.NameProduct)</h4>
+                        <p>$@Html.DisplayFor(modelItem => item.UnitPrice)</p>
+                    </div>
+                }
+
+
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>

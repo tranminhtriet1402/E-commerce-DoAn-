@@ -231,20 +231,27 @@
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\images\add.png" />
     <Content Include="Content\images\background.png" />
+    <Content Include="Content\images\banner.jpg" />
+    <Content Include="Content\images\cart.png" />
     <Content Include="Content\images\facebook.png" />
     <Content Include="Content\images\iconSC.png" />
     <Content Include="Content\images\instagram.png" />
     <Content Include="Content\images\linkedin.png" />
+    <Content Include="Content\images\Logo.png" />
     <Content Include="Content\images\QC1.jpg" />
     <Content Include="Content\images\QC2.jpg" />
     <Content Include="Content\images\QC3.jpg" />
     <Content Include="Content\images\QuangCao.jpg" />
     <Content Include="Content\images\twitter.png" />
+    <Content Include="Content\images\xedapdiahinh_cate.jpg" />
+    <Content Include="Content\images\xedapdua_cate.jpg" />
+    <Content Include="Content\images\xedapduongpho_cate.jpg" />
     <Content Include="Content\loginsignup.css" />
     <Content Include="Content\menufixed.css" />
     <Content Include="Content\adminmenu.css" />
     <Content Include="Content\script.js" />
     <Content Include="Content\style.css" />
+    <Content Include="Content\trangchustyle.css" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
@@ -291,7 +298,6 @@
     <Content Include="Views\Web.config" />
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\_LayoutPage1.cshtml" />
-    <Content Include="Views\Admin\Index.cshtml" />
     <Content Include="Views\Users\Create.cshtml" />
     <Content Include="Views\Users\Delete.cshtml" />
     <Content Include="Views\Users\Details.cshtml" />
@@ -321,9 +327,11 @@
     <Content Include="Views\Products\Edit.cshtml" />
     <Content Include="Views\Login_SignUp\Login.cshtml" />
     <Content Include="Views\Login_SignUp\SignUp.cshtml" />
+    <Content Include="Views\MenuLayout.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Views\Admin\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />

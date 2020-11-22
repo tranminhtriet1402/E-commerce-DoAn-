@@ -1,0 +1,34 @@
+﻿<!DOCTYPE html>
+
+XỬ DỤNG CHO CÁC TRANG CHI TIẾT 
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>@ViewBag.Title</title>
+    <link href="~/Content/trangchustyle.css" rel="stylesheet" />
+</head>
+<body>
+    <div class="container">
+        <div class="=navbar">
+            <div class="logo">
+                <img src="~/Content/images/Logo.png" style="width:125px" />
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="#">Home</a></li>
+                    <li><a href="#">Product</a></li>
+                    <li><a href="#">Login</a></li>
+                    <li><a href="#">Home</a></li>
+                </ul>
+            </nav>
+        </div>
+    </div>
+    
+
+
+    <div>
+        @RenderBody()
+    </div>
+</body>
+</html>
