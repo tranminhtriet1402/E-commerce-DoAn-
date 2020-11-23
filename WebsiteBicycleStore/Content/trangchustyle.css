@@ -126,9 +126,9 @@ p{
     text-decoration-line:underline;
 }
 
-    /*.title::after(2) {
-        content: '  ';
-        background: #ff0000;
+/*.title::after {
+        content: '';
+        background-color: red;
         width: 80px;
         border-radius: 5px;
         position: absolute;
@@ -146,4 +146,65 @@ h4{
 
 .col-4:hover{
     transform:translateY(-5px);
+}
+
+/*Chỉnh sửa LogoQCr*/
+.brands{
+    margin:100px auto;
+}
+.col-5{
+    width:160px;
+}
+.col-5 img{
+    cursor:pointer;
+}
+
+/*footerr*/
+/*.footer{
+    background-color:#000;
+    color:#8a8a8a;
+    font-size:14px;
+    padding: 60px 0 20px;
+}*/
+
+.menu-icon{
+    width:28px;
+    margin-left:20px;
+    display:none;
+}
+
+@media only screen and (max-width:800px){
+    nav ul{
+        position:absolute;
+        top:80px;
+        left:0;
+        background-color:#333;
+        width:100%;
+        overflow:hidden;
+        transition:max-height 0.5s;
+    }
+    nav ul li{
+        display:block;
+        margin-right:20px;
+        margin-top:0px;
+        margin-bottom:10px;
+    }
+        nav ul li a{
+            color:#fff;
+        }
+    .menu-icon{
+        display:inline-block;
+        cursor:pointer;
+    }
+}
+
+
+@media only screen and (max-width:600px){
+    .row{
+        text-align:center;
+        
+    }
+    .col-md-2, .col-md-3, .col-4{
+        flex-basis:100%;
+    }
 }

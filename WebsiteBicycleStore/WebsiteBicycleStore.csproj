@@ -237,7 +237,9 @@
     <Content Include="Content\images\iconSC.png" />
     <Content Include="Content\images\instagram.png" />
     <Content Include="Content\images\linkedin.png" />
+    <Content Include="Content\images\logo-black.png" />
     <Content Include="Content\images\Logo.png" />
+    <Content Include="Content\images\menu.png" />
     <Content Include="Content\images\QC1.jpg" />
     <Content Include="Content\images\QC2.jpg" />
     <Content Include="Content\images\QC3.jpg" />
@@ -246,6 +248,14 @@
     <Content Include="Content\images\xedapdiahinh_cate.jpg" />
     <Content Include="Content\images\xedapdua_cate.jpg" />
     <Content Include="Content\images\xedapduongpho_cate.jpg" />
+    <Content Include="Content\images\xedap_logo1.jpg" />
+    <Content Include="Content\images\xedap_logo2.png" />
+    <Content Include="Content\images\xedap_logo3.png" />
+    <Content Include="Content\images\xedap_logo4.png" />
+    <Content Include="Content\images\xedap_logo5.jpg" />
+    <Content Include="Content\images\xedap_QC1.jpg" />
+    <Content Include="Content\images\xedap_QC2.jpg" />
+    <Content Include="Content\images\xedap_QC3.jpg" />
     <Content Include="Content\loginsignup.css" />
     <Content Include="Content\menufixed.css" />
     <Content Include="Content\adminmenu.css" />

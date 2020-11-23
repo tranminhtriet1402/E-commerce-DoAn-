@@ -7,29 +7,39 @@
 
 <html>
 <head>
-    <meta name="viewport" content="width=device-width" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Index</title>
     <link href="~/Content/trangchustyle.css" rel="stylesheet" />
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" />
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
 </head>
 <body>
     <div class="header">
         <div class="container">
             <div class="=navbar">
                 <div class="logo">
-                    <img src="~/Content/images/Logo.png" style="width:125px" />
+                    <img src="~/Content/images/logo-black.png" style="width:125px" />
                 </div>
                 <nav>
-                    <ul>
+                    <ul id="MenuItems">
                         <li><a href="#">Home</a></li>
                         <li><a href="#">Product</a></li>
-                        <li><a href="#">Login</a></li>
-                        <li><a href="#">Home</a></li>
-                        <li><img src="~/Content/images/cart.png" style="width:30px;height:30px" /></li>
+                        @if (@Session["Email"] == null)
+                        {
+                            <li><a href="/Login_SignUp/Login">Login</a></li>
+                        }
+                        else
+                        {
+                            <li><a href="#">@Session["Email"]</a></li>
+                            <li><a href="@Url.Action("LogOut","Login_SignUp")">LogOut</a></li>
+                        }
 
+                        
                     </ul>
+                    <img src="~/Content/images/cart.png" style="width:30px;height:30px" />
+                    <img class="menu-icon" src="~/Content/images/menu.png"   onclick="menutoggle()"/>
                 </nav>
 
             </div>
@@ -50,13 +60,13 @@
     <div class="categories">
         <div class="small-container">
             <div class="row">
-                <div class="col-md-3">
+                <div class="col-3">
                     <img src="~/Content/images/xedapdua_cate.jpg" style="width:400px;height:400px" />
                 </div>
-                <div class="col-md-3">
+                <div class="col-3">
                     <img src="~/Content/images/xedapdiahinh_cate.jpg" style="width:400px;height:400px" />
                 </div>
-                <div class="col-md-3">
+                <div class="col-3">
                     <img src="~/Content/images/xedapduongpho_cate.jpg" style="width:400px;height:400px" />
                 </div>
             </div>
@@ -67,13 +77,40 @@
     <!--Product-->
     <div class="categories">
         <div class="small-container">
-            <h2 class="title">Sản Phẩm</h2>
+            <h2 class="title">Sản Phẩm 1</h2>
             <div class="row">
                 @foreach (var item in Model)
                 {
                     <div class="col-4">
                         <img src="@Url.Content(item.Images)" style="height:200px;width:200px" />
                         <h4>@Html.DisplayFor(modelItem => item.NameProduct)</h4>
+                        <div class="rating">
+                            <i class="fa fa-star"></i>
+                            <i class="fa fa-star"></i>
+                            <i class="fa fa-star"></i>
+                            <i class="fa fa-star-half-o"></i>
+                            <i class="fa fa-star-o"></i>
+                        </div>
+                        <p>$@Html.DisplayFor(modelItem => item.UnitPrice)</p>
+                    </div>
+                }
+
+
+            </div>
+            <h2 class="title">Sản Phẩm 2</h2>
+            <div class="row">
+                @foreach (var item in Model)
+                {
+                    <div class="col-4">
+                        <img src="@Url.Content(item.Images)" style="height:200px;width:200px" />
+                        <h4>@Html.DisplayFor(modelItem => item.NameProduct)</h4>
+                        <div class="rating">
+                            <i class="fa fa-star"></i>
+                            <i class="fa fa-star"></i>
+                            <i class="fa fa-star"></i>
+                            <i class="fa fa-star-half-o"></i>
+                            <i class="fa fa-star-o"></i>
+                        </div>
                         <p>$@Html.DisplayFor(modelItem => item.UnitPrice)</p>
                     </div>
                 }
@@ -83,5 +120,86 @@
         </div>
     </div>
 
+    <!--Quảng Cáo-->
+    <div class="offer">
+        <div class="small-container">
+            <div class="row">
+                <div class="col-3">
+                    <img src="~/Content/images/xedap_QC1.jpg" style="width:400px;height:400px;border-radius:200px;border:2px solid" />
+                </div>
+                <div class="col-3">
+                    <img src="~/Content/images/xedap_QC2.jpg" style="width:400px;height:400px;border-radius:200px;border:2px solid" />
+                </div>
+                <div class="col-3">
+                    <img src="~/Content/images/xedap_QC3.jpg" style="width:400px;height:400px;border-radius:200px;border:2px solid" />
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!--Logo-->
+    <div class="brands">
+        <div class="row">
+            <div class="col-5">
+                <img src="~/Content/images/xedap_logo1.jpg" style="width:250px;height:250px" />
+            </div>
+            <div class="col-5">
+                <img src="~/Content/images/xedap_logo2.png" style="width:250px;height:250px"/>
+            </div>
+            <div class="col-5">
+                <img src="~/Content/images/xedap_logo3.png" style="width:250px;height:250px"/>
+            </div>
+            <div class="col-5">
+                <img src="~/Content/images/xedap_logo4.png" style="width:250px;height:250px"/>
+            </div>
+            <div class="col-5">
+                <img src="~/Content/images/xedap_logo5.jpg" style="width:250px;height:250px"/>
+            </div>
+        </div>
+    </div>
+
+    <!--footer-->
+    <div class="footer" style="background:#000;color:#8a8a8a;font-size:14px;padding:60px 0 20px;">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-4">
+                    <h3>Đồ Án Thương Mại Điện Tử</h3>
+                    <p>Thứ 2 - Ca 1</p>
+                </div>
+                <div class="col-md-4">
+                    <h3>Website Bán Xe Đạp</h3>
+                    <p>(E-Commerce)</p>
+                </div>
+                <div class="col-md-4">
+                    <h3>Thành Viên Nhóm</h3>                  
+                    <ul>
+                        <li>Trần Minh Triết 17DH110049</li>
+                        <li>Lê Ngọc Bảo Toàn 17DH110050</li>
+                        <li>Nguyễn Bá Duy Việt 17DH110057</li>
+                    </ul>
+                </div>
+                <div class="col-md-4">
+                    <h3>Follow Us</h3>
+                    <ul>
+                        <li>Facebook</li>
+                        <li>Twitter</li>
+                        <li>Instagram</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+        var MenuItems = document.getElementById("MenuItems");
+        MenuItems.style.maxHeight = "0px";
+        function menutoggle() {
+            if (MenuItems.style.maxHeight == "0px") {
+                MenuItems.style.maxHeight = "200px";
+            }
+            else {
+                MenuItems.style.maxHeight = "0px";
+            }
+        }
+    </script>
 </body>
 </html>
