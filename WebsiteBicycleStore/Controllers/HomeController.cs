@@ -12,7 +12,7 @@ namespace WebsiteBicycleStore.Controllers
         private DB_BicycleStoreEntities db = new DB_BicycleStoreEntities();
         public ActionResult Index()
         {
-            return View(db.Products.ToList());
+            return View(db.Products.Take(4).ToList());
         }
 
         public ActionResult About()

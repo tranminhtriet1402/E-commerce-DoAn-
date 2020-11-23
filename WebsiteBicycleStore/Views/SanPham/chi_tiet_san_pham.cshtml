@@ -1,0 +1,14 @@
+﻿@model IEnumerable<WebsiteBicycleStore.Models.Product>
+@{
+    ViewBag.Title = "chi_tiet_san_pham";
+    Layout = "~/Views/MenuLayout.cshtml";
+}
+
+@foreach (var item in Model)
+{
+    
+     @item.NameProduct <br />
+    @item.UnitPrice
+
+}
+

@@ -1,0 +1,81 @@
+﻿@model IEnumerable<WebsiteBicycleStore.Models.Product>
+@{
+    ViewBag.Title = "XeDapDuongPho";
+    Layout = "~/Views/MenuLayout.cshtml";
+}
+
+<div class="categories">
+    <div class="small-container">
+        <h2 style="text-align:center">All Product</h2>
+        <div class="row" style="margin-top:10px">
+
+            <div class="col-md-4">
+                <a href="/SanPham/Index" class="btn">Tất cả loại xe</a>
+            </div>
+            <div class="col-md-4">
+                <a href="/SanPham/XeDapDua" class="btn">Xe đạp đua</a>
+            </div>
+            <div class="col-md-4">
+                <a href="/SanPham/XeDapDiaHinh" class="btn">Xe đạp địa hình</a>
+
+            </div>
+            <div class="col-md-4">
+                <a href="/SanPham/XeDapDuongPho" class="btn">Xe đạp đường phố</a>
+
+            </div>
+        </div>
+        <div class="row">
+            @foreach (var item in Model)
+            {
+                <div class="col-4">
+                    <img src="@Url.Content(item.Images)" style="height:300px;width:300px" />
+                    <h4>@Html.DisplayFor(modelItem => item.NameProduct)</h4>
+                    <div class="rating">
+                        <i class="fa fa-star"></i>
+                        <i class="fa fa-star"></i>
+                        <i class="fa fa-star"></i>
+                        <i class="fa fa-star-half-o"></i>
+                        <i class="fa fa-star-o"></i>
+                    </div>
+                    <p>$@Html.DisplayFor(modelItem => item.UnitPrice) <img src="~/Content/images/iconcart.png" style="height:30px;width:30px" /></p>
+                    <p><a href="/SanPham/chi_tiet_san_pham/@item.IDProduct">
+                                    Xem Chi Tiêt
+                                </a></p>
+                </div>
+            }
+
+
+        </div>
+    </div>
+</div>
+<div class="footer" style="background:#000;color:#8a8a8a;font-size:14px;padding:60px 0 20px;">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-4">
+                <h3>Đồ Án Thương Mại Điện Tử</h3>
+                <p>Thứ 2 - Ca 1</p>
+            </div>
+            <div class="col-md-4">
+                <h3>Website Bán Xe Đạp</h3>
+                <p>(E-Commerce)</p>
+            </div>
+            <div class="col-md-4">
+                <h3>Thành Viên Nhóm</h3>
+                <ul>
+                    <li>Trần Minh Triết 17DH110049</li>
+                    <li>Lê Ngọc Bảo Toàn 17DH110050</li>
+                    <li>Nguyễn Bá Duy Việt 17DH110057</li>
+                </ul>
+            </div>
+            <div class="col-md-4">
+                <h3>Follow Us</h3>
+                <ul>
+                    <li>Facebook</li>
+                    <li>Twitter</li>
+                    <li>Instagram</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+

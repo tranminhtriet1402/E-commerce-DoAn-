@@ -1,0 +1,237 @@
+﻿* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Poppins', sans-serif;
+}
+
+.navbar {
+    display: flex;
+    align-items: center;
+    padding: 20px;
+}
+
+nav {
+    flex: 1;
+    text-align: right;
+}
+
+    nav ul {
+        display: inline-block;
+        list-style-type: none;
+    }
+
+        nav ul li {
+            display: inline-block;
+            margin-right: 20px;
+        }
+
+a {
+    text-decoration: none;
+    color: #555;
+}
+
+p {
+    color: #555;
+}
+
+.container {
+    max-width: 1300px;
+    margin: auto;
+    padding-left: 25px;
+    padding-right: 25px;
+}
+
+.row {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    justify-content: space-around;
+}
+
+.col-md-2 {
+    flex-basis: 50%;
+    min-width: 300px;
+}
+
+    .col-md-2 img {
+        max-width: 100%;
+        padding: 50px 0;
+    }
+
+    .col-md-2 h1 {
+        font-size: 50px;
+        line-height: 60px;
+        margin: 25px 0;
+    }
+
+/*Chỉnh sửa nút*/
+.btn {
+    display: inline-block;
+    background: #ff523b;
+    color: #fff;
+    padding: 8px 30px;
+    margin: 30px 0;
+    border-radius: 30px;
+    transition: background 0.5s;
+}
+
+    .btn:hover {
+        background: #563434;
+    }
+/*//*/
+
+
+/*Chỉnh sửa backgroud banner*/
+.header {
+    background: radial-gradient(#f94144,#fff);
+}
+
+    .header row {
+        margin-top: 70px;
+    }
+
+/*//*/
+
+
+.categories {
+    margin: 70px;
+}
+
+.col-md-3 {
+    flex-basis: 30%;
+    min-width: 250px;
+    margin-bottom: 30px;
+    text-align:center;
+}
+
+    .col-md-3 img {
+        width: 100%;
+    }
+
+
+.small-container {
+    /*max-width:1080px;
+    margin:auto;*/
+    /*padding-left:25px;
+    padding-right:25px;*/
+}
+
+.col-4 {
+    flex-basis: 25%;
+    padding: 10px;
+    min-width: 300px;
+    margin-bottom: 50px;
+    transition: transform 0.5s;
+}
+
+    .col-4 img {
+        width: 100%;
+    }
+
+
+.title {
+    text-align: center;
+    margin: 0 auto 80px;
+    position: relative;
+    line-height: 20px;
+    color: #555;
+    text-decoration-line: underline;
+}
+
+/*.title::after {
+        content: '';
+        background-color: red;
+        width: 80px;
+        border-radius: 5px;
+        position: absolute;
+        bottom:0;
+        left:50%;
+        transform:translateX(-50%)
+    }*/
+h4 {
+    color: #555;
+    font-weight: normal;
+    text-align:center
+}
+
+.col-4 p {
+    font-size: 14px;
+}
+
+.col-4:hover {
+    transform: translateY(-5px);
+}
+
+/*Chỉnh sửa LogoQCr*/
+.brands {
+    margin: 100px auto;
+}
+
+.col-5 {
+    width: 160px;
+}
+
+    .col-5 img {
+        cursor: pointer;
+    }
+
+/*footerr*/
+/*.footer{
+    background-color:#000;
+    color:#8a8a8a;
+    font-size:14px;
+    padding: 60px 0 20px;
+}*/
+
+.menu-icon {
+    width: 28px;
+    margin-left: 20px;
+    display: none;
+}
+
+@media only screen and (max-width:800px) {
+    nav ul {
+        position: absolute;
+        top: 80px;
+        left: 0;
+        background-color: none;
+        width: 100%;
+        overflow: hidden;
+        transition: max-height 0.5s;
+    }
+
+        nav ul li {
+            display: block;
+            margin-right: 20px;
+            margin-top: 10px;
+            margin-bottom: 10px;
+        }
+
+            nav ul li a {
+                color: #333;
+            }
+
+    .menu-icon {
+        display: inline-block;
+        cursor: pointer;
+    }
+}
+
+
+@media only screen and (max-width:600px) {
+    .row {
+        text-align: center;
+    }
+
+    .col-md-2, .col-md-3, .col-4 {
+        flex-basis: 100%;
+    }
+}
+.rating,p{
+    text-align:center;
+}
+
