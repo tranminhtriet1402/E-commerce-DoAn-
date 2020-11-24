@@ -4,7 +4,6 @@
     ViewBag.Title = "Delete";
     Layout = "~/Views/AdminLayout.cshtml";
 }
-
 <nav class="navbar navbar-default navbar-static-top">
     <div class="container-fluid">
         <!-- Brand and toggle get grouped for better mobile display -->
@@ -75,11 +74,43 @@
                         </dd>
 
                         <dt>
-                            @Html.DisplayNameFor(model => model.Quantity)
+                            @Html.DisplayNameFor(model => model.QuantitySale)
                         </dt>
 
                         <dd>
-                            @Html.DisplayFor(model => model.Quantity)
+                            @Html.DisplayFor(model => model.QuantitySale)
+                        </dd>
+
+                        <dt>
+                            @Html.DisplayNameFor(model => model.ngayDat)
+                        </dt>
+
+                        <dd>
+                            @Html.DisplayFor(model => model.ngayDat)
+                        </dd>
+
+                        <dt>
+                            @Html.DisplayNameFor(model => model.ngayNhan)
+                        </dt>
+
+                        <dd>
+                            @Html.DisplayFor(model => model.ngayNhan)
+                        </dd>
+
+                        <dt>
+                            @Html.DisplayNameFor(model => model.imgPro)
+                        </dt>
+
+                        <dd>
+                            @Html.DisplayFor(model => model.imgPro)
+                        </dd>
+
+                        <dt>
+                            @Html.DisplayNameFor(model => model.namePro)
+                        </dt>
+
+                        <dd>
+                            @Html.DisplayFor(model => model.namePro)
                         </dd>
 
                         <dt>
@@ -120,5 +151,6 @@
         </p>
     </footer>
 </div>
+<h2>Delete</h2>
 
 

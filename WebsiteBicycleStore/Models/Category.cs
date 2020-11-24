@@ -20,7 +20,7 @@ namespace WebsiteBicycleStore.Models
         {
             this.Products = new HashSet<Product>();
         }
-    
+
         public int IDCategory { get; set; }
         public string NameCategory { get; set; }
         [NotMapped]

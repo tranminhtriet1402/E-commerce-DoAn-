@@ -49,7 +49,7 @@ namespace WebsiteBicycleStore.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "ID,IDOrder,IDProduct,UnitPriceSale,Quantity")] OrderDetail orderDetail)
+        public ActionResult Create([Bind(Include = "ID,IDOrder,IDProduct,UnitPriceSale,QuantitySale,ngayDat,ngayNhan,imgPro,namePro")] OrderDetail orderDetail)
         {
             if (ModelState.IsValid)
             {
@@ -85,7 +85,7 @@ namespace WebsiteBicycleStore.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "ID,IDOrder,IDProduct,UnitPriceSale,Quantity")] OrderDetail orderDetail)
+        public ActionResult Edit([Bind(Include = "ID,IDOrder,IDProduct,UnitPriceSale,QuantitySale,ngayDat,ngayNhan,imgPro,namePro")] OrderDetail orderDetail)
         {
             if (ModelState.IsValid)
             {

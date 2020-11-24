@@ -82,9 +82,9 @@
                         <th>
                             @Html.DisplayNameFor(model => model.Descriptions)
                         </th>
-                        <th>
+                        @*<th>
                             @Html.DisplayNameFor(model => model.User.FirstName)
-                        </th>
+                        </th>*@
                         <th></th>
                     </tr>
 
@@ -106,9 +106,9 @@
                             <td>
                                 @Html.DisplayFor(modelItem => item.Descriptions)
                             </td>
-                            <td>
+                            @*<td>
                                 @Html.DisplayFor(modelItem => item.User.FirstName)
-                            </td>
+                            </td>*@
                             <td>
                                 @Html.ActionLink("Edit", "Edit", new { id = item.IDOrder }) |
                                 @Html.ActionLink("Details", "Details", new { id = item.IDOrder }) |

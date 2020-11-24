@@ -26,20 +26,28 @@
                     <ul id="MenuItems">
                         <li><a href="/Home/Index">Home</a></li>
                         <li><a href="/SanPham/Index">Product</a></li>
-                        @if (@Session["Email"] == null)
+                        @if (Session["Email"] == null)
                         {
                             <li><a href="/Login_SignUp/Login">Login</a></li>
                         }
                         else
                         {
                             <li><a href="#">@Session["Email"]</a></li>
+
+
                             <li><a href="@Url.Action("LogOut","Login_SignUp")">LogOut</a></li>
                         }
+                        @if (Session["Cart"] != null)
+                        {
+                            <li><a href="/ShoppingCart/ShowToCart"> <img src="~/Content/images/cart.png" style="width:30px;height:30px" /></a></li>
+                        }
+                        else
+                        {
+                            <li><img src="~/Content/images/cart.png" style="width:30px;height:30px" /></li>
+                        }
 
-                        
                     </ul>
-                    <img src="~/Content/images/cart.png" style="width:30px;height:30px" />
-                    <img class="menu-icon" src="~/Content/images/menu.png"   onclick="menutoggle()"/>
+                    <img class="menu-icon" src="~/Content/images/menu.png" onclick="menutoggle()" />
                 </nav>
 
             </div>
@@ -54,8 +62,7 @@
                 </div>
             </div>
         </div>
-    </div>
-
+    </div>    
     <!--categories-->
     <div class="categories">
         <div class="small-container">
@@ -91,10 +98,13 @@
                             <i class="fa fa-star-half-o"></i>
                             <i class="fa fa-star-o"></i>
                         </div>
-                        <p>$@Html.DisplayFor(modelItem => item.UnitPrice) <img src="~/Content/images/iconcart.png" style="height:30px;width:30px"/></p>
-                        <p><a href="/SanPham/chi_tiet_san_pham/@item.IDProduct">
-                                    Xem Chi Tiêt
-                                </a></p>
+                        <p>$@Html.DisplayFor(modelItem => item.UnitPrice) <a href="/ShoppingCart/AddtoCart/@item.IDProduct"><img src="~/Content/images/iconcart.png" style="height:30px;width:30px" /></a></p>
+                        <p>
+                            <a href="/SanPham/chi_tiet_san_pham/@item.IDProduct">
+                                Xem Chi Tiêt
+                            </a>
+                        </p>
+
                     </div>
                 }
 
@@ -147,16 +157,16 @@
                 <img src="~/Content/images/xedap_logo1.jpg" style="width:250px;height:250px" />
             </div>
             <div class="col-5">
-                <img src="~/Content/images/xedap_logo2.png" style="width:250px;height:250px"/>
+                <img src="~/Content/images/xedap_logo2.png" style="width:250px;height:250px" />
             </div>
             <div class="col-5">
-                <img src="~/Content/images/xedap_logo3.png" style="width:250px;height:250px"/>
+                <img src="~/Content/images/xedap_logo3.png" style="width:250px;height:250px" />
             </div>
             <div class="col-5">
-                <img src="~/Content/images/xedap_logo4.png" style="width:250px;height:250px"/>
+                <img src="~/Content/images/xedap_logo4.png" style="width:250px;height:250px" />
             </div>
             <div class="col-5">
-                <img src="~/Content/images/xedap_logo5.jpg" style="width:250px;height:250px"/>
+                <img src="~/Content/images/xedap_logo5.jpg" style="width:250px;height:250px" />
             </div>
         </div>
     </div>
@@ -174,7 +184,7 @@
                     <p>(E-Commerce)</p>
                 </div>
                 <div class="col-md-4">
-                    <h3>Thành Viên Nhóm</h3>                  
+                    <h3>Thành Viên Nhóm</h3>
                     <ul>
                         <li>Trần Minh Triết 17DH110049</li>
                         <li>Lê Ngọc Bảo Toàn 17DH110050</li>
@@ -202,6 +212,12 @@
             else {
                 MenuItems.style.maxHeight = "0px";
             }
+        }
+    </script>
+
+    <script>
+        function chuyentrang() {
+            window.location("/Home/Index")
         }
     </script>
 </body>

@@ -8,12 +8,12 @@
         <EntityTypeShape EntityType="DB_BicycleStoreModel.Category" Width="1.5" PointX="0.75" PointY="7.625" IsExpanded="true" />
         <EntityTypeShape EntityType="DB_BicycleStoreModel.User" Width="1.5" PointX="0.75" PointY="1.25" IsExpanded="true" />
         <EntityTypeShape EntityType="DB_BicycleStoreModel.Order" Width="1.5" PointX="3" PointY="1" />
-        <EntityTypeShape EntityType="DB_BicycleStoreModel.OrderDetail" Width="1.5" PointX="5.25" PointY="1.125" />
-        <AssociationConnector Association="DB_BicycleStoreModel.FK__OrderDeta__Quant__4E88ABD4" />
         <AssociationConnector Association="DB_BicycleStoreModel.FK__Orders__Descript__4CA06362" />
         <EntityTypeShape EntityType="DB_BicycleStoreModel.Product" Width="1.5" PointX="3" PointY="7" />
         <AssociationConnector Association="DB_BicycleStoreModel.FK__Products__IDCate__49C3F6B7" />
-        <AssociationConnector Association="DB_BicycleStoreModel.FK__OrderDeta__IDPro__4F7CD00D" />
+        <EntityTypeShape EntityType="DB_BicycleStoreModel.OrderDetail" Width="1.5" PointX="5.25" PointY="3.875" />
+        <AssociationConnector Association="DB_BicycleStoreModel.FK__OrderDeta__IDOrd__5BE2A6F2" />
+        <AssociationConnector Association="DB_BicycleStoreModel.FK__OrderDeta__IDPro__5CD6CB2B" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

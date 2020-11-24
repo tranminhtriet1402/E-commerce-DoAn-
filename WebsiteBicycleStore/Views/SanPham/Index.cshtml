@@ -45,7 +45,7 @@
                             <i class="fa fa-star-half-o"></i>
                             <i class="fa fa-star-o"></i>
                         </div>
-                        <p>$@Html.DisplayFor(modelItem => item.UnitPrice) <img src="~/Content/images/iconcart.png" style="height:30px;width:30px"/></p>
+                        <p>$@Html.DisplayFor(modelItem => item.UnitPrice)  <a href="/ShoppingCart/AddtoCart/@item.IDProduct"><img src="~/Content/images/iconcart.png" style="height:30px;width:30px" /></a></p>
                         <p><a href="/SanPham/chi_tiet_san_pham/@item.IDProduct">
                                     Xem Chi Tiêt
                                 </a></p>

@@ -40,6 +40,8 @@ namespace WebsiteBicycleStore.Controllers
         }
         public ActionResult chi_tiet_san_pham(int id)
         {
+            List<Product> pro = db.Products.Where(s => s.IDCategory == 2).ToList();
+            ViewBag.ds = pro;
             return View(db.Products.Where(s => s.IDProduct.ToString().StartsWith(id.ToString())).ToList());
         }
     }

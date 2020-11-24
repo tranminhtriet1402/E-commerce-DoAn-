@@ -4,7 +4,6 @@
     ViewBag.Title = "Details";
     Layout = "~/Views/AdminLayout.cshtml";
 }
-
 <nav class="navbar navbar-default navbar-static-top">
     <div class="container-fluid">
         <!-- Brand and toggle get grouped for better mobile display -->
@@ -62,7 +61,7 @@
             </div>
             <div class="panel-body">
                 <div>
-                    <h4>Thông tin chi tiết đơn hàng số @Html.DisplayFor(model => model.IDOrder)</h4>
+                    <h4>OrderDetail</h4>
                     <hr />
                     <dl class="dl-horizontal">
                         <dt>
@@ -74,11 +73,43 @@
                         </dd>
 
                         <dt>
-                            @Html.DisplayNameFor(model => model.Quantity)
+                            @Html.DisplayNameFor(model => model.QuantitySale)
                         </dt>
 
                         <dd>
-                            @Html.DisplayFor(model => model.Quantity)
+                            @Html.DisplayFor(model => model.QuantitySale)
+                        </dd>
+
+                        <dt>
+                            @Html.DisplayNameFor(model => model.ngayDat)
+                        </dt>
+
+                        <dd>
+                            @Html.DisplayFor(model => model.ngayDat)
+                        </dd>
+
+                        <dt>
+                            @Html.DisplayNameFor(model => model.ngayNhan)
+                        </dt>
+
+                        <dd>
+                            @Html.DisplayFor(model => model.ngayNhan)
+                        </dd>
+
+                        <dt>
+                            @Html.DisplayNameFor(model => model.imgPro)
+                        </dt>
+
+                        <dd>
+                            @Html.DisplayFor(model => model.imgPro)
+                        </dd>
+
+                        <dt>
+                            @Html.DisplayNameFor(model => model.namePro)
+                        </dt>
+
+                        <dd>
+                            @Html.DisplayFor(model => model.namePro)
                         </dd>
 
                         <dt>
@@ -103,7 +134,6 @@
                     @Html.ActionLink("Edit", "Edit", new { id = Model.ID }) |
                     @Html.ActionLink("Back to List", "Index")
                 </p>
-
             </div>
         </div>
     </div>
@@ -114,4 +144,6 @@
         </p>
     </footer>
 </div>
+<h2>Details</h2>
+
 

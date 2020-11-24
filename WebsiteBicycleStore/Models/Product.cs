@@ -21,7 +21,7 @@ namespace WebsiteBicycleStore.Models
         {
             Images = "~/Content/images/add.png";
         }
-    
+
         public int IDProduct { get; set; }
         public string NameProduct { get; set; }
         public Nullable<decimal> UnitPrice { get; set; }

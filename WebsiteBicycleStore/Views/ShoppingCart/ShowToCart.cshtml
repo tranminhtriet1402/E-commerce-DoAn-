@@ -1,0 +1,210 @@
+﻿@model WebsiteBicycleStore.Models.Cart
+@{
+    ViewBag.Title = "ShowToCart";
+    Layout = "~/Views/MenuLayout.cshtml";
+}
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.0.0/jquery.min.js"></script>
+
+<!-- jQuery Modal -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.js"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.css" />
+
+
+
+
+<div class="small-container cart-page">
+    <div class="row">
+        <div class="col-lg-6">
+            <table>
+                <tr>
+                    <th>Sản Phẩm</th>
+                    <th>Số lượng</th>
+                    <th>Giá Tiền</th>
+                </tr>
+                @if (Model.Items == null)
+                {
+                    <tr>@ViewBag.mess</tr>
+
+                }
+                else
+                {
+                    foreach (var item in Model.Items)
+                    {
+                        double total = Convert.ToDouble(item._shopping_product.UnitPrice.Value * item._shopping_quantity);
+                        <tr>
+
+                            <td>
+                                <div class="cart-info">
+                                    <img src="@Url.Content(item._shopping_product.Images)" />
+                                    <div>
+                                        <p>@Html.DisplayFor(model => item._shopping_product.NameProduct)</p>
+                                        <small>$@Html.DisplayFor(model => item._shopping_product.UnitPrice)</small>
+                                        <a href="/ShoppingCart/RemoveCart/@item._shopping_product.IDProduct">Remove</a>
+                                    </div>
+                                </div>
+                            </td>
+                            <td>
+                                @using (Html.BeginForm("Update_Quantity_Cart", "ShoppingCart"))
+                                {
+                                    <input type="hidden" value="@item._shopping_product.IDProduct" name="ID_Product" />
+                                    <input type="number" value="@item._shopping_quantity" name="Quantity" />
+                                    <br />
+                                    <input type="submit" value="Update Quantity" />
+                                }
+                            </td>
+                            <td>$@total</td>
+                        </tr>
+                    }
+                }
+
+            </table>
+            <div class="total-price">
+                <table sty>
+                    <tr>
+                        <td>Tổng giá sản phẩm</td>
+                        <td>$@Model.Total_Money()</td>
+                    </tr>
+                    <tr>
+                        <td>Giá thuế</td>
+                        <td>$0</td>
+                    </tr>
+                    <tr>
+                        <td>Tổng giá sản phẩm</td>
+                        <td><input type="text" name="Amount" value="$@Model.Total_Money()" /></td>
+                    </tr>
+                    <tr>
+                        <td><a href="/Home/Index">Tiếp tục mua sắm</a></td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+        <div class="col-lg-6">
+            @if (Session["Email"] == null)
+            {
+                <h2>Vui lòng đăng nhập trước khi thanh toán</h2>
+                <h3 class="btn"> <a href="/Login_SignUp/Login">Đăng nhập ?</a></h3>
+            }
+            else
+            {
+                <!-- Link to open the modal -->
+                <div>
+                    <a href="#ex1" rel="modal:open" class="btn">Thanh Toán Bằng Tiền Mặt</a> <br />
+                    <a href="#ex2" rel="modal:open" class="btn">Thanh Toán Bằng Thẻ ATM</a> <br />
+                    <a href="#ex3" rel="modal:open" class="btn">Thanh Toán Bằng PayPal</a>
+                </div>
+            }
+
+
+        </div>
+    </div>
+
+</div>
+
+<!--Modal TT tiền mặt-->
+
+
+<div id="ex1" class="modal">
+    @using (Html.BeginForm("CheckOut", "ShoppingCart"))
+    {
+        <input type="text" name="des" required />
+        <input type="text" name="diachi" required />
+        <input type="text" name="amount" value="@Model.Total_Money()" disabled   />
+        <input type="submit" />
+        foreach (var item in Model.Items)
+        {
+            double total = Convert.ToDouble(item._shopping_product.UnitPrice.Value * item._shopping_quantity);
+            <table>
+                <tr style="border:1px solid black">
+                    <td style="border:1px solid black">
+                        @Html.DisplayFor(model => item._shopping_product.NameProduct)
+                    </td>
+                    <td style="border:1px solid black">
+                        @Html.DisplayFor(model => item._shopping_quantity)
+                    </td>
+                    <td style="border:1px solid black">
+                        $@Html.DisplayFor(model => item._shopping_product.UnitPrice)
+                    </td>
+                    <td style="border:1px solid black">$@total</td>
+                </tr>
+            </table>
+
+
+        }
+}
+
+
+
+</div>
+
+<!--Modal TT Thẻ ATM-->
+<div id="ex2" class="modal">
+    <p>Thanks for clicking. That felt good.</p>
+    <a href="#" rel="modal:close">Close</a>
+</div>
+<!--Modal TT tiền mặt-->
+<div id="ex3" class="modal">
+    <p>Thanks for clicking. That felt good.</p>
+    <a href="#" rel="modal:close">Close</a>
+</div>
+
+
+
+@*<h2><strong>Nhập địa chỉ nhận hàng</strong></h2>
+    <input type="text" name="diachi" required />
+    <h2><strong>Ghi Chú</strong></h2>
+    <input type="text" name="des" required />
+
+     <a href="#" rel="modal:close">Close</a>
+     @foreach (var item in Model.Items)
+     {
+         double total = Convert.ToDouble(item._shopping_product.UnitPrice.Value * item._shopping_quantity);
+         <table>
+                <tr style="border:1px solid black">
+                    <td style="border:1px solid black">
+                        @Html.DisplayFor(model => item._shopping_product.NameProduct)
+                    </td>
+                    <td style="border:1px solid black">
+                        @Html.DisplayFor(model => item._shopping_quantity)
+                    </td>
+                    <td style="border:1px solid black">
+                        $@Html.DisplayFor(model => item._shopping_product.UnitPrice)
+                    </td>
+                    <td style="border:1px solid black">$@total</td>
+                </tr></table>
+
+
+      }*@
+
+<!--footer-->
+<div class="footer" style="background:#000;color:#8a8a8a;font-size:14px;padding:60px 0 20px;">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-4">
+                <h3>Đồ Án Thương Mại Điện Tử</h3>
+                <p>Thứ 2 - Ca 1</p>
+            </div>
+            <div class="col-md-4">
+                <h3>Website Bán Xe Đạp</h3>
+                <p>(E-Commerce)</p>
+            </div>
+            <div class="col-md-4">
+                <h3>Thành Viên Nhóm</h3>
+                <ul>
+                    <li>Trần Minh Triết 17DH110049</li>
+                    <li>Lê Ngọc Bảo Toàn 17DH110050</li>
+                    <li>Nguyễn Bá Duy Việt 17DH110057</li>
+                </ul>
+            </div>
+            <div class="col-md-4">
+                <h3>Follow Us</h3>
+                <ul>
+                    <li>Facebook</li>
+                    <li>Twitter</li>
+                    <li>Instagram</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+

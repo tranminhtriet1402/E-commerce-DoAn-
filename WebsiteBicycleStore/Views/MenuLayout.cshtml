@@ -7,7 +7,9 @@
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" />
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-
+    @*<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>*@
 </head>
 <body>
     
@@ -29,10 +31,18 @@
                             <li><a href="#">@Session["Email"]</a></li>
                             <li><a href="@Url.Action("LogOut","Login_SignUp")">LogOut</a></li>
                         }
+                        @if (Session["Cart"] != null)
+                        {
+                            <li><a href="/ShoppingCart/ShowToCart"> <img src="~/Content/images/cart.png" style="width:30px;height:30px" /></a></li>
+                        }
+                        else
+                        {
+                            <li><img src="~/Content/images/cart.png" style="width:30px;height:30px" /></li>
+                        }
 
 
                     </ul>
-                    <img src="~/Content/images/cart.png" style="width:30px;height:30px" />
+    
                     <img class="menu-icon" src="~/Content/images/menu.png" onclick="menutoggle()" />
                 </nav>
             </div>

@@ -22,7 +22,11 @@ warning 6002: The table/view 'DB_BicycleStore.dbo.OrderDetail' does not have a p
           <Property Name="IDOrder" Type="int" />
           <Property Name="IDProduct" Type="int" />
           <Property Name="UnitPriceSale" Type="decimal" Precision="18" Scale="0" />
-          <Property Name="Quantity" Type="int" />
+          <Property Name="QuantitySale" Type="int" />
+          <Property Name="ngayDat" Type="date" />
+          <Property Name="ngayNhan" Type="date" />
+          <Property Name="imgPro" Type="nvarchar(max)" />
+          <Property Name="namePro" Type="nvarchar(max)" />
         </EntityType>
         <EntityType Name="Orders">
           <Key>
@@ -59,19 +63,7 @@ warning 6002: The table/view 'DB_BicycleStore.dbo.OrderDetail' does not have a p
           <Property Name="Email" Type="nvarchar" MaxLength="50" />
           <Property Name="Password" Type="nvarchar" MaxLength="50" />
         </EntityType>
-        <Association Name="FK__OrderDeta__IDPro__4F7CD00D">
-          <End Role="Products" Type="Self.Products" Multiplicity="0..1" />
-          <End Role="OrderDetail" Type="Self.OrderDetail" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Products">
-              <PropertyRef Name="IDProduct" />
-            </Principal>
-            <Dependent Role="OrderDetail">
-              <PropertyRef Name="IDProduct" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK__OrderDeta__Quant__4E88ABD4">
+        <Association Name="FK__OrderDeta__IDOrd__5BE2A6F2">
           <End Role="Orders" Type="Self.Orders" Multiplicity="0..1" />
           <End Role="OrderDetail" Type="Self.OrderDetail" Multiplicity="*" />
           <ReferentialConstraint>
@@ -80,6 +72,18 @@ warning 6002: The table/view 'DB_BicycleStore.dbo.OrderDetail' does not have a p
             </Principal>
             <Dependent Role="OrderDetail">
               <PropertyRef Name="IDOrder" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__OrderDeta__IDPro__5CD6CB2B">
+          <End Role="Products" Type="Self.Products" Multiplicity="0..1" />
+          <End Role="OrderDetail" Type="Self.OrderDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Products">
+              <PropertyRef Name="IDProduct" />
+            </Principal>
+            <Dependent Role="OrderDetail">
+              <PropertyRef Name="IDProduct" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -118,15 +122,19 @@ warning 6002: The table/view 'DB_BicycleStore.dbo.OrderDetail' does not have a p
     [OrderDetail].[IDOrder] AS [IDOrder], 
     [OrderDetail].[IDProduct] AS [IDProduct], 
     [OrderDetail].[UnitPriceSale] AS [UnitPriceSale], 
-    [OrderDetail].[Quantity] AS [Quantity]
+    [OrderDetail].[QuantitySale] AS [QuantitySale], 
+    [OrderDetail].[ngayDat] AS [ngayDat], 
+    [OrderDetail].[ngayNhan] AS [ngayNhan], 
+    [OrderDetail].[imgPro] AS [imgPro], 
+    [OrderDetail].[namePro] AS [namePro]
     FROM [dbo].[OrderDetail] AS [OrderDetail]</DefiningQuery>
           </EntitySet>
-          <AssociationSet Name="FK__OrderDeta__IDPro__4F7CD00D" Association="Self.FK__OrderDeta__IDPro__4F7CD00D">
-            <End Role="Products" EntitySet="Products" />
+          <AssociationSet Name="FK__OrderDeta__IDOrd__5BE2A6F2" Association="Self.FK__OrderDeta__IDOrd__5BE2A6F2">
+            <End Role="Orders" EntitySet="Orders" />
             <End Role="OrderDetail" EntitySet="OrderDetail" />
           </AssociationSet>
-          <AssociationSet Name="FK__OrderDeta__Quant__4E88ABD4" Association="Self.FK__OrderDeta__Quant__4E88ABD4">
-            <End Role="Orders" EntitySet="Orders" />
+          <AssociationSet Name="FK__OrderDeta__IDPro__5CD6CB2B" Association="Self.FK__OrderDeta__IDPro__5CD6CB2B">
+            <End Role="Products" EntitySet="Products" />
             <End Role="OrderDetail" EntitySet="OrderDetail" />
           </AssociationSet>
           <AssociationSet Name="FK__Orders__Descript__4CA06362" Association="Self.FK__Orders__Descript__4CA06362">
@@ -165,11 +173,6 @@ warning 6002: The table/view 'DB_BicycleStore.dbo.OrderDetail' does not have a p
           <EntitySet Name="Categories" EntityType="Self.Category" />
           <EntitySet Name="Users" EntityType="Self.User" />
           <EntitySet Name="Orders" EntityType="DB_BicycleStoreModel.Order" />
-          <EntitySet Name="OrderDetails" EntityType="DB_BicycleStoreModel.OrderDetail" />
-          <AssociationSet Name="FK__OrderDeta__Quant__4E88ABD4" Association="DB_BicycleStoreModel.FK__OrderDeta__Quant__4E88ABD4">
-            <End Role="Order" EntitySet="Orders" />
-            <End Role="OrderDetail" EntitySet="OrderDetails" />
-          </AssociationSet>
           <AssociationSet Name="FK__Orders__Descript__4CA06362" Association="DB_BicycleStoreModel.FK__Orders__Descript__4CA06362">
             <End Role="User" EntitySet="Users" />
             <End Role="Order" EntitySet="Orders" />
@@ -179,7 +182,12 @@ warning 6002: The table/view 'DB_BicycleStore.dbo.OrderDetail' does not have a p
             <End Role="Category" EntitySet="Categories" />
             <End Role="Product" EntitySet="Products" />
           </AssociationSet>
-          <AssociationSet Name="FK__OrderDeta__IDPro__4F7CD00D" Association="DB_BicycleStoreModel.FK__OrderDeta__IDPro__4F7CD00D">
+          <EntitySet Name="OrderDetails" EntityType="DB_BicycleStoreModel.OrderDetail" />
+          <AssociationSet Name="FK__OrderDeta__IDOrd__5BE2A6F2" Association="DB_BicycleStoreModel.FK__OrderDeta__IDOrd__5BE2A6F2">
+            <End Role="Order" EntitySet="Orders" />
+            <End Role="OrderDetail" EntitySet="OrderDetails" />
+          </AssociationSet>
+          <AssociationSet Name="FK__OrderDeta__IDPro__5CD6CB2B" Association="DB_BicycleStoreModel.FK__OrderDeta__IDPro__5CD6CB2B">
             <End Role="Product" EntitySet="Products" />
             <End Role="OrderDetail" EntitySet="OrderDetails" />
           </AssociationSet>
@@ -195,33 +203,9 @@ warning 6002: The table/view 'DB_BicycleStore.dbo.OrderDetail' does not have a p
           <Property Name="Address_Cus" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="Amount" Type="Int32" />
           <Property Name="Descriptions" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="OrderDetails" Relationship="DB_BicycleStoreModel.FK__OrderDeta__Quant__4E88ABD4" FromRole="Order" ToRole="OrderDetail" />
           <NavigationProperty Name="User" Relationship="DB_BicycleStoreModel.FK__Orders__Descript__4CA06362" FromRole="Order" ToRole="User" />
+          <NavigationProperty Name="OrderDetails" Relationship="DB_BicycleStoreModel.FK__OrderDeta__IDOrd__5BE2A6F2" FromRole="Order" ToRole="OrderDetail" />
         </EntityType>
-        <EntityType Name="OrderDetail">
-          <Key>
-            <PropertyRef Name="ID" />
-          </Key>
-          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="IDOrder" Type="Int32" />
-          <Property Name="IDProduct" Type="Int32" />
-          <Property Name="UnitPriceSale" Type="Decimal" Precision="18" Scale="0" />
-          <Property Name="Quantity" Type="Int32" />
-          <NavigationProperty Name="Order" Relationship="DB_BicycleStoreModel.FK__OrderDeta__Quant__4E88ABD4" FromRole="OrderDetail" ToRole="Order" />
-          <NavigationProperty Name="Product" Relationship="DB_BicycleStoreModel.FK__OrderDeta__IDPro__4F7CD00D" FromRole="OrderDetail" ToRole="Product" />
-        </EntityType>
-        <Association Name="FK__OrderDeta__Quant__4E88ABD4">
-          <End Type="DB_BicycleStoreModel.Order" Role="Order" Multiplicity="0..1" />
-          <End Type="DB_BicycleStoreModel.OrderDetail" Role="OrderDetail" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Order">
-              <PropertyRef Name="IDOrder" />
-            </Principal>
-            <Dependent Role="OrderDetail">
-              <PropertyRef Name="IDOrder" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK__Orders__Descript__4CA06362">
           <End Type="DB_BicycleStoreModel.User" Role="User" Multiplicity="0..1" />
           <End Type="DB_BicycleStoreModel.Order" Role="Order" Multiplicity="*" />
@@ -247,7 +231,7 @@ warning 6002: The table/view 'DB_BicycleStore.dbo.OrderDetail' does not have a p
           <Property Name="IDCategory" Type="Int32" />
           <Property Name="Descriptions" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="Category" Relationship="DB_BicycleStoreModel.FK__Products__IDCate__49C3F6B7" FromRole="Product" ToRole="Category" />
-          <NavigationProperty Name="OrderDetails" Relationship="DB_BicycleStoreModel.FK__OrderDeta__IDPro__4F7CD00D" FromRole="Product" ToRole="OrderDetail" />
+          <NavigationProperty Name="OrderDetails" Relationship="DB_BicycleStoreModel.FK__OrderDeta__IDPro__5CD6CB2B" FromRole="Product" ToRole="OrderDetail" />
         </EntityType>
         <Association Name="FK__Products__IDCate__49C3F6B7">
           <End Type="DB_BicycleStoreModel.Category" Role="Category" Multiplicity="0..1" />
@@ -261,7 +245,35 @@ warning 6002: The table/view 'DB_BicycleStore.dbo.OrderDetail' does not have a p
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__OrderDeta__IDPro__4F7CD00D">
+        <EntityType Name="OrderDetail">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="IDOrder" Type="Int32" />
+          <Property Name="IDProduct" Type="Int32" />
+          <Property Name="UnitPriceSale" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="QuantitySale" Type="Int32" />
+          <Property Name="ngayDat" Type="DateTime" Precision="0" />
+          <Property Name="ngayNhan" Type="DateTime" Precision="0" />
+          <Property Name="imgPro" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="namePro" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Order" Relationship="DB_BicycleStoreModel.FK__OrderDeta__IDOrd__5BE2A6F2" FromRole="OrderDetail" ToRole="Order" />
+          <NavigationProperty Name="Product" Relationship="DB_BicycleStoreModel.FK__OrderDeta__IDPro__5CD6CB2B" FromRole="OrderDetail" ToRole="Product" />
+        </EntityType>
+        <Association Name="FK__OrderDeta__IDOrd__5BE2A6F2">
+          <End Type="DB_BicycleStoreModel.Order" Role="Order" Multiplicity="0..1" />
+          <End Type="DB_BicycleStoreModel.OrderDetail" Role="OrderDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Order">
+              <PropertyRef Name="IDOrder" />
+            </Principal>
+            <Dependent Role="OrderDetail">
+              <PropertyRef Name="IDOrder" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__OrderDeta__IDPro__5CD6CB2B">
           <End Type="DB_BicycleStoreModel.Product" Role="Product" Multiplicity="0..1" />
           <End Type="DB_BicycleStoreModel.OrderDetail" Role="OrderDetail" Multiplicity="*" />
           <ReferentialConstraint>
@@ -311,17 +323,6 @@ warning 6002: The table/view 'DB_BicycleStore.dbo.OrderDetail' does not have a p
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="OrderDetails">
-            <EntityTypeMapping TypeName="DB_BicycleStoreModel.OrderDetail">
-              <MappingFragment StoreEntitySet="OrderDetail">
-                <ScalarProperty Name="Quantity" ColumnName="Quantity" />
-                <ScalarProperty Name="UnitPriceSale" ColumnName="UnitPriceSale" />
-                <ScalarProperty Name="IDProduct" ColumnName="IDProduct" />
-                <ScalarProperty Name="IDOrder" ColumnName="IDOrder" />
-                <ScalarProperty Name="ID" ColumnName="ID" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="Products">
             <EntityTypeMapping TypeName="DB_BicycleStoreModel.Product">
               <MappingFragment StoreEntitySet="Products">
@@ -333,6 +334,21 @@ warning 6002: The table/view 'DB_BicycleStore.dbo.OrderDetail' does not have a p
                 <ScalarProperty Name="UnitPrice" ColumnName="UnitPrice" />
                 <ScalarProperty Name="NameProduct" ColumnName="NameProduct" />
                 <ScalarProperty Name="IDProduct" ColumnName="IDProduct" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="OrderDetails">
+            <EntityTypeMapping TypeName="DB_BicycleStoreModel.OrderDetail">
+              <MappingFragment StoreEntitySet="OrderDetail">
+                <ScalarProperty Name="namePro" ColumnName="namePro" />
+                <ScalarProperty Name="imgPro" ColumnName="imgPro" />
+                <ScalarProperty Name="ngayNhan" ColumnName="ngayNhan" />
+                <ScalarProperty Name="ngayDat" ColumnName="ngayDat" />
+                <ScalarProperty Name="QuantitySale" ColumnName="QuantitySale" />
+                <ScalarProperty Name="UnitPriceSale" ColumnName="UnitPriceSale" />
+                <ScalarProperty Name="IDProduct" ColumnName="IDProduct" />
+                <ScalarProperty Name="IDOrder" ColumnName="IDOrder" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
