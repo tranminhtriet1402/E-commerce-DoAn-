@@ -26,13 +26,15 @@
                     <ul id="MenuItems">
                         <li><a href="/Home/Index">Home</a></li>
                         <li><a href="/SanPham/Index">Product</a></li>
+
                         @if (Session["Email"] == null)
                         {
                             <li><a href="/Login_SignUp/Login">Login</a></li>
                         }
                         else
                         {
-                            <li><a href="#">@Session["Email"]</a></li>
+                            <li><a href="/Home/DonHang">Đơn Hàng Của Bạn</a></li>
+                            <li><a href="/KhachHang/Index">@Session["Email"]</a></li>
 
 
                             <li><a href="@Url.Action("LogOut","Login_SignUp")">LogOut</a></li>

@@ -1,0 +1,78 @@
+﻿@model IEnumerable<WebsiteBicycleStore.Models.Order>
+@{
+    ViewBag.Title = "DonHang";
+    Layout = "~/Views/MenuLayout.cshtml";
+}
+
+<h1 style="text-align:center;margin-top:10px">Đơn hàng của bạn</h1>
+
+<p>Tổng số đơn hàng bạn đã đặt : @Session["Count"]</p>
+@foreach (var item in Model)
+{
+<p>Tổng số tiền đã thanh toán cho các đơn hàng: $@Model.Sum(s => s.Amount)</p>
+    break;
+}
+<table style="margin:auto">
+    <tr style="background-color:#ff523b;color:white">
+        <td style="text-align:center">Mã đơn hàng</td>
+        <td style="text-align:center">Ngày</td>
+        <td style="text-align:center">Địa chỉ nhận hàng</td>
+        <td style="text-align:center">Tổng số tiền thanh toán</td>
+        <td style="text-align:center">Ghi chú</td>
+        <td style="text-align:center"></td>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr style="border:1px solid black">
+            <td style="border:1px solid black">@item.IDOrder</td>
+            <td style="border:1px solid black">@item.OrderDate</td>
+            <td style="border:1px solid black">@item.Address_Cus</td>
+
+            <td style="border:1px solid black">$@item.Amount</td>
+            <td style="border:1px solid black">@item.Descriptions</td>
+            <td style="border:1px solid black">
+                <a href="/Home/chi_tiet_don_hang/@item.IDOrder">
+                    Xem Chi Tiêt
+                </a>
+            </td>
+        </tr>
+        
+    }
+</table>
+
+
+
+
+
+<!--footer-->
+<div class="footer" style="background:#000;color:#8a8a8a;font-size:14px;padding:60px 0 20px;">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-4">
+                <h3>Đồ Án Thương Mại Điện Tử</h3>
+                <p>Thứ 2 - Ca 1</p>
+            </div>
+            <div class="col-md-4">
+                <h3>Website Bán Xe Đạp</h3>
+                <p>(E-Commerce)</p>
+            </div>
+            <div class="col-md-4">
+                <h3>Thành Viên Nhóm</h3>
+                <ul>
+                    <li>Trần Minh Triết 17DH110049</li>
+                    <li>Lê Ngọc Bảo Toàn 17DH110050</li>
+                    <li>Nguyễn Bá Duy Việt 17DH110057</li>
+                </ul>
+            </div>
+            <div class="col-md-4">
+                <h3>Follow Us</h3>
+                <ul>
+                    <li>Facebook</li>
+                    <li>Twitter</li>
+                    <li>Instagram</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>

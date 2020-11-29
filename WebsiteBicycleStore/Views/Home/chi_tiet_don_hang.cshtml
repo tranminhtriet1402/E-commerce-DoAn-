@@ -1,0 +1,69 @@
+﻿@model IEnumerable<WebsiteBicycleStore.Models.OrderDetail>
+@{
+    ViewBag.Title = "chi_tiet_don_hang";
+    Layout = "~/Views/MenuLayout.cshtml";
+}
+
+@foreach (var item in Model)
+{
+    <h1 style="text-align:center;margin-top:20px"> Chi Tiết Đơn Hàng Số @item.IDOrder</h1>
+    break;
+}
+
+@foreach (var item in Model)
+{
+    <p>Ngày Đặt Hàng: @item.ngayDat</p>
+    <p>Ngày Nhận Hàng: @item.ngayNhan</p>
+    break;
+}
+
+<table style="margin:auto">
+    <tr style="background-color:#ff523b;color:white">
+        <td style="text-align:center">Tên sản phẩm </td>
+        <td style="text-align:center">Hình ảnh</td>
+        <td style="text-align:center">Số lượng</td>
+        <td style="text-align:center">Giá mỗi sản phẩm</td>
+    </tr>
+    @foreach (var item in Model)
+    {
+        <tr style="border:1px solid black">
+            <td style="border:1px solid black">@item.namePro</td>
+            <td style="border:1px solid black"><img src="@Url.Content(item.imgPro)" /></td>
+            <td style="border:1px solid black">@item.QuantitySale</td>
+            <td style="border:1px solid black">$@item.UnitPriceSale</td>
+        </tr>
+    }
+</table>
+<p><a href="/Home/DonHang" class="btn">Quay trở lại đơn hàng</a></p>
+
+<!--footer-->
+<div class="footer" style="background:#000;color:#8a8a8a;font-size:14px;padding:60px 0 20px;margin-top:300px">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-4">
+                <h3>Đồ Án Thương Mại Điện Tử</h3>
+                <p>Thứ 2 - Ca 1</p>
+            </div>
+            <div class="col-md-4">
+                <h3>Website Bán Xe Đạp</h3>
+                <p>(E-Commerce)</p>
+            </div>
+            <div class="col-md-4">
+                <h3>Thành Viên Nhóm</h3>
+                <ul>
+                    <li>Trần Minh Triết 17DH110049</li>
+                    <li>Lê Ngọc Bảo Toàn 17DH110050</li>
+                    <li>Nguyễn Bá Duy Việt 17DH110057</li>
+                </ul>
+            </div>
+            <div class="col-md-4">
+                <h3>Follow Us</h3>
+                <ul>
+                    <li>Facebook</li>
+                    <li>Twitter</li>
+                    <li>Instagram</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>

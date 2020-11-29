@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
+using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using WebsiteBicycleStore.Models;
@@ -15,18 +17,35 @@ namespace WebsiteBicycleStore.Controllers
             return View(db.Products.Take(4).ToList());
         }
 
-        public ActionResult About()
-        {
-            ViewBag.Message = "Your application description page.";
+       //Đơn hàng và chi tiết
 
-            return View();
+        public ActionResult DonHang(string email)
+        {
+            
+            email = Session["Email"].ToString();
+            //Thống kê đơn hàng
+            var count = 0;
+            var sum = db.Orders.Where(s=>s.Email.StartsWith(email)).ToList();
+            count = sum.Count();
+            Session["Count"] = count;
+
+
+            return View(db.Orders.Where(s => s.Email.StartsWith(email)).ToList());
         }
 
-        public ActionResult Contact()
+        public ActionResult chi_tiet_don_hang(int id)
         {
-            ViewBag.Message = "Your contact page.";
-
-            return View();
+            return View(db.OrderDetails.Where(s => s.IDOrder.ToString().StartsWith(id.ToString())).ToList());
         }
+
+        //Account và chỉnh sửa
+
+        public ActionResult Account(string email)
+        {
+            email = Session["Email"].ToString();
+            return View(db.Users.Where(s => s.Email.StartsWith(email)).ToList());
+
+        }
+
     }
 }
