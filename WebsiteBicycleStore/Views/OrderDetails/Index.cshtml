@@ -66,6 +66,9 @@
                 <table class="table">
                     <tr>
                         <th>
+                            @Html.DisplayNameFor(model => model.IDOrder)
+                        </th>
+                        <th>
                             @Html.DisplayNameFor(model => model.UnitPriceSale)
                         </th>
                         <th>
@@ -95,6 +98,9 @@
                     @foreach (var item in Model)
                     {
                         <tr>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.ID)
+                            </td>
                             <td>
                                 @Html.DisplayFor(modelItem => item.UnitPriceSale)
                             </td>

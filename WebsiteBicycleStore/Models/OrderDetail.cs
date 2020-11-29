@@ -19,9 +19,9 @@ namespace WebsiteBicycleStore.Models
         public Nullable<int> IDProduct { get; set; }
         public Nullable<decimal> UnitPriceSale { get; set; }
         public Nullable<int> QuantitySale { get; set; }
+        public string imgPro { get; set; }
         public Nullable<System.DateTime> ngayDat { get; set; }
         public Nullable<System.DateTime> ngayNhan { get; set; }
-        public string imgPro { get; set; }
         public string namePro { get; set; }
     
         public virtual Order Order { get; set; }

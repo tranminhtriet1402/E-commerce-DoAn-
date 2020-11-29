@@ -1,5 +1,8 @@
-﻿using System;
+﻿using Microsoft.Ajax.Utilities;
+//using PayPal.Api;
+using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -83,31 +86,31 @@ namespace WebsiteBicycleStore.Controllers
                 Cart cart = Session["Cart"] as Cart;
                 Order _order = new Order();
 
-
+                
                 _order.OrderDate = DateTime.Now;
-
+               
                 _order.Email = Session["Email"].ToString();
                 _order.Address_Cus = form["diachi"];
-                _order.Descriptions = form["des"];
+                _order.Descriptions = "Thanh Toán Sau Khi Nhận Hàng";
                 _order.Amount = int.Parse(form["amount"]);
                 db.Orders.Add(_order);
                 //**Check order xong, sửa lại giao diện**//
 
-
-
-                //foreach (var item in cart.Items)
-                //{
-                //    OrderDetail _order_Detail = new OrderDetail();
-                //    _order_Detail.IDOrder = _order.IDOrder;
-                //    _order_Detail.ngayDat = _order.OrderDate;
-                //    _order_Detail.namePro = item._shopping_product.NameProduct;
-                //    _order_Detail.ngayNhan = DateTime.Now.AddDays(5);
-                //    _order_Detail.IDProduct = item._shopping_product.IDProduct;
-                //    _order_Detail.UnitPriceSale = item._shopping_product.UnitPrice;
-                //    _order_Detail.imgPro = item._shopping_product.Images;
-                //    _order_Detail.QuantitySale = item._shopping_quantity;
-                //    db.OrderDetails.Add(_order_Detail);
-                //}
+                foreach (var item in cart.Items)
+                {
+                    OrderDetail _order_Detail = new OrderDetail();
+                    _order_Detail.IDOrder = _order.IDOrder;
+                    int var = (int) _order_Detail.IDOrder;
+                    Session["mhd"] = var;
+                    _order_Detail.ngayDat = _order.OrderDate;
+                    _order_Detail.namePro = item._shopping_product.NameProduct;
+                    _order_Detail.ngayNhan = DateTime.Now.AddDays(5);
+                    _order_Detail.IDProduct = item._shopping_product.IDProduct;
+                    _order_Detail.UnitPriceSale = item._shopping_product.UnitPrice;
+                    _order_Detail.imgPro = item._shopping_product.Images;
+                    _order_Detail.QuantitySale = item._shopping_quantity;
+                    db.OrderDetails.Add(_order_Detail);
+                }
                 db.SaveChanges();
                 cart.ClearCart();
                 return RedirectToAction("Index", "Home");
@@ -119,5 +122,67 @@ namespace WebsiteBicycleStore.Controllers
             }
 
         }
+
+        public ActionResult CheckOut1(FormCollection form)
+        {
+
+            try
+            {
+                Cart cart = Session["Cart"] as Cart;
+                Order _order = new Order();
+
+
+                _order.OrderDate = DateTime.Now;
+
+                _order.Email = Session["Email"].ToString();
+                _order.Address_Cus = form["diachi"];
+                _order.Descriptions = "Đã Chuyển Khoản";
+                _order.Amount = int.Parse(form["amount"]);
+                db.Orders.Add(_order);
+                //**Check order xong, sửa lại giao diện**//
+
+                foreach (var item in cart.Items)
+                {
+                    OrderDetail _order_Detail = new OrderDetail();
+                    _order_Detail.IDOrder = _order.IDOrder;
+                    int var = (int)_order_Detail.IDOrder;
+                    Session["mhd"] = var;
+                    _order_Detail.ngayDat = _order.OrderDate;
+                    _order_Detail.namePro = item._shopping_product.NameProduct;
+                    _order_Detail.ngayNhan = DateTime.Now.AddDays(5);
+                    _order_Detail.IDProduct = item._shopping_product.IDProduct;
+                    _order_Detail.UnitPriceSale = item._shopping_product.UnitPrice;
+                    _order_Detail.imgPro = item._shopping_product.Images;
+                    _order_Detail.QuantitySale = item._shopping_quantity;
+                    db.OrderDetails.Add(_order_Detail);
+                }
+                db.SaveChanges();
+                cart.ClearCart();
+                return RedirectToAction("Index", "Home");
+            }
+            catch (Exception)
+            {
+
+                return RedirectToAction("Index", "SanPham");
+            }
+
+        }
+
+
+        //public ActionResult paypal()
+        //{
+        //    APIContext apicontext = PaypalConfiguration.GetAPIContext();
+        //    try
+        //    {
+        //        string PayerId=Request.Pa
+        //    }
+        //    catch (Exception)
+        //    {
+
+        //        throw;
+        //    }
+
+        //}
+
     }
 }

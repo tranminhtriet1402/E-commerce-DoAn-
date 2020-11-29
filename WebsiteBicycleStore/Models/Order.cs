@@ -19,7 +19,7 @@ namespace WebsiteBicycleStore.Models
         {
             this.OrderDetails = new HashSet<OrderDetail>();
         }
-
+    
         public int IDOrder { get; set; }
         public Nullable<int> IDUser { get; set; }
         public string Email { get; set; }
@@ -27,7 +27,7 @@ namespace WebsiteBicycleStore.Models
         public string Address_Cus { get; set; }
         public Nullable<int> Amount { get; set; }
         public string Descriptions { get; set; }
-
+    
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<OrderDetail> OrderDetails { get; set; }
         public virtual User User { get; set; }

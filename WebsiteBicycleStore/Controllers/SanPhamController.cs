@@ -27,16 +27,16 @@ namespace WebsiteBicycleStore.Controllers
         public ActionResult XeDapDua()
         {
             //return View(db.Products.ToList());
-            return View(db.Products.Where(s => s.IDCategory == 2).ToList());
+            return View(db.Products.Where(s => s.IDCategory == 1).ToList());
         }
         public ActionResult XeDapDiaHinh()
         {
 
-            return View(db.Products.Where(s => s.IDCategory == 3).ToList());
+            return View(db.Products.Where(s => s.IDCategory == 2).ToList());
         }
         public ActionResult XeDapDuongPho()
         {
-            return View(db.Products.Where(s => s.IDCategory == 4).ToList());
+            return View(db.Products.Where(s => s.IDCategory == 3).ToList());
         }
         public ActionResult chi_tiet_san_pham(int id)
         {

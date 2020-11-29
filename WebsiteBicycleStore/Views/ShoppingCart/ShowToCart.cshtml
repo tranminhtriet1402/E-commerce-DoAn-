@@ -24,7 +24,7 @@
                 </tr>
                 @if (Model.Items == null)
                 {
-                    <tr>@ViewBag.mess</tr>
+                    <tr>ViewBag.mess</tr>
 
                 }
                 else
@@ -56,11 +56,12 @@
                             <td>$@total</td>
                         </tr>
                     }
+
                 }
 
             </table>
             <div class="total-price">
-                <table sty>
+                <table>
                     <tr>
                         <td>Tổng giá sản phẩm</td>
                         <td>$@Model.Total_Money()</td>
@@ -107,40 +108,76 @@
 <div id="ex1" class="modal">
     @using (Html.BeginForm("CheckOut", "ShoppingCart"))
     {
-        <input type="text" name="des" required />
+        <h3>Nhập địa chỉ nhà</h3>
         <input type="text" name="diachi" required />
-        <input type="text" name="amount" value="@Model.Total_Money()" disabled   />
-        <input type="submit" />
-        foreach (var item in Model.Items)
-        {
+        <br />
+        <i>Lưu ý : thanh toán tiền mặt sau khi đã nhận hàng và kiểm tra</i>
+
+        <table>
+            <tr>
+                <td style="background-color:#ff523b">Hình Ảnh</td>
+                <td style="background-color:#ff523b">Tên Sản Phẩm</td>
+                <td style="background-color:#ff523b">Giá Tiền</td>
+                <td style="background-color:#ff523b">Số Lượng</td>
+            </tr>
+            @foreach (var item in Model.Items)
+            {
             double total = Convert.ToDouble(item._shopping_product.UnitPrice.Value * item._shopping_quantity);
-            <table>
-                <tr style="border:1px solid black">
-                    <td style="border:1px solid black">
-                        @Html.DisplayFor(model => item._shopping_product.NameProduct)
-                    </td>
-                    <td style="border:1px solid black">
-                        @Html.DisplayFor(model => item._shopping_quantity)
-                    </td>
-                    <td style="border:1px solid black">
-                        $@Html.DisplayFor(model => item._shopping_product.UnitPrice)
-                    </td>
-                    <td style="border:1px solid black">$@total</td>
-                </tr>
-            </table>
+            <tr>
 
+                <td>
+                    <img src="@Url.Content(item._shopping_product.Images)" />                   
+                </td>
+                <td>@Html.DisplayFor(model => item._shopping_product.NameProduct)</td>
+                <td>$@Html.DisplayFor(model => item._shopping_product.UnitPrice)</td>
+                <td>@Html.DisplayFor(model => item._shopping_quantity)</td>
+            </tr>
+            }
+        </table>
 
-        }
-}
-
-
-
+        <div style="float:right">Tổng tiền thanh toán: $@Model.Total_Money()</div>
+        <input type="number" name="amount" value="@Model.Total_Money()" hidden />
+        <input type="submit" class="btn" value="Xác Nhận Đơn Hàng"/>
+    }
 </div>
 
 <!--Modal TT Thẻ ATM-->
 <div id="ex2" class="modal">
-    <p>Thanks for clicking. That felt good.</p>
-    <a href="#" rel="modal:close">Close</a>
+    @using (Html.BeginForm("CheckOut1", "ShoppingCart"))
+    {
+        <h1>Lỗi Ví MoMo</h1>
+        <h3>Nhập địa chỉ nhà</h3>
+        <input type="text" name="diachi" required />
+        <br />
+        <i>Lưu ý : Chuyển khoản đúng với số tiền trước khi bấm <i style="color:red">xác nhận đơn hàng</i></i> <br />
+        <img src="~/Content/images/QRmomo.jpg" />
+        <p>Nội dụng : [Tên tài khoản đăng nhập] chuyển khoản xác nhận hóa đơn @Session["mhd"] </p>
+        <table>
+            <tr>
+                <td style="background-color:#ff523b">Hình Ảnh</td>
+                <td style="background-color:#ff523b">Tên Sản Phẩm</td>
+                <td style="background-color:#ff523b">Giá Tiền</td>
+                <td style="background-color:#ff523b">Số Lượng</td>
+            </tr>
+            @foreach (var item in Model.Items)
+            {
+                double total = Convert.ToDouble(item._shopping_product.UnitPrice.Value * item._shopping_quantity);
+                <tr>
+
+                    <td>
+                        <img src="@Url.Content(item._shopping_product.Images)" />
+                    </td>
+                    <td>@Html.DisplayFor(model => item._shopping_product.NameProduct)</td>
+                    <td>$@Html.DisplayFor(model => item._shopping_product.UnitPrice)</td>
+                    <td>@Html.DisplayFor(model => item._shopping_quantity)</td>
+                </tr>
+            }
+        </table>
+
+        <div style="float:right">$@Model.Total_Money()</div>
+        <input type="number" name="amount" value="@Model.Total_Money()" hidden />
+        <input type="submit" class="btn" value="Xác Nhận Đơn Hàng" />
+    }
 </div>
 <!--Modal TT tiền mặt-->
 <div id="ex3" class="modal">
@@ -150,31 +187,8 @@
 
 
 
-@*<h2><strong>Nhập địa chỉ nhận hàng</strong></h2>
-    <input type="text" name="diachi" required />
-    <h2><strong>Ghi Chú</strong></h2>
-    <input type="text" name="des" required />
-
-     <a href="#" rel="modal:close">Close</a>
-     @foreach (var item in Model.Items)
-     {
-         double total = Convert.ToDouble(item._shopping_product.UnitPrice.Value * item._shopping_quantity);
-         <table>
-                <tr style="border:1px solid black">
-                    <td style="border:1px solid black">
-                        @Html.DisplayFor(model => item._shopping_product.NameProduct)
-                    </td>
-                    <td style="border:1px solid black">
-                        @Html.DisplayFor(model => item._shopping_quantity)
-                    </td>
-                    <td style="border:1px solid black">
-                        $@Html.DisplayFor(model => item._shopping_product.UnitPrice)
-                    </td>
-                    <td style="border:1px solid black">$@total</td>
-                </tr></table>
 
 
-      }*@
 
 <!--footer-->
 <div class="footer" style="background:#000;color:#8a8a8a;font-size:14px;padding:60px 0 20px;">
