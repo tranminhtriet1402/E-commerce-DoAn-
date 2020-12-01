@@ -16,7 +16,7 @@
 <div class="small-container cart-page">
     <div class="row">
         <div class="col-lg-6">
-            <table>
+            <table class="testpaypal">
                 <tr>
                     <th>Sản Phẩm</th>
                     <th>Số lượng</th>
@@ -55,6 +55,10 @@
                             </td>
                             <td>$@total</td>
                         </tr>
+                        Session["total"] = Model.Total_Money();
+                        <tr>
+                            <td> <a href="@Url.Action("PaymentWithPaypal", "ShoppingCart")">Payment</a></td>
+                        </tr>
                     }
 
                 }
@@ -92,7 +96,12 @@
                 <div>
                     <a href="#ex1" rel="modal:open" class="btn">Thanh Toán Bằng Tiền Mặt</a> <br />
                     <a href="#ex2" rel="modal:open" class="btn">Thanh Toán Bằng Thẻ ATM</a> <br />
-                    <a href="#ex3" rel="modal:open" class="btn">Thanh Toán Bằng PayPal</a>
+                    @*<a href="#ex3" rel="modal:open" class="btn3">Thanh Toán Bằng PayPal</a>*@
+                    <div id="smart-button-container">
+                        <div style="text-align: center;">
+                            <div id="paypal-button-container"></div>
+                        </div>
+                    </div>
                 </div>
             }
 
@@ -101,6 +110,8 @@
     </div>
 
 </div>
+
+
 
 <!--Modal TT tiền mặt-->
 
@@ -122,22 +133,22 @@
             </tr>
             @foreach (var item in Model.Items)
             {
-            double total = Convert.ToDouble(item._shopping_product.UnitPrice.Value * item._shopping_quantity);
-            <tr>
+                double total = Convert.ToDouble(item._shopping_product.UnitPrice.Value * item._shopping_quantity);
+                <tr>
 
-                <td>
-                    <img src="@Url.Content(item._shopping_product.Images)" />                   
-                </td>
-                <td>@Html.DisplayFor(model => item._shopping_product.NameProduct)</td>
-                <td>$@Html.DisplayFor(model => item._shopping_product.UnitPrice)</td>
-                <td>@Html.DisplayFor(model => item._shopping_quantity)</td>
-            </tr>
+                    <td>
+                        <img src="@Url.Content(item._shopping_product.Images)" />
+                    </td>
+                    <td>@Html.DisplayFor(model => item._shopping_product.NameProduct)</td>
+                    <td>$@Html.DisplayFor(model => item._shopping_product.UnitPrice)</td>
+                    <td>@Html.DisplayFor(model => item._shopping_quantity)</td>
+                </tr>
             }
         </table>
 
         <div style="float:right">Tổng tiền thanh toán: $@Model.Total_Money()</div>
         <input type="number" name="amount" value="@Model.Total_Money()" hidden />
-        <input type="submit" class="btn" value="Xác Nhận Đơn Hàng"/>
+        <input type="submit" class="btn" value="Xác Nhận Đơn Hàng" />
     }
 </div>
 
@@ -188,9 +199,7 @@
 
 
 
-
-
-<!--footer-->
+@*footer*@
 <div class="footer" style="background:#000;color:#8a8a8a;font-size:14px;padding:60px 0 20px;">
     <div class="container">
         <div class="row">
@@ -222,3 +231,44 @@
     </div>
 </div>
 
+<input type="hidden" name="cmd" value="_ext-enter">
+<form action="https://www.paypal.com/us/cgi-bin/webscr" method="post">
+    <input type="hidden" name="cmd" value="_xclick">
+    <input type="hidden" name="business" value="you@youremail.com">
+    <input type="hidden" name="item_name" value="Item Name">
+    <input type="hidden" name="currency_code" value="USD">
+    <input type="hidden" name="amount" value="0.00">
+    <input type="image" src="http://www.paypal.com/en_US/i/btn/x-click-but01.gif" name="submit" alt="Make payments with PayPal - it's fast, free and secure!">
+</form>
+
+@*<script src="https://www.paypal.com/sdk/js?client-id=sb&currency=USD" data-sdk-integration-source="button-factory"></script>
+    <script>
+        function initPayPalButton() {
+            paypal.Buttons({
+                style: {
+                    shape: 'rect',
+                    color: 'gold',
+                    layout: 'vertical',
+                    label: 'paypal',
+
+                },
+
+                createOrder: function (data, actions) {
+                    return actions.order.create({
+                        purchase_units: [{ "amount": { "currency_code": "USD", "value": @Model.Total_Money() } }]
+                    });
+                },
+
+                onApprove: function (data, actions) {
+                    return actions.order.capture().then(function (details) {
+                        alert('Transaction completed by ' + details.payer.name.given_name + '!');
+                    });
+                },
+
+                onError: function (err) {
+                    console.log(err);
+                }
+            }).render('#paypal-button-container');
+        }
+        initPayPalButton();
+    </script>*@

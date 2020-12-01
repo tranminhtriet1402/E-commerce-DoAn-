@@ -225,6 +225,7 @@
     <Compile Include="Models\OrderDetail.cs">
       <DependentUpon>DB_ShopEntities.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\PaypalLogger.cs" />
     <Compile Include="Models\Product.cs">
       <DependentUpon>DB_ShopEntities.tt</DependentUpon>
     </Compile>
@@ -366,6 +367,8 @@
     <Content Include="Views\KhachHang\Details.cshtml" />
     <Content Include="Views\KhachHang\Edit.cshtml" />
     <Content Include="Views\KhachHang\Index.cshtml" />
+    <Content Include="Views\ShoppingCart\FailureView.cshtml" />
+    <Content Include="Views\ShoppingCart\SuccessView.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
