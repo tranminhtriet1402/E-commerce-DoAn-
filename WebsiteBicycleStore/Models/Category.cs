@@ -11,7 +11,8 @@ namespace WebsiteBicycleStore.Models
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel.DataAnnotations.Schema;
+
     public partial class Category
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -19,10 +20,12 @@ namespace WebsiteBicycleStore.Models
         {
             this.Products = new HashSet<Product>();
         }
-    
+
         public int IDCategory { get; set; }
         public string NameCategory { get; set; }
-    
+        [NotMapped]
+        public List<Category> CateCollection { get; set; }
+
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Product> Products { get; set; }
     }
