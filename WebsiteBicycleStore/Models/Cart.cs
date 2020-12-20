@@ -65,5 +65,15 @@ namespace WebsiteBicycleStore.Models
             IDOrder = rd.Next(100, 1000);
             return IDOrder;
         }
+        public double Total_Money1()
+        {
+            var total = items.Sum(s => s._shopping_product.UnitPrice * s._shopping_quantity);
+            return (double)total + 2;
+        }
+        public double Total_Money2()
+        {
+            var total = items.Sum(s => s._shopping_product.UnitPrice * s._shopping_quantity);
+            return (double)total + 3;
+        }
     }
 }

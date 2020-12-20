@@ -15,6 +15,7 @@ namespace WebsiteBicycleStore.Controllers
 {
     public class ShoppingCartController : Controller
     {
+
         private DB_BicycleStoreEntities db = new DB_BicycleStoreEntities();
         // GET: ShoppingCart
         public Cart GetCart()
@@ -81,15 +82,15 @@ namespace WebsiteBicycleStore.Controllers
         }
         public ActionResult CheckOut(FormCollection form)
         {
-            
+
             try
             {
                 Cart cart = Session["Cart"] as Cart;
                 Order _order = new Order();
 
-                
+
                 _order.OrderDate = DateTime.Now;
-               
+
                 _order.Email = Session["Email"].ToString();
                 _order.Address_Cus = form["diachi"];
                 _order.Descriptions = "Thanh Toán Sau Khi Nhận Hàng";
@@ -101,7 +102,7 @@ namespace WebsiteBicycleStore.Controllers
                 {
                     OrderDetail _order_Detail = new OrderDetail();
                     _order_Detail.IDOrder = _order.IDOrder;
-                    int var = (int) _order_Detail.IDOrder;
+                    int var = (int)_order_Detail.IDOrder;
                     Session["mhd"] = var;
                     _order_Detail.ngayDat = _order.OrderDate;
                     _order_Detail.namePro = item._shopping_product.NameProduct;
@@ -176,6 +177,33 @@ namespace WebsiteBicycleStore.Controllers
             var listItems = new ItemList() { items = new List<Item>() };
 
             Cart cart = Session["Cart"] as Cart;
+            Order _order = new Order();
+
+
+            _order.OrderDate = DateTime.Now;
+
+            _order.Email = Session["Email"].ToString();
+            _order.Address_Cus = "234 Su Van Hanh";
+            _order.Descriptions = "Đã Thanh Toán Bằng PayPal";
+            _order.Amount = /*nt.Parse(form["amount"]);*/ (int)cart.Items.Sum(x => x._shopping_quantity * x._shopping_product.UnitPrice);
+            db.Orders.Add(_order);
+            //**Check order xong, sửa lại giao diện**//
+
+            foreach (var item in cart.Items)
+            {
+                OrderDetail _order_Detail = new OrderDetail();
+                _order_Detail.IDOrder = _order.IDOrder;
+                _order_Detail.ngayDat = _order.OrderDate;
+                _order_Detail.namePro = item._shopping_product.NameProduct;
+                _order_Detail.ngayNhan = DateTime.Now.AddDays(5);
+                _order_Detail.IDProduct = item._shopping_product.IDProduct;
+                _order_Detail.UnitPriceSale = item._shopping_product.UnitPrice;
+                _order_Detail.imgPro = item._shopping_product.Images;
+                _order_Detail.QuantitySale = item._shopping_quantity;
+                db.OrderDetails.Add(_order_Detail);
+            }
+            db.SaveChanges();
+
             foreach (var item in cart.Items)
             {
                 listItems.items.Add(new Item()
@@ -230,7 +258,7 @@ namespace WebsiteBicycleStore.Controllers
                 transactions = transactionList,
                 redirect_urls = redirUrls
             };
-
+            cart.ClearCart();
             return payment.Create(apiContext);
         }
 
@@ -248,6 +276,10 @@ namespace WebsiteBicycleStore.Controllers
         // Create PaymentWithPaypal method
         public ActionResult PaymentWithPaypal()
         {
+
+
+
+
             // Gettings context from the paypal bases on clientId and clientSecret for payment
             APIContext apiContext = PaypalConfiguration.GetAPIContext();
 
@@ -300,6 +332,7 @@ namespace WebsiteBicycleStore.Controllers
 
             //Remove shopping cart session
             //Session.Remove(strCart);
+
             return View("SuccessView");
         }
     }

@@ -11,7 +11,7 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.css" />
 
 
-
+@Session["ship"]
 
 <div class="small-container cart-page">
     <div class="row">
@@ -56,9 +56,9 @@
                             <td>$@total</td>
                         </tr>
                         Session["total"] = Model.Total_Money();
-                        <tr>
-                            <td> <a href="@Url.Action("PaymentWithPaypal", "ShoppingCart")">Payment</a></td>
-                        </tr>
+                        @*<tr>
+                                <td> <a href="@Url.Action("PaymentWithPaypal", "ShoppingCart")">Payment</a></td>
+                            </tr>*@
                     }
 
                 }
@@ -95,8 +95,9 @@
                 <!-- Link to open the modal -->
                 <div>
                     <a href="#ex1" rel="modal:open" class="btn">Thanh Toán Bằng Tiền Mặt</a> <br />
-                    <a href="#ex2" rel="modal:open" class="btn">Thanh Toán Bằng Thẻ ATM</a> <br />
-                    @*<a href="#ex3" rel="modal:open" class="btn3">Thanh Toán Bằng PayPal</a>*@
+                    <a @*href="#ex2" rel="modal:open" class="btn">Thanh Toán Bằng Thẻ ATM</a> <br />*@
+                       @*<a href="#ex3" rel="modal:open" class="btn3">Thanh Toán Bằng PayPal</a>*@
+                    <a href="@Url.Action("PaymentWithPaypal", "ShoppingCart")" class="btn">Thanh Toán bằng PayPal</a>
                     <div id="smart-button-container">
                         <div style="text-align: center;">
                             <div id="paypal-button-container"></div>
@@ -192,8 +193,41 @@
 </div>
 <!--Modal TT tiền mặt-->
 <div id="ex3" class="modal">
-    <p>Thanks for clicking. That felt good.</p>
-    <a href="#" rel="modal:close">Close</a>
+    @using (Html.BeginForm("CheckOut2", "ShoppingCart"))
+    {
+        <h1>Lỗi Ví MoMo</h1>
+        <h3>Nhập địa chỉ nhà</h3>
+        <input type="text" name="diachi" required />
+        <br />
+        <i>Lưu ý : Chuyển khoản đúng với số tiền trước khi bấm <i style="color:red">xác nhận đơn hàng</i></i> <br />
+        <img src="~/Content/images/QRmomo.jpg" />
+        <p>Nội dụng : [Tên tài khoản đăng nhập] chuyển khoản xác nhận hóa đơn @Session["mhd"] </p>
+        <table>
+            <tr>
+                <td style="background-color:#ff523b">Hình Ảnh</td>
+                <td style="background-color:#ff523b">Tên Sản Phẩm</td>
+                <td style="background-color:#ff523b">Giá Tiền</td>
+                <td style="background-color:#ff523b">Số Lượng</td>
+            </tr>
+            @foreach (var item in Model.Items)
+            {
+                double total = Convert.ToDouble(item._shopping_product.UnitPrice.Value * item._shopping_quantity);
+                <tr>
+
+                    <td>
+                        <img src="@Url.Content(item._shopping_product.Images)" />
+                    </td>
+                    <td>@Html.DisplayFor(model => item._shopping_product.NameProduct)</td>
+                    <td>$@Html.DisplayFor(model => item._shopping_product.UnitPrice)</td>
+                    <td>@Html.DisplayFor(model => item._shopping_quantity)</td>
+                </tr>
+            }
+        </table>
+
+        <div style="float:right">$@Model.Total_Money()</div>
+        <input type="number" name="amount" value="@Model.Total_Money()" hidden />
+        <a href="@Url.Action("PaymentWithPaypal", "ShoppingCart")">Payment</a>
+    }
 </div>
 
 
@@ -231,15 +265,7 @@
     </div>
 </div>
 
-<input type="hidden" name="cmd" value="_ext-enter">
-<form action="https://www.paypal.com/us/cgi-bin/webscr" method="post">
-    <input type="hidden" name="cmd" value="_xclick">
-    <input type="hidden" name="business" value="you@youremail.com">
-    <input type="hidden" name="item_name" value="Item Name">
-    <input type="hidden" name="currency_code" value="USD">
-    <input type="hidden" name="amount" value="0.00">
-    <input type="image" src="http://www.paypal.com/en_US/i/btn/x-click-but01.gif" name="submit" alt="Make payments with PayPal - it's fast, free and secure!">
-</form>
+
 
 @*<script src="https://www.paypal.com/sdk/js?client-id=sb&currency=USD" data-sdk-integration-source="button-factory"></script>
     <script>
