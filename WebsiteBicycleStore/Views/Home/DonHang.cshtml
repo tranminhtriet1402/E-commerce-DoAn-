@@ -19,6 +19,9 @@
         <td style="text-align:center">Địa chỉ nhận hàng</td>
         <td style="text-align:center">Tổng số tiền thanh toán</td>
         <td style="text-align:center">Ghi chú</td>
+        <td style="text-align:center">Tình Trạng Đơn Hàng</td>
+        <td style="text-align:center">Tình Trạng Giao</td>
+        <td style="text-align:center">Tình Trạng Thanh Toán</td>
         <td style="text-align:center"></td>
     </tr>
 
@@ -31,6 +34,9 @@
 
             <td style="border:1px solid black">$@item.Amount</td>
             <td style="border:1px solid black">@item.Descriptions</td>
+            <td style="border:1px solid black">@(item.TinhTrangDonHang.GetValueOrDefault()?"Đã Xác Nhận":"Chưa Xác Nhận")</td>
+            <td style="border:1px solid black">@(item.TinhTrangGiao.GetValueOrDefault()?"Giao Thành Công":"Đang Trong Quá Trình Giao")</td>
+            <td style="border:1px solid black">@(item.TinhTrangThanhToan.GetValueOrDefault()?"Đã Thanh Toán":"Chưa Thanh Toán")</td>
             <td style="border:1px solid black">
                 <a href="/Home/chi_tiet_don_hang/@item.IDOrder">
                     Xem Chi Tiêt

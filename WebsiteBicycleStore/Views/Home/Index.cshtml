@@ -118,18 +118,23 @@
             <div class="row">
                 @foreach (var item in Model)
                 {
-                    <div class="col-4">
-                        <img src="@Url.Content(item.Images)" style="height:200px;width:200px" />
-                        <h4>@Html.DisplayFor(modelItem => item.NameProduct)</h4>
-                        <div class="rating">
-                            <i class="fa fa-star"></i>
-                            <i class="fa fa-star"></i>
-                            <i class="fa fa-star"></i>
-                            <i class="fa fa-star-half-o"></i>
-                            <i class="fa fa-star-o"></i>
-                        </div>
-                        <p>$@Html.DisplayFor(modelItem => item.UnitPrice)</p>
+                <div class="col-4">
+                    <img src="@Url.Content(item.Images)" style="height:200px;width:200px" />
+                    <h4>@Html.DisplayFor(modelItem => item.NameProduct)</h4>
+                    <div class="rating">
+                        <i class="fa fa-star"></i>
+                        <i class="fa fa-star"></i>
+                        <i class="fa fa-star"></i>
+                        <i class="fa fa-star-half-o"></i>
+                        <i class="fa fa-star-o"></i>
                     </div>
+                    <p>$@Html.DisplayFor(modelItem => item.UnitPrice) <a href="/ShoppingCart/AddtoCart/@item.IDProduct"><img src="~/Content/images/iconcart.png" style="height:30px;width:30px" /></a></p>
+                    <p>
+                        <a href="/SanPham/chi_tiet_san_pham/@item.IDProduct">
+                            Xem Chi Tiêt
+                        </a>
+                    </p>
+                </div>
                 }
 
 

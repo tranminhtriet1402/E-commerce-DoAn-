@@ -48,7 +48,7 @@ namespace WebsiteBicycleStore.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "IDOrder,IDUser,Email,OrderDate,Address_Cus,Amount,Descriptions")] Order order)
+        public ActionResult Create([Bind(Include = "IDOrder,IDUser,Email,OrderDate,Address_Cus,Amount,Descriptions,TinhTrangGiao,TinhTrangDonHang,TinhTrangThanhToan")] Order order)
         {
             if (ModelState.IsValid)
             {
@@ -82,7 +82,7 @@ namespace WebsiteBicycleStore.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "IDOrder,IDUser,Email,OrderDate,Address_Cus,Amount,Descriptions")] Order order)
+        public ActionResult Edit([Bind(Include = "IDOrder,IDUser,Email,OrderDate,Address_Cus,Amount,Descriptions,TinhTrangGiao,TinhTrangDonHang,TinhTrangThanhToan")] Order order)
         {
             if (ModelState.IsValid)
             {
@@ -127,6 +127,55 @@ namespace WebsiteBicycleStore.Controllers
                 db.Dispose();
             }
             base.Dispose(disposing);
+        }
+
+
+        public ActionResult TinhTrangGiao(int? id)
+        {
+            var check = db.Orders.Find(id);
+            
+            if (check.TinhTrangGiao == true)
+            {
+                check.TinhTrangGiao = false;
+            }
+            else if (check.TinhTrangGiao == false)
+            {
+                check.TinhTrangGiao = true;
+            }
+            db.SaveChanges();
+            return RedirectToAction("Index", "Orders");
+        }
+        public ActionResult TinhTrangDonHang(int? id)
+        {
+            var check = db.Orders.Find(id);
+            if (check.TinhTrangDonHang == true)
+            {
+                check.TinhTrangDonHang = false;
+            }
+            else if (check.TinhTrangDonHang == false)
+            {
+                check.TinhTrangDonHang = true;
+            }
+
+
+            db.SaveChanges();
+            return RedirectToAction("Index", "Orders");
+        }
+        public ActionResult TinhTrangThanhToan(int? id)
+        {
+            var check = db.Orders.Find(id);
+            if (check.TinhTrangThanhToan == true)
+            {
+                check.TinhTrangThanhToan = false;
+            }
+            else if (check.TinhTrangThanhToan == false)
+            {
+                check.TinhTrangThanhToan = true;
+            }
+
+
+            db.SaveChanges();
+            return RedirectToAction("Index", "Orders");
         }
     }
 }

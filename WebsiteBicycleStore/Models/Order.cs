@@ -27,6 +27,9 @@ namespace WebsiteBicycleStore.Models
         public string Address_Cus { get; set; }
         public Nullable<int> Amount { get; set; }
         public string Descriptions { get; set; }
+        public Nullable<bool> TinhTrangGiao { get; set; }
+        public Nullable<bool> TinhTrangDonHang { get; set; }
+        public Nullable<bool> TinhTrangThanhToan { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<OrderDetail> OrderDetails { get; set; }

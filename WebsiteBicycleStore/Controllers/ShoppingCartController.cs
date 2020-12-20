@@ -100,7 +100,9 @@ namespace WebsiteBicycleStore.Controllers
                 }
 
                 _order.OrderDate = DateTime.Now;
-
+                _order.TinhTrangDonHang = false;
+                _order.TinhTrangGiao = false;
+                _order.TinhTrangThanhToan = false;
                 _order.Email = Session["Email"].ToString();
                 _order.Address_Cus = form["diachi"];
                 //_order.Descriptions = "Thanh Toán Khi Nhận Hàng";
@@ -116,7 +118,7 @@ namespace WebsiteBicycleStore.Controllers
                     Session["mhd"] = var;
                     _order_Detail.ngayDat = _order.OrderDate;
                     _order_Detail.namePro = item._shopping_product.NameProduct;
-                    _order_Detail.ngayNhan = DateTime.Now.AddDays(5);
+                    _order_Detail.ngayNhan = DateTime.Now.AddDays(5);                  
                     _order_Detail.IDProduct = item._shopping_product.IDProduct;
                     _order_Detail.UnitPriceSale = item._shopping_product.UnitPrice;
                     _order_Detail.imgPro = item._shopping_product.Images;
@@ -150,6 +152,9 @@ namespace WebsiteBicycleStore.Controllers
                 _order.Address_Cus = form["diachi"];
                 _order.Descriptions = "Đã Chuyển Khoản";
                 _order.Amount = int.Parse(form["amount"]);
+                _order.TinhTrangDonHang = false;
+                _order.TinhTrangGiao = false;
+                _order.TinhTrangThanhToan = false;
                 db.Orders.Add(_order);
                 //**Check order xong, sửa lại giao diện**//
 
@@ -195,6 +200,9 @@ namespace WebsiteBicycleStore.Controllers
             _order.Email = Session["Email"].ToString();
             _order.Address_Cus = "234 Su Van Hanh";
             _order.Descriptions = "Đã Thanh Toán Bằng PayPal";
+            _order.TinhTrangDonHang = false;
+            _order.TinhTrangGiao = false;
+            _order.TinhTrangThanhToan = false;
             _order.Amount = /*nt.Parse(form["amount"]);*/ (int)cart.Items.Sum(x => x._shopping_quantity * x._shopping_product.UnitPrice);
             db.Orders.Add(_order);
             //**Check order xong, sửa lại giao diện**//

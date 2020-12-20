@@ -6,6 +6,7 @@
 }
 
 
+
 <nav class="navbar navbar-default navbar-static-top">
     <div class="container-fluid">
         <!-- Brand and toggle get grouped for better mobile display -->
@@ -62,9 +63,6 @@
                 Đơn hàng
             </div>
             <div class="panel-body">
-                <p>
-                    @Html.ActionLink("Create New", "Create")
-                </p>
                 <table class="table">
                     <tr>
                         <th>
@@ -82,9 +80,18 @@
                         <th>
                             @Html.DisplayNameFor(model => model.Descriptions)
                         </th>
+                        <th>                           
+                            @Html.DisplayNameFor(model => model.TinhTrangDonHang)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.TinhTrangGiao)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.TinhTrangThanhToan)
+                        </th>
                         @*<th>
-                            @Html.DisplayNameFor(model => model.User.FirstName)
-                        </th>*@
+                @Html.DisplayNameFor(model => model.User.FirstName)
+            </th>*@
                         <th></th>
                     </tr>
 
@@ -106,21 +113,33 @@
                             <td>
                                 @Html.DisplayFor(modelItem => item.Descriptions)
                             </td>
-                            @*<td>
-                                @Html.DisplayFor(modelItem => item.User.FirstName)
-                            </td>*@
                             <td>
-                                @Html.ActionLink("Edit", "Edit", new { id = item.IDOrder }) |
-                                @Html.ActionLink("Details", "Details", new { id = item.IDOrder }) |
+                                @*@Html.DisplayFor(modelItem => item.TinhTrangGiao)*@
+                                
+                                <a href="/Orders/TinhTrangDonHang/@item.IDOrder">@(item.TinhTrangDonHang.GetValueOrDefault()?"Đã Xác Nhận":"Chưa Xác Nhận")</a>
+                            </td>
+                            <td>
+                                @*@Html.DisplayFor(modelItem => item.TinhTrangDonHang)*@
+                                <a href="/Orders/TinhTrangGiao/@item.IDOrder">@(item.TinhTrangGiao.GetValueOrDefault()?"Giao Thành Công":"Đang Trong Quá Trình Giao")</a>
+                            </td>
+                            <td>
+                                @*@Html.DisplayFor(modelItem => item.TinhTrangThanhToan)*@
+                                <a href="/Orders/TinhTrangThanhToan/@item.IDOrder">@(item.TinhTrangThanhToan.GetValueOrDefault()?"Đã Thanh Toán":"Chưa Thanh Toán")</a>
+                            </td>
+                            @*<td>
+                    @Html.DisplayFor(modelItem => item.User.FirstName)
+                </td>*@
+                            <td>
+                                @*@Html.ActionLink("Edit", "Edit", new { id = item.IDOrder }) |
+                                @Html.ActionLink("Details", "Details", new { id = item.IDOrder }) |*@
                                 @Html.ActionLink("Delete", "Delete", new { id = item.IDOrder })
                             </td>
                         </tr>
                     }
 
                 </table>
-            </div>
-            
 
+            </div>
         </div>
     </div>
     <footer class="pull-left footer">
@@ -130,3 +149,8 @@
         </p>
     </footer>
 </div>
+
+@*<p>
+        @Html.ActionLink("Create New", "Create")
+    </p>*@
+

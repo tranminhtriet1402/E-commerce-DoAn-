@@ -5,6 +5,7 @@
     Layout = "~/Views/AdminLayout.cshtml";
 }
 
+
 <nav class="navbar navbar-default navbar-static-top">
     <div class="container-fluid">
         <!-- Brand and toggle get grouped for better mobile display -->
@@ -29,7 +30,6 @@
                 <button type="submit" class="btn btn-default"><i class="glyphicon glyphicon-search"></i></button>
             </form>
             <ul class="nav navbar-nav navbar-right">
-                <
                 <li><a href="/Home/Index" target="_blank">Visit Site</a></li>
                 <li class="dropdown ">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
@@ -61,65 +61,93 @@
             <div class="panel-heading">
                 Đơn hàng
             </div>
-            <div>
-                <h4>Thông tin đơn hàng số @Html.DisplayFor(model => model.IDOrder)</h4>
-                <hr />
-                <dl class="dl-horizontal">
-                    <dt>
-                        @Html.DisplayNameFor(model => model.Email)
-                    </dt>
+            <div class="panel-body">
+                <h2>Details</h2>
 
-                    <dd>
-                        @Html.DisplayFor(model => model.Email)
-                    </dd>
+                <div>
+                    <h4>Order</h4>
+                    <hr />
+                    <dl class="dl-horizontal">
+                        <dt>
+                            @Html.DisplayNameFor(model => model.Email)
+                        </dt>
 
-                    <dt>
-                        @Html.DisplayNameFor(model => model.OrderDate)
-                    </dt>
+                        <dd>
+                            @Html.DisplayFor(model => model.Email)
+                        </dd>
 
-                    <dd>
-                        @Html.DisplayFor(model => model.OrderDate)
-                    </dd>
+                        <dt>
+                            @Html.DisplayNameFor(model => model.OrderDate)
+                        </dt>
 
-                    <dt>
-                        @Html.DisplayNameFor(model => model.Address_Cus)
-                    </dt>
+                        <dd>
+                            @Html.DisplayFor(model => model.OrderDate)
+                        </dd>
 
-                    <dd>
-                        @Html.DisplayFor(model => model.Address_Cus)
-                    </dd>
+                        <dt>
+                            @Html.DisplayNameFor(model => model.Address_Cus)
+                        </dt>
 
-                    <dt>
-                        @Html.DisplayNameFor(model => model.Amount)
-                    </dt>
+                        <dd>
+                            @Html.DisplayFor(model => model.Address_Cus)
+                        </dd>
 
-                    <dd>
-                        @Html.DisplayFor(model => model.Amount)
-                    </dd>
+                        <dt>
+                            @Html.DisplayNameFor(model => model.Amount)
+                        </dt>
 
-                    <dt>
-                        @Html.DisplayNameFor(model => model.Descriptions)
-                    </dt>
+                        <dd>
+                            @Html.DisplayFor(model => model.Amount)
+                        </dd>
 
-                    <dd>
-                        @Html.DisplayFor(model => model.Descriptions)
-                    </dd>
+                        <dt>
+                            @Html.DisplayNameFor(model => model.Descriptions)
+                        </dt>
 
-                    <dt>
-                        @Html.DisplayNameFor(model => model.User.FirstName)
-                    </dt>
+                        <dd>
+                            @Html.DisplayFor(model => model.Descriptions)
+                        </dd>
 
-                    <dd>
-                        @Html.DisplayFor(model => model.User.FirstName)
-                    </dd>
+                        <dt>
+                            @Html.DisplayNameFor(model => model.TinhTrangGiao)
+                        </dt>
 
-                </dl>
+                        <dd>
+                            @Html.DisplayFor(model => model.TinhTrangGiao)
+                        </dd>
+
+                        <dt>
+                            @Html.DisplayNameFor(model => model.TinhTrangDonHang)
+                        </dt>
+
+                        <dd>
+                            @Html.DisplayFor(model => model.TinhTrangDonHang)
+                        </dd>
+
+                        <dt>
+                            @Html.DisplayNameFor(model => model.TinhTrangThanhToan)
+                        </dt>
+
+                        <dd>
+                            @Html.DisplayFor(model => model.TinhTrangThanhToan)
+                        </dd>
+
+                        <dt>
+                            @Html.DisplayNameFor(model => model.User.FirstName)
+                        </dt>
+
+                        <dd>
+                            @Html.DisplayFor(model => model.User.FirstName)
+                        </dd>
+
+                    </dl>
+                </div>
+                <p>
+                    @Html.ActionLink("Edit", "Edit", new { id = Model.IDOrder }) |
+                    @Html.ActionLink("Back to List", "Index")
+                </p>
+
             </div>
-            <p>
-                @Html.ActionLink("Edit", "Edit", new { id = Model.IDOrder }) |
-                @Html.ActionLink("Back to List", "Index")
-            </p>
-
         </div>
     </div>
     <footer class="pull-left footer">
@@ -129,5 +157,4 @@
         </p>
     </footer>
 </div>
-
 
