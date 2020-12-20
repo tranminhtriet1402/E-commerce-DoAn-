@@ -87,14 +87,24 @@ namespace WebsiteBicycleStore.Controllers
             {
                 Cart cart = Session["Cart"] as Cart;
                 Order _order = new Order();
-
+                string check = form["ship"].ToString();
+                if (check=="2")
+                {
+                    _order.Descriptions = "Thanh Toán Khi Nhận Hàng, đã bao gòm phí ship $" + form["ship"].ToString();
+                    _order.Amount = int.Parse(form["amount1"]);
+                }
+                else if(check == "3")
+                { 
+                    _order.Descriptions = "Thanh Toán Khi Nhận Hàng , đã bao gòm phí ship $" + form["ship"].ToString();
+                    _order.Amount = int.Parse(form["amount2"]);
+                }
 
                 _order.OrderDate = DateTime.Now;
 
                 _order.Email = Session["Email"].ToString();
                 _order.Address_Cus = form["diachi"];
-                _order.Descriptions = "Thanh Toán Sau Khi Nhận Hàng";
-                _order.Amount = int.Parse(form["amount"]);
+                //_order.Descriptions = "Thanh Toán Khi Nhận Hàng";
+                //_order.Amount = int.Parse(form["amount"]);
                 db.Orders.Add(_order);
                 //**Check order xong, sửa lại giao diện**//
 

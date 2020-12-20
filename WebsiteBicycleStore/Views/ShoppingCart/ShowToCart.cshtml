@@ -9,7 +9,18 @@
 <!-- jQuery Modal -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.js"></script>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.css" />
-
+<script>
+    function img(x) {
+        if (x == 0) {
+            document.getElementById('myimg').style.display = 'block';
+            document.getElementById('myimg1').style.display = 'none';
+        }
+        else {
+            document.getElementById('myimg').style.display = 'none';
+            document.getElementById('myimg1').style.display = 'block';
+        }
+    }
+</script>
 
 @Session["ship"]
 
@@ -124,6 +135,16 @@
         <h3>Nhập địa chỉ nhà</h3>
         <input type="text" name="diachi" required />
         <br />
+        @*<div> @Html.RadioButton("Ship", "1")Q1 Q2 Q3</div>
+            <div> @Html.RadioButton("Ship", "2")Q4 Q5 Q6</div>*@
+        <div><input type="radio" name="ship" onclick="img(0)" value="2"/>Q1 , Q2 , Q3 , Q4 , Q5</div>
+        <div><input type="radio" name="ship" onclick="img(1)" value="3"/>Q6, Q7 , Q8 , Q9 , Q10</div>
+
+
+
+
+
+        <br />
         <i>Lưu ý : thanh toán tiền mặt sau khi đã nhận hàng và kiểm tra</i>
 
         <table>
@@ -148,8 +169,14 @@
             }
         </table>
 
-        <div style="float:right">Tổng tiền thanh toán: $@Model.Total_Money()</div>
+        @*<div style="float:right">Tổng tiền thanh toán: $@Model.Total_Money()</div>*@
         <input type="number" name="amount" value="@Model.Total_Money()" hidden />
+        <input type="number" name="amount1" value="@Model.Total_Money1()" hidden />
+        <input type="number" name="amount2" value="@Model.Total_Money2()" hidden />
+
+        <p id="myimg" hidden style="float:right">Phí ship $2 <br /> Tổng tiền: @Model.Total_Money1()</p>
+        <p id="myimg1" hidden style="float:right">Phí ship $3 <br /> Tổng tiền: @Model.Total_Money2()</p>
+
         <input type="submit" class="btn" value="Xác Nhận Đơn Hàng" />
     }
 </div>
