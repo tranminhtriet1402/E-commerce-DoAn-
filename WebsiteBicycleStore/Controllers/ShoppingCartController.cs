@@ -334,6 +334,7 @@ namespace WebsiteBicycleStore.Controllers
             //Session.Remove(strCart);
 
             return View("SuccessView");
+
         }
     }
 }
