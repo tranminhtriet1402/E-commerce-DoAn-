@@ -103,6 +103,8 @@ namespace WebsiteBicycleStore.Controllers
                 _order.TinhTrangDonHang = false;
                 _order.TinhTrangGiao = false;
                 _order.TinhTrangThanhToan = false;
+                _order.HuyDon = false;
+                _order.TinhTrangDongGoi = false;
                 _order.Email = Session["Email"].ToString();
                 _order.Address_Cus = form["diachi"];
                 //_order.Descriptions = "Thanh Toán Khi Nhận Hàng";
@@ -155,6 +157,8 @@ namespace WebsiteBicycleStore.Controllers
                 _order.TinhTrangDonHang = false;
                 _order.TinhTrangGiao = false;
                 _order.TinhTrangThanhToan = false;
+                _order.HuyDon = false;
+                _order.TinhTrangDongGoi = false;
                 db.Orders.Add(_order);
                 //**Check order xong, sửa lại giao diện**//
 
@@ -203,6 +207,8 @@ namespace WebsiteBicycleStore.Controllers
             _order.TinhTrangDonHang = false;
             _order.TinhTrangGiao = false;
             _order.TinhTrangThanhToan = false;
+            _order.HuyDon = false;
+            _order.TinhTrangDongGoi = false;
             _order.Amount = /*nt.Parse(form["amount"]);*/ (int)cart.Items.Sum(x => x._shopping_quantity * x._shopping_product.UnitPrice);
             db.Orders.Add(_order);
             //**Check order xong, sửa lại giao diện**//

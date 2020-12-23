@@ -5,8 +5,6 @@
     Layout = "~/Views/AdminLayout.cshtml";
 }
 
-
-
 <nav class="navbar navbar-default navbar-static-top">
     <div class="container-fluid">
         <!-- Brand and toggle get grouped for better mobile display -->
@@ -54,15 +52,18 @@
             <li><a href="/Products/Index">Sản Phẩm</a></li>
             <li><a href="/Categories/Index">Loại Sản Phẩm</a></li>
             <li class="active"><a href="/Orders/Index">Đơn Hàng</a></li>
-            <li ><a href="/OrderDetails/Index">Chi Tiết Đơn hàng</a></li>
+            <li><a href="/OrderDetails/Index">Chi Tiết Đơn hàng</a></li>
         </ul>
     </div>
     <div class="col-md-10 content">
         <div class="panel panel-default">
             <div class="panel-heading">
-                Đơn hàng
+                Đơn Hàng
             </div>
             <div class="panel-body">
+                <p>
+                    @Html.ActionLink("Create New", "Create")
+                </p>
                 <table class="table">
                     <tr>
                         <th>
@@ -80,18 +81,27 @@
                         <th>
                             @Html.DisplayNameFor(model => model.Descriptions)
                         </th>
-                        <th>                           
+                        <th>
+                            @Html.DisplayNameFor(model => model.TinhTrangThanhToan)
+                        </th>
+                        <th>
                             @Html.DisplayNameFor(model => model.TinhTrangDonHang)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.TinhTrangDongGoi)
                         </th>
                         <th>
                             @Html.DisplayNameFor(model => model.TinhTrangGiao)
                         </th>
                         <th>
-                            @Html.DisplayNameFor(model => model.TinhTrangThanhToan)
+                            @Html.DisplayNameFor(model => model.HuyDon)
+                        </th>
+                        <th>
+                            Xóa Đơn Hàng
                         </th>
                         @*<th>
-                @Html.DisplayNameFor(model => model.User.FirstName)
-            </th>*@
+                                @Html.DisplayNameFor(model => model.User.FirstName)
+                            </th>*@
                         <th></th>
                     </tr>
 
@@ -113,32 +123,106 @@
                             <td>
                                 @Html.DisplayFor(modelItem => item.Descriptions)
                             </td>
-                            <td>
-                                @*@Html.DisplayFor(modelItem => item.TinhTrangGiao)*@
-                                
-                                <a href="/Orders/TinhTrangDonHang/@item.IDOrder">@(item.TinhTrangDonHang.GetValueOrDefault()?"Đã Xác Nhận":"Chưa Xác Nhận")</a>
-                            </td>
-                            <td>
-                                @*@Html.DisplayFor(modelItem => item.TinhTrangDonHang)*@
-                                <a href="/Orders/TinhTrangGiao/@item.IDOrder">@(item.TinhTrangGiao.GetValueOrDefault()?"Giao Thành Công":"Đang Trong Quá Trình Giao")</a>
-                            </td>
-                            <td>
-                                @*@Html.DisplayFor(modelItem => item.TinhTrangThanhToan)*@
+                            <td hidden>
                                 <a href="/Orders/TinhTrangThanhToan/@item.IDOrder">@(item.TinhTrangThanhToan.GetValueOrDefault()?"Đã Thanh Toán":"Chưa Thanh Toán")</a>
+                                <a href="/Orders/TinhTrangDonHang/@item.IDOrder">@(item.TinhTrangDonHang.GetValueOrDefault()?"Đã Xác Nhận":"Chưa Xác Nhận")</a>
+                                <a href="/Orders/TinhTrangDongGoi/@item.IDOrder">@(item.TinhTrangDongGoi.GetValueOrDefault()?"Đóng Gói Thành Công":"Đang Trong Quá Trình Đóng Giói")</a>
+                                <a href="/Orders/TinhTrangGiao/@item.IDOrder">@(item.TinhTrangGiao.GetValueOrDefault()?"Giao Thành Công":"Đang Trong Quá Trình Giao")</a>
+                                <a href="/Orders/HuyDon/@item.IDOrder">@(item.HuyDon.GetValueOrDefault()? "Bạn Đã Hủy Đơn Hàng Này" : "Hủy Đơn ")</a>
                             </td>
+
+                            @if (item.HuyDon == true)
+                            {
+                                <td><a href="#">Đã Hủy</a></td>
+                                <td><a href="#">Đã Hủy</a></td>
+                                <td><a href="#">Đã Hủy</a></td>
+                                <td><a href="#">Đã Hủy</a></td>
+                                <td><a href="#">Đã Hủy</a></td>
+
+                            }
+                            else
+                            {
+                                <td>
+                                    @*@Html.DisplayFor(modelItem => item.TinhTrangThanhToan)*@
+                                    <a href="/Orders/TinhTrangThanhToan/@item.IDOrder">@(item.TinhTrangThanhToan.GetValueOrDefault()?"Đã Thanh Toán":"Chưa Thanh Toán")</a>
+                                </td>
+                                <td>
+                                    @*@Html.DisplayFor(modelItem => item.TinhTrangDonHang)*@
+                                    <a href="/Orders/TinhTrangDonHang/@item.IDOrder">@(item.TinhTrangDonHang.GetValueOrDefault()?"Đã Xác Nhận":"Chưa Xác Nhận")</a>
+                                </td>
+                                if (item.TinhTrangDonHang == false)
+                                {
+                                    <td><a href="#">Đang Xử lý</a></td>
+                                }
+                                else
+                                {
+                                    <td>
+                                        @*@Html.DisplayFor(modelItem => item.TinhTrangDongGioi)*@
+                                        <a href="/Orders/TinhTrangDongGoi/@item.IDOrder">@(item.TinhTrangDongGoi.GetValueOrDefault()?"Đóng Gói Thành Công":"Đang Trong Quá Trình Đóng Giói")</a>
+                                    </td>
+                                }
+
+                                if (item.TinhTrangDongGoi == false)
+                                {
+                                    <td><a href="#">Đang Xử lý</a></td>
+                                }
+                                else
+                                {
+                                    <td>
+                                        @*@Html.DisplayFor(modelItem => item.TinhTrangGiao)*@
+                                        <a href="/Orders/TinhTrangGiao/@item.IDOrder">@(item.TinhTrangGiao.GetValueOrDefault()?"Giao Thành Công":"Đang Trong Quá Trình Giao")</a>
+                                    </td>
+                                }
+
+
+
+
+                                if (item.TinhTrangDongGoi == false)
+                                {
+                                    <td>
+                                        @*@Html.DisplayFor(modelItem => item.HuyDon)*@
+                                        <a href="/Orders/HuyDon/@item.IDOrder">@(item.HuyDon.GetValueOrDefault()? "Bạn Đã Hủy Đơn Hàng Này" : "Hủy Đơn ")</a>
+                                    </td>
+
+                                }
+                                else if (item.TinhTrangGiao == false || item.TinhTrangGiao == true)
+                                {
+
+                                    <td><a href="#">không thể hủy đơn hàng</a></td>
+
+                                }
+
+                            }
+
+                            @if (item.HuyDon == true || item.HuyDon == false)
+                            {
+                                 <td style="font-weight:bold">
+                                     <a href="/Orders/Delete/@item.IDOrder" style="color:red">Delete</a>
+                                 @*@Html.ActionLink("Delete", "Delete", new { id = item.IDOrder })*@
+                            </td>
+                            }
+                            @*else
+                            {
+                                <td><a href="#">Hủy Đơn Trước Khi Xóa</a></td>
+                            }*@
+
+                           
+
+
+
+
                             @*<td>
-                    @Html.DisplayFor(modelItem => item.User.FirstName)
-                </td>*@
-                            <td>
-                                @*@Html.ActionLink("Edit", "Edit", new { id = item.IDOrder }) |
-                                @Html.ActionLink("Details", "Details", new { id = item.IDOrder }) |*@
+                                    @Html.DisplayFor(modelItem => item.User.FirstName)
+                                </td>*@
+                            @*<td>                              
+                                @Html.ActionLink("Edit", "Edit", new { id = item.IDOrder }) |
+                                @Html.ActionLink("Details", "Details", new { id = item.IDOrder }) |
                                 @Html.ActionLink("Delete", "Delete", new { id = item.IDOrder })
-                            </td>
+                            </td>*@
                         </tr>
                     }
 
                 </table>
-
             </div>
         </div>
     </div>
@@ -149,8 +233,3 @@
         </p>
     </footer>
 </div>
-
-@*<p>
-        @Html.ActionLink("Create New", "Create")
-    </p>*@
-

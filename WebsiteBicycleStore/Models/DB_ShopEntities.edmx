@@ -40,6 +40,8 @@
           <Property Name="TinhTrangGiao" Type="bit" />
           <Property Name="TinhTrangDonHang" Type="bit" />
           <Property Name="TinhTrangThanhToan" Type="bit" />
+          <Property Name="HuyDon" Type="bit" />
+          <Property Name="TinhTrangDongGoi" Type="bit" />
         </EntityType>
         <EntityType Name="Products">
           <Key>
@@ -161,7 +163,7 @@
             <End Role="User" EntitySet="Users" />
             <End Role="Order" EntitySet="Orders" />
           </AssociationSet>
-        </EntityContainer>
+          </EntityContainer>
         <EntityType Name="Category">
           <Key>
             <PropertyRef Name="IDCategory" />
@@ -250,6 +252,8 @@
           <Property Name="TinhTrangGiao" Type="Boolean" />
           <Property Name="TinhTrangDonHang" Type="Boolean" />
           <Property Name="TinhTrangThanhToan" Type="Boolean" />
+          <Property Name="HuyDon" Type="Boolean" />
+          <Property Name="TinhTrangDongGoi" Type="Boolean" />
           <NavigationProperty Name="OrderDetails" Relationship="DB_BicycleStoreModel.FK__OrderDeta__IDOrd__07C12930" FromRole="Order" ToRole="OrderDetail" />
           <NavigationProperty Name="User" Relationship="DB_BicycleStoreModel.FK__Orders__IDUser__09A971A2" FromRole="Order" ToRole="User" />
         </EntityType>
@@ -334,6 +338,8 @@
           <EntitySetMapping Name="Orders">
             <EntityTypeMapping TypeName="DB_BicycleStoreModel.Order">
               <MappingFragment StoreEntitySet="Orders">
+                <ScalarProperty Name="TinhTrangDongGoi" ColumnName="TinhTrangDongGoi" />
+                <ScalarProperty Name="HuyDon" ColumnName="HuyDon" />
                 <ScalarProperty Name="TinhTrangThanhToan" ColumnName="TinhTrangThanhToan" />
                 <ScalarProperty Name="TinhTrangDonHang" ColumnName="TinhTrangDonHang" />
                 <ScalarProperty Name="TinhTrangGiao" ColumnName="TinhTrangGiao" />

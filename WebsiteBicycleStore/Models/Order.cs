@@ -30,6 +30,8 @@ namespace WebsiteBicycleStore.Models
         public Nullable<bool> TinhTrangGiao { get; set; }
         public Nullable<bool> TinhTrangDonHang { get; set; }
         public Nullable<bool> TinhTrangThanhToan { get; set; }
+        public Nullable<bool> HuyDon { get; set; }
+        public Nullable<bool> TinhTrangDongGoi { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<OrderDetail> OrderDetails { get; set; }

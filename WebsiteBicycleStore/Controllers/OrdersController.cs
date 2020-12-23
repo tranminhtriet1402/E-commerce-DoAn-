@@ -10,8 +10,10 @@ using WebsiteBicycleStore.Models;
 
 namespace WebsiteBicycleStore.Controllers
 {
+    
     public class OrdersController : Controller
     {
+        public int checkdon;
         private DB_BicycleStoreEntities db = new DB_BicycleStoreEntities();
 
         // GET: Orders
@@ -48,7 +50,7 @@ namespace WebsiteBicycleStore.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "IDOrder,IDUser,Email,OrderDate,Address_Cus,Amount,Descriptions,TinhTrangGiao,TinhTrangDonHang,TinhTrangThanhToan")] Order order)
+        public ActionResult Create([Bind(Include = "IDOrder,IDUser,Email,OrderDate,Address_Cus,Amount,Descriptions,TinhTrangGiao,TinhTrangDonHang,TinhTrangThanhToan,HuyDon,TinhTrangDongGoi")] Order order)
         {
             if (ModelState.IsValid)
             {
@@ -82,7 +84,7 @@ namespace WebsiteBicycleStore.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "IDOrder,IDUser,Email,OrderDate,Address_Cus,Amount,Descriptions,TinhTrangGiao,TinhTrangDonHang,TinhTrangThanhToan")] Order order)
+        public ActionResult Edit([Bind(Include = "IDOrder,IDUser,Email,OrderDate,Address_Cus,Amount,Descriptions,TinhTrangGiao,TinhTrangDonHang,TinhTrangThanhToan,HuyDon,TinhTrangDongGoi")] Order order)
         {
             if (ModelState.IsValid)
             {
@@ -113,11 +115,20 @@ namespace WebsiteBicycleStore.Controllers
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
-        {
+        {          
             Order order = db.Orders.Find(id);
             db.Orders.Remove(order);
+            foreach (var ec in db.OrderDetails.Where(x => x.IDOrder == id))
+            {
+                db.OrderDetails.Remove(ec);
+            }
             db.SaveChanges();
             return RedirectToAction("Index");
+        }
+        public ActionResult DeleteConfirmed1(int id)
+        {
+            checkdon = id;
+            return RedirectToAction("Index","OrderDetails");
         }
 
         protected override void Dispose(bool disposing)
@@ -128,12 +139,10 @@ namespace WebsiteBicycleStore.Controllers
             }
             base.Dispose(disposing);
         }
-
-
         public ActionResult TinhTrangGiao(int? id)
         {
             var check = db.Orders.Find(id);
-            
+
             if (check.TinhTrangGiao == true)
             {
                 check.TinhTrangGiao = false;
@@ -177,5 +186,42 @@ namespace WebsiteBicycleStore.Controllers
             db.SaveChanges();
             return RedirectToAction("Index", "Orders");
         }
+        public ActionResult TinhTrangDongGoi(int? id)
+        {
+            var check = db.Orders.Find(id);
+            if (check.TinhTrangDongGoi == true)
+            {
+                check.TinhTrangDongGoi = false;
+            }
+            else if (check.TinhTrangDongGoi == false)
+            {
+                check.TinhTrangGiao = false;
+                check.TinhTrangDongGoi = true;
+            }
+
+
+            db.SaveChanges();
+            return RedirectToAction("Index", "Orders");
+        }
+        public ActionResult HuyDon(int? id)
+        {
+            var check = db.Orders.Find(id);
+            if (check.HuyDon == true)
+            {
+                check.HuyDon = false;
+            }
+            else if (check.HuyDon == false)
+            {
+                check.HuyDon = true;
+                check.TinhTrangDongGoi = false;
+                check.TinhTrangDonHang = false;
+            }
+
+
+            db.SaveChanges();
+            return RedirectToAction("Index", "Orders");
+        }
+
+        
     }
 }

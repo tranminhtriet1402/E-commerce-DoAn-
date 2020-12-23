@@ -47,5 +47,22 @@ namespace WebsiteBicycleStore.Controllers
 
         }
 
+        public ActionResult HuyDonForCus(int? id)
+        {
+            var check = db.Orders.Find(id);
+            if (check.HuyDon == true)
+            {
+                check.HuyDon = false;
+            }
+            else if (check.HuyDon == false)
+            {
+                check.HuyDon = true;
+                check.TinhTrangDongGoi = false;
+                check.TinhTrangDonHang = false;
+            }
+            db.SaveChanges();
+            return RedirectToAction("DonHang", "Home");
+        }
+
     }
 }
