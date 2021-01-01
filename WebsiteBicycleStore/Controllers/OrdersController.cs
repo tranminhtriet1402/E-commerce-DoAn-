@@ -141,8 +141,7 @@ namespace WebsiteBicycleStore.Controllers
         }
         public ActionResult TinhTrangGiao(int? id)
         {
-            var check = db.Orders.Find(id);
-
+            var check = db.Orders.Find(id);           
             if (check.TinhTrangGiao == true)
             {
                 check.TinhTrangGiao = false;
@@ -204,8 +203,16 @@ namespace WebsiteBicycleStore.Controllers
             return RedirectToAction("Index", "Orders");
         }
         public ActionResult HuyDon(int? id)
-        {
+        {           
             var check = db.Orders.Find(id);
+            var count = 0;
+            foreach (var ec in db.OrderDetails.Where(x => x.IDOrder == id))
+            {
+                count += (int)ec.QuantitySale;
+                var congSL = db.Products.Find(ec.IDProduct);
+                congSL.soLuong += count;
+            }
+            
             if (check.HuyDon == true)
             {
                 check.HuyDon = false;

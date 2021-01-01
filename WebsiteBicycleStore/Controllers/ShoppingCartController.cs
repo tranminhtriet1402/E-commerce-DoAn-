@@ -4,6 +4,7 @@ using PayPal.Api;
 using System;
 using System.Collections.Generic;
 using System.Configuration;
+using System.Data.Entity;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -125,6 +126,10 @@ namespace WebsiteBicycleStore.Controllers
                     _order_Detail.UnitPriceSale = item._shopping_product.UnitPrice;
                     _order_Detail.imgPro = item._shopping_product.Images;
                     _order_Detail.QuantitySale = item._shopping_quantity;
+                    var check1 = db.Products.Find(item._shopping_product.IDProduct);
+                    check1.soLuong -= cart.Total_Quantity();
+
+                    db.Entry(check1).State = EntityState.Modified;
                     db.OrderDetails.Add(_order_Detail);
                 }
                 db.SaveChanges();
@@ -161,7 +166,7 @@ namespace WebsiteBicycleStore.Controllers
                 _order.TinhTrangDongGoi = false;
                 db.Orders.Add(_order);
                 //**Check order xong, sửa lại giao diện**//
-
+                
                 foreach (var item in cart.Items)
                 {
                     OrderDetail _order_Detail = new OrderDetail();
@@ -173,6 +178,7 @@ namespace WebsiteBicycleStore.Controllers
                     _order_Detail.UnitPriceSale = item._shopping_product.UnitPrice;
                     _order_Detail.imgPro = item._shopping_product.Images;
                     _order_Detail.QuantitySale = item._shopping_quantity;
+                    
                     db.OrderDetails.Add(_order_Detail);
                 }
                 db.SaveChanges();
@@ -224,6 +230,10 @@ namespace WebsiteBicycleStore.Controllers
                 _order_Detail.UnitPriceSale = item._shopping_product.UnitPrice;
                 _order_Detail.imgPro = item._shopping_product.Images;
                 _order_Detail.QuantitySale = item._shopping_quantity;
+                var check1 = db.Products.Find(item._shopping_product.IDProduct);
+                check1.soLuong -= cart.Total_Quantity();
+
+                db.Entry(check1).State = EntityState.Modified;
                 db.OrderDetails.Add(_order_Detail);
             }
             db.SaveChanges();
@@ -237,6 +247,7 @@ namespace WebsiteBicycleStore.Controllers
                     price = item._shopping_product.UnitPrice.ToString(),
                     quantity = item._shopping_quantity.ToString(),
                     sku = "sku"
+                 
                 });
             }
 
@@ -360,5 +371,9 @@ namespace WebsiteBicycleStore.Controllers
             return View("SuccessView");
 
         }
+
+
+        
+
     }
 }

@@ -27,6 +27,7 @@ namespace WebsiteBicycleStore.Controllers
             var count = 0;
             var sum = db.Orders.Where(s=>s.Email.StartsWith(email)).ToList();
             count = sum.Count();
+
             Session["Count"] = count;
 
 

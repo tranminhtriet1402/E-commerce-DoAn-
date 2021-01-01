@@ -55,6 +55,7 @@
           <Property Name="Available" Type="nvarchar" MaxLength="50" />
           <Property Name="IDCategory" Type="int" />
           <Property Name="Descriptions" Type="nvarchar" MaxLength="50" />
+          <Property Name="soLuong" Type="int" />
         </EntityType>
         <EntityType Name="Users">
           <Key>
@@ -144,16 +145,7 @@
         <EntityContainer Name="DB_BicycleStoreEntities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="Categories" EntityType="DB_BicycleStoreModel.Category" />
           <EntitySet Name="OrderDetails" EntityType="DB_BicycleStoreModel.OrderDetail" />
-          <EntitySet Name="Products" EntityType="DB_BicycleStoreModel.Product" />
           <EntitySet Name="Users" EntityType="DB_BicycleStoreModel.User" />
-          <AssociationSet Name="FK__Products__IDCate__0A9D95DB" Association="DB_BicycleStoreModel.FK__Products__IDCate__0A9D95DB">
-            <End Role="Category" EntitySet="Categories" />
-            <End Role="Product" EntitySet="Products" />
-          </AssociationSet>
-          <AssociationSet Name="FK__OrderDeta__IDPro__08B54D69" Association="DB_BicycleStoreModel.FK__OrderDeta__IDPro__08B54D69">
-            <End Role="Product" EntitySet="Products" />
-            <End Role="OrderDetail" EntitySet="OrderDetails" />
-          </AssociationSet>
           <EntitySet Name="Orders" EntityType="DB_BicycleStoreModel.Order" />
           <AssociationSet Name="FK__OrderDeta__IDOrd__07C12930" Association="DB_BicycleStoreModel.FK__OrderDeta__IDOrd__07C12930">
             <End Role="Order" EntitySet="Orders" />
@@ -162,6 +154,15 @@
           <AssociationSet Name="FK__Orders__IDUser__09A971A2" Association="DB_BicycleStoreModel.FK__Orders__IDUser__09A971A2">
             <End Role="User" EntitySet="Users" />
             <End Role="Order" EntitySet="Orders" />
+          </AssociationSet>
+          <EntitySet Name="Products" EntityType="DB_BicycleStoreModel.Product" />
+          <AssociationSet Name="FK__Products__IDCate__0A9D95DB" Association="DB_BicycleStoreModel.FK__Products__IDCate__0A9D95DB">
+            <End Role="Category" EntitySet="Categories" />
+            <End Role="Product" EntitySet="Products" />
+          </AssociationSet>
+          <AssociationSet Name="FK__OrderDeta__IDPro__08B54D69" Association="DB_BicycleStoreModel.FK__OrderDeta__IDPro__08B54D69">
+            <End Role="Product" EntitySet="Products" />
+            <End Role="OrderDetail" EntitySet="OrderDetails" />
           </AssociationSet>
           </EntityContainer>
         <EntityType Name="Category">
@@ -185,23 +186,8 @@
           <Property Name="ngayDat" Type="DateTime" Precision="0" />
           <Property Name="ngayNhan" Type="DateTime" Precision="0" />
           <Property Name="namePro" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="Product" Relationship="DB_BicycleStoreModel.FK__OrderDeta__IDPro__08B54D69" FromRole="OrderDetail" ToRole="Product" />
           <NavigationProperty Name="Order" Relationship="DB_BicycleStoreModel.FK__OrderDeta__IDOrd__07C12930" FromRole="OrderDetail" ToRole="Order" />
-        </EntityType>
-        <EntityType Name="Product">
-          <Key>
-            <PropertyRef Name="IDProduct" />
-          </Key>
-          <Property Name="IDProduct" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="NameProduct" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="UnitPrice" Type="Decimal" Precision="18" Scale="0" />
-          <Property Name="Images" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="ProductDate" Type="DateTime" Precision="0" />
-          <Property Name="Available" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="IDCategory" Type="Int32" />
-          <Property Name="Descriptions" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="Category" Relationship="DB_BicycleStoreModel.FK__Products__IDCate__0A9D95DB" FromRole="Product" ToRole="Category" />
-          <NavigationProperty Name="OrderDetails" Relationship="DB_BicycleStoreModel.FK__OrderDeta__IDPro__08B54D69" FromRole="Product" ToRole="OrderDetail" />
+          <NavigationProperty Name="Product" Relationship="DB_BicycleStoreModel.FK__OrderDeta__IDPro__08B54D69" FromRole="OrderDetail" ToRole="Product" />
         </EntityType>
         <EntityType Name="User">
           <Key>
@@ -214,30 +200,6 @@
           <Property Name="Password" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="Orders" Relationship="DB_BicycleStoreModel.FK__Orders__IDUser__09A971A2" FromRole="User" ToRole="Order" />
         </EntityType>
-        <Association Name="FK__Products__IDCate__0A9D95DB">
-          <End Type="DB_BicycleStoreModel.Category" Role="Category" Multiplicity="0..1" />
-          <End Type="DB_BicycleStoreModel.Product" Role="Product" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Category">
-              <PropertyRef Name="IDCategory" />
-            </Principal>
-            <Dependent Role="Product">
-              <PropertyRef Name="IDCategory" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK__OrderDeta__IDPro__08B54D69">
-          <End Type="DB_BicycleStoreModel.Product" Role="Product" Multiplicity="0..1" />
-          <End Type="DB_BicycleStoreModel.OrderDetail" Role="OrderDetail" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Product">
-              <PropertyRef Name="IDProduct" />
-            </Principal>
-            <Dependent Role="OrderDetail">
-              <PropertyRef Name="IDProduct" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <EntityType Name="Order">
           <Key>
             <PropertyRef Name="IDOrder" />
@@ -281,6 +243,46 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="Product">
+          <Key>
+            <PropertyRef Name="IDProduct" />
+          </Key>
+          <Property Name="IDProduct" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="NameProduct" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="UnitPrice" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="Images" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="ProductDate" Type="DateTime" Precision="0" />
+          <Property Name="Available" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="IDCategory" Type="Int32" />
+          <Property Name="Descriptions" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="soLuong" Type="Int32" />
+          <NavigationProperty Name="Category" Relationship="DB_BicycleStoreModel.FK__Products__IDCate__0A9D95DB" FromRole="Product" ToRole="Category" />
+          <NavigationProperty Name="OrderDetails" Relationship="DB_BicycleStoreModel.FK__OrderDeta__IDPro__08B54D69" FromRole="Product" ToRole="OrderDetail" />
+        </EntityType>
+        <Association Name="FK__Products__IDCate__0A9D95DB">
+          <End Type="DB_BicycleStoreModel.Category" Role="Category" Multiplicity="0..1" />
+          <End Type="DB_BicycleStoreModel.Product" Role="Product" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Category">
+              <PropertyRef Name="IDCategory" />
+            </Principal>
+            <Dependent Role="Product">
+              <PropertyRef Name="IDCategory" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__OrderDeta__IDPro__08B54D69">
+          <End Type="DB_BicycleStoreModel.Product" Role="Product" Multiplicity="0..1" />
+          <End Type="DB_BicycleStoreModel.OrderDetail" Role="OrderDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Product">
+              <PropertyRef Name="IDProduct" />
+            </Principal>
+            <Dependent Role="OrderDetail">
+              <PropertyRef Name="IDProduct" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -310,20 +312,6 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="Products">
-            <EntityTypeMapping TypeName="DB_BicycleStoreModel.Product">
-              <MappingFragment StoreEntitySet="Products">
-                <ScalarProperty Name="Descriptions" ColumnName="Descriptions" />
-                <ScalarProperty Name="IDCategory" ColumnName="IDCategory" />
-                <ScalarProperty Name="Available" ColumnName="Available" />
-                <ScalarProperty Name="ProductDate" ColumnName="ProductDate" />
-                <ScalarProperty Name="Images" ColumnName="Images" />
-                <ScalarProperty Name="UnitPrice" ColumnName="UnitPrice" />
-                <ScalarProperty Name="NameProduct" ColumnName="NameProduct" />
-                <ScalarProperty Name="IDProduct" ColumnName="IDProduct" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="Users">
             <EntityTypeMapping TypeName="DB_BicycleStoreModel.User">
               <MappingFragment StoreEntitySet="Users">
@@ -350,6 +338,21 @@
                 <ScalarProperty Name="Email" ColumnName="Email" />
                 <ScalarProperty Name="IDUser" ColumnName="IDUser" />
                 <ScalarProperty Name="IDOrder" ColumnName="IDOrder" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Products">
+            <EntityTypeMapping TypeName="DB_BicycleStoreModel.Product">
+              <MappingFragment StoreEntitySet="Products">
+                <ScalarProperty Name="soLuong" ColumnName="soLuong" />
+                <ScalarProperty Name="Descriptions" ColumnName="Descriptions" />
+                <ScalarProperty Name="IDCategory" ColumnName="IDCategory" />
+                <ScalarProperty Name="Available" ColumnName="Available" />
+                <ScalarProperty Name="ProductDate" ColumnName="ProductDate" />
+                <ScalarProperty Name="Images" ColumnName="Images" />
+                <ScalarProperty Name="UnitPrice" ColumnName="UnitPrice" />
+                <ScalarProperty Name="NameProduct" ColumnName="NameProduct" />
+                <ScalarProperty Name="IDProduct" ColumnName="IDProduct" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

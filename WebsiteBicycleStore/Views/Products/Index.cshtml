@@ -85,6 +85,9 @@
                             @Html.DisplayNameFor(model => model.Descriptions)
                         </th>
                         <th>
+                            @Html.DisplayNameFor(model => model.soLuong)
+                        </th>
+                        <th>
                             @Html.DisplayNameFor(model => model.Category.NameCategory)
                         </th>
                         <th></th>
@@ -111,6 +114,9 @@
                             </td>
                             <td>
                                 @Html.DisplayFor(modelItem => item.Descriptions)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.soLuong)
                             </td>
                             <td>
                                 @Html.DisplayFor(modelItem => item.Category.NameCategory)

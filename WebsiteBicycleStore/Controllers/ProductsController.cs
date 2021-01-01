@@ -50,6 +50,14 @@ namespace WebsiteBicycleStore.Controllers
                     pro.ProductDate = DateTime.Now;
 
                 }
+                if (pro.soLuong == 0)
+                {
+                    pro.Available = "Hết Hàng";
+                }
+                else
+                {
+                    pro.Available = "Còn Hàng";
+                }
                 _db.Products.Add(pro);
                 _db.SaveChanges();
                 return RedirectToAction("Index");
@@ -84,6 +92,14 @@ namespace WebsiteBicycleStore.Controllers
                     pro.ImageUpload.SaveAs(Path.Combine(Server.MapPath("~/Content/images"), fileName));
                     pro.ProductDate = DateTime.Now;
 
+                }
+                if (pro.soLuong==0)
+                {
+                    pro.Available = "Hết Hàng";
+                }
+                else
+                {
+                    pro.Available = "Còn Hàng";
                 }
                 _db.Entry(pro).State = System.Data.Entity.EntityState.Modified;
                 _db.SaveChanges();
