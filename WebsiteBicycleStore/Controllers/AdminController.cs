@@ -11,6 +11,7 @@ namespace WebsiteBicycleStore.Controllers
         // GET: Admin
         public ActionResult Index()
         {
+
             return View();
         }
     }
