@@ -20,7 +20,7 @@ namespace WebsiteBicycleStore.Models
         {
             this.Users = new HashSet<User>();
         }
-    
+
         public int IDPhanLoai { get; set; }
         public string TenPhanLoai { get; set; }
         [NotMapped]

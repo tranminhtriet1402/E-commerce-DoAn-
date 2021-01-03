@@ -38,5 +38,6 @@ namespace WebsiteBicycleStore.Models
         public virtual ICollection<OrderDetail> OrderDetails { get; set; }
 
         public Nullable<int> soLuong { get; set; }
+
     }
 }

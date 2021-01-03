@@ -22,7 +22,6 @@
     }
 </script>
 
-@Session["ship"]
 
 <div class="small-container cart-page">
     <div class="row">
@@ -68,6 +67,7 @@
                             <td>$@total</td>
                         </tr>
                         Session["total"] = Model.Total_Money();
+                        
                         @*<tr>
                                 <td> <a href="@Url.Action("PaymentWithPaypal", "ShoppingCart")">Payment</a></td>
                             </tr>*@
@@ -137,8 +137,8 @@
         <br />
         @*<div> @Html.RadioButton("Ship", "1")Q1 Q2 Q3</div>
             <div> @Html.RadioButton("Ship", "2")Q4 Q5 Q6</div>*@
-        <div><input type="radio" name="ship" onclick="img(0)" value="2"/>Q1 , Q2 , Q3 , Q4 , Q5</div>
-        <div><input type="radio" name="ship" onclick="img(1)" value="3"/>Q6, Q7 , Q8 , Q9 , Q10</div>
+        <div><input type="radio" name="ship" onclick="img(0)" value="2" />Q1 , Q2 , Q3 , Q4 , Q5</div>
+        <div><input type="radio" name="ship" onclick="img(1)" value="3" />Q6, Q7 , Q8 , Q9 , Q10</div>
 
 
 
@@ -173,9 +173,24 @@
         <input type="number" name="amount" value="@Model.Total_Money()" hidden />
         <input type="number" name="amount1" value="@Model.Total_Money1()" hidden />
         <input type="number" name="amount2" value="@Model.Total_Money2()" hidden />
+        <input type="number" name="amount3" value="@Model.Total_Money3()" hidden />
 
-        <p id="myimg" hidden style="float:right">Phí ship $2 <br /> Tổng tiền: @Model.Total_Money1()</p>
-        <p id="myimg1" hidden style="float:right">Phí ship $3 <br /> Tổng tiền: @Model.Total_Money2()</p>
+        if (ViewBag.phanloai == "Khách Hàng Vip")
+        {
+            <p id="myimg" hidden style="float:right">  @ViewBag.phanloai : Miễn Phí Ship <br />  <br /> Tổng tiền: @Model.Total_Money()</p>
+            <p id="myimg1" hidden style="float:right"> @ViewBag.phanloai : Miễn Phí Ship <br />  <br /> Tổng tiền: @Model.Total_Money()</p>
+        }
+        else if (ViewBag.phanloai == "Khách Hàng Thường")
+        {
+            <p id="myimg" hidden style="float:right">  @ViewBag.phanloai <br /> Phí ship $2 <br /> Tổng tiền: @Model.Total_Money1()</p>
+            <p id="myimg1" hidden style="float:right"> @ViewBag.phanloai <br /> Phí ship $3 <br /> Tổng tiền: @Model.Total_Money2()</p>
+        }
+        else if (ViewBag.phanloai == "Khách Hàng SVIP")
+        {
+            <p id="myimg" hidden style="float:right">  @ViewBag.phanloai : Giảm 10% + Miễn Phí Ship <br />  <br /> Tổng tiền: @Model.Total_Money3()</p>
+            <p id="myimg1" hidden style="float:right"> @ViewBag.phanloai : Giảm 10% + Miễn Phí Ship<br /> <br /> Tổng tiền: @Model.Total_Money3()</p>
+        }
+
 
         <input type="submit" class="btn" value="Xác Nhận Đơn Hàng" />
     }

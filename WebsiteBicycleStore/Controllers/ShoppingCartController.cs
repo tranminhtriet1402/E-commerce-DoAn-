@@ -38,8 +38,26 @@ namespace WebsiteBicycleStore.Controllers
             }
             return RedirectToAction("ShowToCart", "ShoppingCart");
         }
-        public ActionResult ShowToCart()
+        public ActionResult ShowToCart(string email)
         {
+            email = Session["Email"].ToString();
+            var diemtichluy = db.Users.Where(s => s.Email.StartsWith(email)).ToList();
+            foreach (var tichluy in diemtichluy)
+            {
+                if (tichluy.IDPhanLoai==2)
+                {
+                    ViewBag.phanloai = "Khách Hàng Vip";
+                }
+                else if (tichluy.IDPhanLoai == 1)
+                {
+                    ViewBag.phanloai = "Khách Hàng Thường";
+                }
+                else if (tichluy.IDPhanLoai == 3)
+                {
+                    ViewBag.phanloai = "Khách Hàng SVIP";
+                }
+                
+            }
             if (Session["Cart"] == null)
             {
                 return RedirectToAction("ShowToCart", "ShoppingCart");
@@ -88,13 +106,20 @@ namespace WebsiteBicycleStore.Controllers
             foreach (var tichluy in diemtichluy)
             {
                 tichluy.DiemTichLuy += 1;
-                if (tichluy.DiemTichLuy>5)
+                if (tichluy.DiemTichLuy>=5 && tichluy.DiemTichLuy<20)
                 {
                     tichluy.IDPhanLoai = 2;
+                    Session["CheckID"] = 2;
                 }
-                else if (tichluy.DiemTichLuy > 20)
+                else if (tichluy.DiemTichLuy >= 20)
                 {
                     tichluy.IDPhanLoai = 3;
+                    Session["CheckID"] = 3;
+                }
+                else if (tichluy.DiemTichLuy < 5)
+                {
+                    tichluy.IDPhanLoai = 1;
+                    Session["CheckID"] = 1;
                 }
             }
             try
@@ -102,18 +127,101 @@ namespace WebsiteBicycleStore.Controllers
                 Cart cart = Session["Cart"] as Cart;
                 Order _order = new Order();
                 string check = form["ship"].ToString();
-                if (check=="2")
-                {
-                    _order.Descriptions = "Thanh Toán Khi Nhận Hàng, đã bao gòm phí ship $" + form["ship"].ToString();
-                    _order.Amount = int.Parse(form["amount1"]);
-                }
-                else if(check == "3")
-                { 
-                    _order.Descriptions = "Thanh Toán Khi Nhận Hàng , đã bao gòm phí ship $" + form["ship"].ToString();
-                    _order.Amount = int.Parse(form["amount2"]);
-                }
 
-                _order.OrderDate = DateTime.Now;
+                if ((int)Session["CheckID"] == 1)
+                {
+                    if (check == "2")
+                    {
+
+                        _order.Descriptions = "Thanh Toán Khi Nhận Hàng , đã bao gòm phí ship $" + form["ship"].ToString();
+                        _order.Amount = int.Parse(form["amount1"]);
+                    }
+                    else if (check == "3")
+                    {
+                        _order.Descriptions = " Thanh Toán Khi Nhận Hàng , đã bao gòm phí ship $" + form["ship"].ToString();
+                        _order.Amount = int.Parse(form["amount2"]);
+                    }
+                }
+                else if ((int)Session["CheckID"] == 2)
+                {
+                    if (check == "2")
+                    {
+
+                        _order.Descriptions = "Miễn phí ship (Khách Hàng VIP)" /*+ form["ship"].ToString()*/;
+                        _order.Amount = int.Parse(form["amount"]);
+                    }
+                    else if (check == "3")
+                    {
+                        _order.Descriptions = "Miễn phí ship (Khách Hàng VIP)" /*+ form["ship"].ToString()*/;
+                        _order.Amount = int.Parse(form["amount"]);
+                    }
+
+                }
+                else if ((int)Session["CheckID"] == 3)
+                {
+                    if (check == "2")
+                    {
+
+                        _order.Descriptions = "Giảm 10% + Miễn phí ship (Khách Hàng SVIP)" /*+ form["ship"].ToString()*/;
+                        _order.Amount = double.Parse(form["amount3"]);
+                    }
+                    else if (check == "3")
+                    {
+                        _order.Descriptions = "Giảm 10% + Miễn phí ship (Khách Hàng SVIP)" /*+ form["ship"].ToString()*/;
+                        _order.Amount = double.Parse(form["amount3"]);
+                    }
+                }
+                    //foreach (var tichluy in diemtichluy)
+                    //{
+                    //    if (tichluy.IDPhanLoai == 1)
+                    //    {
+                    //        if (check == "2")
+                    //        {
+
+                    //            _order.Descriptions = "Thanh Toán Khi Nhận Hàng, đã bao gòm phí ship $" + form["ship"].ToString();
+                    //            _order.Amount = int.Parse(form["amount1"]);
+                    //        }
+                    //        else if (check == "3")
+                    //        {
+                    //            _order.Descriptions = "Thanh Toán Khi Nhận Hàng , đã bao gòm phí ship $" + form["ship"].ToString();
+                    //            _order.Amount = int.Parse(form["amount2"]);
+                    //        }
+                    //    }
+                    //    else if (tichluy.IDPhanLoai == 2)
+                    //    {
+                    //        if (check == "2")
+                    //        {
+
+                    //            _order.Descriptions = "Thanh Toán Khi Nhận Hàng, Miễn phí ship (Khách Hàng VIP)" + form["ship"].ToString();
+                    //            _order.Amount = int.Parse(form["amount"]);
+                    //        }
+                    //        else if (check == "3")
+                    //        {
+                    //            _order.Descriptions = "Thanh Toán Khi Nhận Hàng , Miễn phí ship (Khách Hàng VIP)" + form["ship"].ToString();
+                    //            _order.Amount = int.Parse(form["amount"]);
+                    //        }
+
+                    //    }
+                    //    else if (tichluy.IDPhanLoai == 3)
+                    //    {
+                    //        if (check == "2")
+                    //        {
+
+                    //            _order.Descriptions = "Thanh Toán Khi Nhận Hàng, Giảm 10% + Miễn phí ship (Khách Hàng SVIP)" + form["ship"].ToString();
+                    //            _order.Amount = int.Parse(form["amount3"]);
+                    //        }
+                    //        else if (check == "3")
+                    //        {
+                    //            _order.Descriptions = "Thanh Toán Khi Nhận Hàng , Giảm 10% + Miễn phí ship (Khách Hàng SVIP)" + form["ship"].ToString();
+                    //            _order.Amount = int.Parse(form["amount3"]);
+                    //        }
+
+                    //    }
+
+                    //}
+
+
+                    _order.OrderDate = DateTime.Now;
                 _order.TinhTrangDonHang = false;
                 _order.TinhTrangGiao = false;
                 _order.TinhTrangThanhToan = false;
@@ -274,7 +382,7 @@ namespace WebsiteBicycleStore.Controllers
                     price = item._shopping_product.UnitPrice.ToString(),
                     quantity = item._shopping_quantity.ToString(),
                     sku = "sku"
-                 
+
                 });
             }
 

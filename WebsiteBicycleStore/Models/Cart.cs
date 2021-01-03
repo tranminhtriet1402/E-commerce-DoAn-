@@ -76,5 +76,11 @@ namespace WebsiteBicycleStore.Models
             return (double)total + 3;
 
         }
+        public double Total_Money3()
+        {
+            var total = items.Sum(s => s._shopping_product.UnitPrice * s._shopping_quantity);
+            return (double)total - (double)total*10/100;
+
+        }
     }
 }

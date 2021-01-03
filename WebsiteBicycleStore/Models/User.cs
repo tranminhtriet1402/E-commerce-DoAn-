@@ -36,7 +36,7 @@ namespace WebsiteBicycleStore.Models
         public string Password { get; set; }
         public Nullable<int> DiemTichLuy { get; set; }
         public Nullable<int> IDPhanLoai { get; set; }
-    
+
         public virtual LoaiNguoiDung LoaiNguoiDung { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Order> Orders { get; set; }

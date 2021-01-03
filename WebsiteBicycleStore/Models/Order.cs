@@ -25,7 +25,7 @@ namespace WebsiteBicycleStore.Models
         public string Email { get; set; }
         public Nullable<System.DateTime> OrderDate { get; set; }
         public string Address_Cus { get; set; }
-        public Nullable<int> Amount { get; set; }
+        public Nullable<double> Amount { get; set; }
         public string Descriptions { get; set; }
         public Nullable<bool> TinhTrangGiao { get; set; }
         public Nullable<bool> TinhTrangDonHang { get; set; }

@@ -24,7 +24,7 @@ namespace WebsiteBicycleStore.Models
         public Nullable<System.DateTime> ngayNhan { get; set; }
         public string namePro { get; set; }
     
-        public virtual Order Order { get; set; }
         public virtual Product Product { get; set; }
+        public virtual Order Order { get; set; }
     }
 }

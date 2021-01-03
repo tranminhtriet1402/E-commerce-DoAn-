@@ -43,6 +43,7 @@ namespace WebsiteBicycleStore.Controllers
 
                     Session["Email"] = _user.Email;
                     Session["PassWord"] = _user.Password;
+                    Session["CheckIDPhanLoai"] = _user.IDPhanLoai;
                     Session["ID"] = _user.IDUser;
                     return RedirectToAction("Index", "Home");
 
