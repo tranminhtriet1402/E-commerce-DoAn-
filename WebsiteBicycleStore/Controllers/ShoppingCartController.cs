@@ -147,7 +147,7 @@ namespace WebsiteBicycleStore.Controllers
                 }
                 db.SaveChanges();
                 cart.ClearCart();
-                return RedirectToAction("Index", "Home");
+                return View("SuccessView");
             }
             catch (Exception)
             {

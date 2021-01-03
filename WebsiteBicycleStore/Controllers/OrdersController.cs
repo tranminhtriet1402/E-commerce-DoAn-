@@ -10,7 +10,7 @@ using WebsiteBicycleStore.Models;
 
 namespace WebsiteBicycleStore.Controllers
 {
-    
+
     public class OrdersController : Controller
     {
         public int checkdon;
@@ -19,9 +19,21 @@ namespace WebsiteBicycleStore.Controllers
         // GET: Orders
         public ActionResult Index()
         {
-            
+            var SoDonGiaoThanhCong = db.Orders.Where(s => s.TinhTrangDongGoi == true && s.Descriptions != "Đã Thanh Toán Bằng PayPal").ToList();
+            Session["SoDonGiaoThanhCong"] = SoDonGiaoThanhCong.Count();
+
+            var soDonGiaoThanhCongDoanhThu = db.Orders.Where(s => s.TinhTrangDongGoi == true && s.Descriptions != "Đã Thanh Toán Bằng PayPal").Sum(s => s.Amount);
+            Session["soDonGiaoThanhCongDoanhThu"] = soDonGiaoThanhCongDoanhThu;
+
+            var SoDonGiaoThanhCongPayPal = db.Orders.Where(s => s.Descriptions == "Đã Thanh Toán Bằng PayPal" && s.TinhTrangDongGoi == true).ToList();
+            Session["SoDonGiaoThanhCongPayPal"] = SoDonGiaoThanhCongPayPal.Count();
+
+            var soDonGiaoThanhCongDoanhThuPayPal = db.Orders.Where(s => s.Descriptions == "Đã Thanh Toán Bằng PayPal" && s.TinhTrangDongGoi == true).Sum(s => s.Amount);
+            Session["soDonGiaoThanhCongDoanhThuPayPal"] = soDonGiaoThanhCongDoanhThuPayPal;
+
             var orders = db.Orders.Include(o => o.User);
             return View(orders.ToList());
+            
         }
 
         // GET: Orders/Details/5
@@ -116,7 +128,7 @@ namespace WebsiteBicycleStore.Controllers
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
-        {          
+        {
             Order order = db.Orders.Find(id);
             db.Orders.Remove(order);
             foreach (var ec in db.OrderDetails.Where(x => x.IDOrder == id))
@@ -129,7 +141,7 @@ namespace WebsiteBicycleStore.Controllers
         public ActionResult DeleteConfirmed1(int id)
         {
             checkdon = id;
-            return RedirectToAction("Index","OrderDetails");
+            return RedirectToAction("Index", "OrderDetails");
         }
 
         protected override void Dispose(bool disposing)
@@ -142,7 +154,7 @@ namespace WebsiteBicycleStore.Controllers
         }
         public ActionResult TinhTrangGiao(int? id)
         {
-            var check = db.Orders.Find(id);           
+            var check = db.Orders.Find(id);
             if (check.TinhTrangGiao == true)
             {
                 check.TinhTrangGiao = false;
@@ -204,9 +216,9 @@ namespace WebsiteBicycleStore.Controllers
             return RedirectToAction("Index", "Orders");
         }
         public ActionResult HuyDon(int? id)
-        {           
+        {
             var check = db.Orders.Find(id);
-            
+
             foreach (var ec in db.OrderDetails.Where(x => x.IDOrder == id))
             {
                 var count = 0;
@@ -214,7 +226,7 @@ namespace WebsiteBicycleStore.Controllers
                 var congSL = db.Products.Find(ec.IDProduct);
                 congSL.soLuong += count;
             }
-            
+
             if (check.HuyDon == true)
             {
                 check.HuyDon = false;
@@ -231,6 +243,6 @@ namespace WebsiteBicycleStore.Controllers
             return RedirectToAction("Index", "Orders");
         }
 
-        
+
     }
 }

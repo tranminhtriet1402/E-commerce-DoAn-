@@ -105,14 +105,14 @@
                     </th>
 
                     @*<th>
-            @Html.DisplayNameFor(model => model.User.FirstName)
-        </th>*@
+                            @Html.DisplayNameFor(model => model.User.FirstName)
+                        </th>*@
                     <th></th>
                 </tr>
 
                 @foreach (var item in Model)
                 {
-                    if (item.HuyDon==false && item.TinhTrangDongGoi==false && item.TinhTrangGiao == false || item.HuyDon == false && item.TinhTrangDongGoi == true && item.TinhTrangGiao == false)
+                    if (item.HuyDon == false && item.TinhTrangDongGoi == false && item.TinhTrangGiao == false || item.HuyDon == false && item.TinhTrangDongGoi == true && item.TinhTrangGiao == false)
                     {
                         <tr>
                             <td>
@@ -229,7 +229,7 @@
                                     @Html.ActionLink("Details", "Details", new { id = item.IDOrder }) |
                                     @Html.ActionLink("Delete", "Delete", new { id = item.IDOrder })
                                 </td>*@
-                        <td><a href="/OrderDetails/Index/@item.IDOrder">Xem Chi tiết</a></td>
+                            <td><a href="/OrderDetails/Index/@item.IDOrder">Xem Chi tiết</a></td>
                         </tr>
                     }
 
@@ -242,12 +242,14 @@
     <div class="panel panel-default">
         <div class="panel-heading">
             Đơn Hàng Đã Giao Thành Công
+            <p style="text-align:right">Tổng Số Đơn Hàng Giao Thành Công : <strong>@Session["SoDonGiaoThanhCong"]</strong>  </p>
+            <p style="text-align:right"> Doanh Thu Đơn hàng : <strong>$@Session["soDonGiaoThanhCongDoanhThu"]</strong></p>
         </div>
         <div class="panel-body">
             <table class="table">
                 <tr>
                     <th>
-                        Mã Đơn 
+                        Mã Đơn
                     </th>
                     <th>
                         @Html.DisplayNameFor(model => model.Email)
@@ -287,134 +289,328 @@
                     </th>
 
                     @*<th>
-            @Html.DisplayNameFor(model => model.User.FirstName)
-        </th>*@
+                @Html.DisplayNameFor(model => model.User.FirstName)
+            </th>*@
                     <th></th>
                 </tr>
-              
-              
+
+
                 @foreach (var item in Model)
                 {
-                    if (item.TinhTrangGiao == true && item.TinhTrangDonHang == true && item.TinhTrangDongGoi == true && item.TinhTrangThanhToan == true)
+                    if (item.Descriptions != "Đã Thanh Toán Bằng PayPal")
                     {
-                        <tr>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.IDOrder)
-                            </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.Email)
-                            </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.OrderDate)
-                            </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.Address_Cus)
-                            </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.Amount)
-                            </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.Descriptions)
-                            </td>
-                            <td hidden>
-                                <a href="/Orders/TinhTrangThanhToan/@item.IDOrder">@(item.TinhTrangThanhToan.GetValueOrDefault()?"Đã Thanh Toán":"Chưa Thanh Toán")</a>
-                                <a href="/Orders/TinhTrangDonHang/@item.IDOrder">@(item.TinhTrangDonHang.GetValueOrDefault()?"Đã Xác Nhận":"Chưa Xác Nhận")</a>
-                                <a href="/Orders/TinhTrangDongGoi/@item.IDOrder">@(item.TinhTrangDongGoi.GetValueOrDefault()?"Đóng Gói Thành Công":"Đang Trong Quá Trình Đóng Giói")</a>
-                                <a href="/Orders/TinhTrangGiao/@item.IDOrder">@(item.TinhTrangGiao.GetValueOrDefault()?"Giao Thành Công":"Đang Trong Quá Trình Giao")</a>
-                                <a href="/Orders/HuyDon/@item.IDOrder">@(item.HuyDon.GetValueOrDefault()? "Bạn Đã Hủy Đơn Hàng Này" : "Hủy Đơn ")</a>
-                                <a href="/OrderDetails/Index/@item.IDOrder">Xem chi tiết</a>
-                            </td>
-
-                            @if (item.HuyDon == true)
-                            {
-                                <td><a href="#">Đã Hủy</a></td>
-                                <td><a href="#">Đã Hủy</a></td>
-                                <td><a href="#">Đã Hủy</a></td>
-                                <td><a href="#">Đã Hủy</a></td>
-                                <td><a href="#">Đã Hủy</a></td>
-
-                            }
-                            else
-                            {
+                        if (item.TinhTrangGiao == true && item.TinhTrangDonHang == true && item.TinhTrangDongGoi == true && item.TinhTrangThanhToan == true)
+                        {
+                            <tr>
                                 <td>
-                                    @*@Html.DisplayFor(modelItem => item.TinhTrangThanhToan)*@
+                                    @Html.DisplayFor(modelItem => item.IDOrder)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Email)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.OrderDate)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Address_Cus)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Amount)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Descriptions)
+                                </td>
+                                <td hidden>
                                     <a href="/Orders/TinhTrangThanhToan/@item.IDOrder">@(item.TinhTrangThanhToan.GetValueOrDefault()?"Đã Thanh Toán":"Chưa Thanh Toán")</a>
+                                    <a href="/Orders/TinhTrangDonHang/@item.IDOrder">@(item.TinhTrangDonHang.GetValueOrDefault()?"Đã Xác Nhận":"Chưa Xác Nhận")</a>
+                                    <a href="/Orders/TinhTrangDongGoi/@item.IDOrder">@(item.TinhTrangDongGoi.GetValueOrDefault()?"Đóng Gói Thành Công":"Đang Trong Quá Trình Đóng Giói")</a>
+                                    <a href="/Orders/TinhTrangGiao/@item.IDOrder">@(item.TinhTrangGiao.GetValueOrDefault()?"Giao Thành Công":"Đang Trong Quá Trình Giao")</a>
+                                    <a href="/Orders/HuyDon/@item.IDOrder">@(item.HuyDon.GetValueOrDefault()? "Bạn Đã Hủy Đơn Hàng Này" : "Hủy Đơn ")</a>
+                                    <a href="/OrderDetails/Index/@item.IDOrder">Xem chi tiết</a>
+                                </td>
+
+                                @if (item.HuyDon == true)
+                                {
+                                    <td><a href="#">Đã Hủy</a></td>
+                                    <td><a href="#">Đã Hủy</a></td>
+                                    <td><a href="#">Đã Hủy</a></td>
+                                    <td><a href="#">Đã Hủy</a></td>
+                                    <td><a href="#">Đã Hủy</a></td>
+
+                                }
+                                else
+                                {
+                                    <td>
+                                        @*@Html.DisplayFor(modelItem => item.TinhTrangThanhToan)*@
+                                        <a href="/Orders/TinhTrangThanhToan/@item.IDOrder">@(item.TinhTrangThanhToan.GetValueOrDefault()?"Đã Thanh Toán":"Chưa Thanh Toán")</a>
+                                    </td>
+                                    <td>
+                                        @*@Html.DisplayFor(modelItem => item.TinhTrangDonHang)*@
+                                        <a href="/Orders/TinhTrangDonHang/@item.IDOrder">@(item.TinhTrangDonHang.GetValueOrDefault()?"Đã Xác Nhận":"Chưa Xác Nhận")</a>
+                                    </td>
+                                    if (item.TinhTrangDonHang == false)
+                                    {
+                                        <td><a href="#">Đang Xử lý</a></td>
+                                    }
+                                    else
+                                    {
+                                        <td>
+                                            @*@Html.DisplayFor(modelItem => item.TinhTrangDongGioi)*@
+                                            <a href="/Orders/TinhTrangDongGoi/@item.IDOrder">@(item.TinhTrangDongGoi.GetValueOrDefault()?"Đóng Gói Thành Công":"Đang Trong Quá Trình Đóng Giói")</a>
+                                        </td>
+                                    }
+
+                                    if (item.TinhTrangDongGoi == false)
+                                    {
+                                        <td><a href="#">Đang Xử lý</a></td>
+                                    }
+                                    else
+                                    {
+                                        <td>
+                                            @*@Html.DisplayFor(modelItem => item.TinhTrangGiao)*@
+                                            <a href="/Orders/TinhTrangGiao/@item.IDOrder">@(item.TinhTrangGiao.GetValueOrDefault()?"Giao Thành Công":"Đang Trong Quá Trình Giao")</a>
+                                        </td>
+                                    }
+
+
+
+
+                                    if (item.TinhTrangDongGoi == false)
+                                    {
+                                        <td>
+                                            @*@Html.DisplayFor(modelItem => item.HuyDon)*@
+                                            <a href="/Orders/HuyDon/@item.IDOrder">@(item.HuyDon.GetValueOrDefault()? "Bạn Đã Hủy Đơn Hàng Này" : "Hủy Đơn ")</a>
+                                        </td>
+
+                                    }
+                                    else if (item.TinhTrangGiao == false || item.TinhTrangGiao == true)
+                                    {
+
+                                        <td><a href="#">không thể hủy đơn hàng</a></td>
+
+                                    }
+
+                                }
+
+                                @if (item.HuyDon == true || item.HuyDon == false)
+                                {
+                                    <td style="font-weight:bold">
+                                        <a href="/Orders/Delete/@item.IDOrder" style="color:red">Delete</a>
+                                        @*@Html.ActionLink("Delete", "Delete", new { id = item.IDOrder })*@
+                                    </td>
+                                }
+                                @*else
+                        {
+                            <td><a href="#">Hủy Đơn Trước Khi Xóa</a></td>
+                        }*@
+
+
+
+
+
+
+                                @*<td>
+                            @Html.DisplayFor(modelItem => item.User.FirstName)
+                        </td>*@
+                                @*<td>
+                            @Html.ActionLink("Edit", "Edit", new { id = item.IDOrder }) |
+                            @Html.ActionLink("Details", "Details", new { id = item.IDOrder }) |
+                            @Html.ActionLink("Delete", "Delete", new { id = item.IDOrder })
+                        </td>*@
+                                <td> <a href="/OrderDetails/Index/@item.IDOrder">Xem chi tiết</a></td>
+                            </tr>
+                        }
+
+                    }
+
+                }
+
+            </table>
+        </div>
+    </div>
+    @*Đơn Hàng Giao Thành Công (Thanh Toán Bằng Paypal)*@
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            Đơn Hàng Đã Giao Thành Công (Thanh Toán Bằng PayPal)
+            <p style="text-align:right">Tổng Số Đơn Hàng Giao Thành Công : <strong>@Session["SoDonGiaoThanhCongPayPal"]</strong>  </p>
+            <p style="text-align:right"> Doanh Thu Đơn hàng : <strong>$@Session["soDonGiaoThanhCongDoanhThuPayPal"]</strong></p>
+        </div>
+        <div class="panel-body">
+            <table class="table">
+                <tr>
+                    <th>
+                        Mã Đơn
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Email)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.OrderDate)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Address_Cus)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Amount)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Descriptions)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.TinhTrangThanhToan)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.TinhTrangDonHang)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.TinhTrangDongGoi)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.TinhTrangGiao)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.HuyDon)
+                    </th>
+                    <th>
+                        Xóa Đơn Hàng
+                    </th>
+                    <th>
+                        Chi tiết
+                    </th>
+
+                    @*<th>
+                @Html.DisplayNameFor(model => model.User.FirstName)
+            </th>*@
+                    <th></th>
+                </tr>
+
+
+                @foreach (var item in Model)
+                {
+                    if (item.Descriptions == "Đã Thanh Toán Bằng PayPal")
+                    {
+                        if (item.TinhTrangGiao == true && item.TinhTrangDonHang == true && item.TinhTrangDongGoi == true && item.TinhTrangThanhToan == true)
+                        {
+                            <tr>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.IDOrder)
                                 </td>
                                 <td>
-                                    @*@Html.DisplayFor(modelItem => item.TinhTrangDonHang)*@
+                                    @Html.DisplayFor(modelItem => item.Email)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.OrderDate)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Address_Cus)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Amount)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Descriptions)
+                                </td>
+                                <td hidden>
+                                    <a href="/Orders/TinhTrangThanhToan/@item.IDOrder">@(item.TinhTrangThanhToan.GetValueOrDefault()?"Đã Thanh Toán":"Chưa Thanh Toán")</a>
                                     <a href="/Orders/TinhTrangDonHang/@item.IDOrder">@(item.TinhTrangDonHang.GetValueOrDefault()?"Đã Xác Nhận":"Chưa Xác Nhận")</a>
+                                    <a href="/Orders/TinhTrangDongGoi/@item.IDOrder">@(item.TinhTrangDongGoi.GetValueOrDefault()?"Đóng Gói Thành Công":"Đang Trong Quá Trình Đóng Giói")</a>
+                                    <a href="/Orders/TinhTrangGiao/@item.IDOrder">@(item.TinhTrangGiao.GetValueOrDefault()?"Giao Thành Công":"Đang Trong Quá Trình Giao")</a>
+                                    <a href="/Orders/HuyDon/@item.IDOrder">@(item.HuyDon.GetValueOrDefault()? "Bạn Đã Hủy Đơn Hàng Này" : "Hủy Đơn ")</a>
+                                    <a href="/OrderDetails/Index/@item.IDOrder">Xem chi tiết</a>
                                 </td>
-                                if (item.TinhTrangDonHang == false)
+
+                                @if (item.HuyDon == true)
                                 {
-                                    <td><a href="#">Đang Xử lý</a></td>
+                                    <td><a href="#">Đã Hủy</a></td>
+                                    <td><a href="#">Đã Hủy</a></td>
+                                    <td><a href="#">Đã Hủy</a></td>
+                                    <td><a href="#">Đã Hủy</a></td>
+                                    <td><a href="#">Đã Hủy</a></td>
+
                                 }
                                 else
                                 {
                                     <td>
-                                        @*@Html.DisplayFor(modelItem => item.TinhTrangDongGioi)*@
-                                        <a href="/Orders/TinhTrangDongGoi/@item.IDOrder">@(item.TinhTrangDongGoi.GetValueOrDefault()?"Đóng Gói Thành Công":"Đang Trong Quá Trình Đóng Giói")</a>
+                                        @*@Html.DisplayFor(modelItem => item.TinhTrangThanhToan)*@
+                                        <a href="/Orders/TinhTrangThanhToan/@item.IDOrder">@(item.TinhTrangThanhToan.GetValueOrDefault()?"Đã Thanh Toán":"Chưa Thanh Toán")</a>
                                     </td>
-                                }
-
-                                if (item.TinhTrangDongGoi == false)
-                                {
-                                    <td><a href="#">Đang Xử lý</a></td>
-                                }
-                                else
-                                {
                                     <td>
-                                        @*@Html.DisplayFor(modelItem => item.TinhTrangGiao)*@
-                                        <a href="/Orders/TinhTrangGiao/@item.IDOrder">@(item.TinhTrangGiao.GetValueOrDefault()?"Giao Thành Công":"Đang Trong Quá Trình Giao")</a>
+                                        @*@Html.DisplayFor(modelItem => item.TinhTrangDonHang)*@
+                                        <a href="/Orders/TinhTrangDonHang/@item.IDOrder">@(item.TinhTrangDonHang.GetValueOrDefault()?"Đã Xác Nhận":"Chưa Xác Nhận")</a>
+                                    </td>
+                                    if (item.TinhTrangDonHang == false)
+                                    {
+                                        <td><a href="#">Đang Xử lý</a></td>
+                                    }
+                                    else
+                                    {
+                                        <td>
+                                            @*@Html.DisplayFor(modelItem => item.TinhTrangDongGioi)*@
+                                            <a href="/Orders/TinhTrangDongGoi/@item.IDOrder">@(item.TinhTrangDongGoi.GetValueOrDefault()?"Đóng Gói Thành Công":"Đang Trong Quá Trình Đóng Giói")</a>
+                                        </td>
+                                    }
+
+                                    if (item.TinhTrangDongGoi == false)
+                                    {
+                                        <td><a href="#">Đang Xử lý</a></td>
+                                    }
+                                    else
+                                    {
+                                        <td>
+                                            @*@Html.DisplayFor(modelItem => item.TinhTrangGiao)*@
+                                            <a href="/Orders/TinhTrangGiao/@item.IDOrder">@(item.TinhTrangGiao.GetValueOrDefault()?"Giao Thành Công":"Đang Trong Quá Trình Giao")</a>
+                                        </td>
+                                    }
+
+
+
+
+                                    if (item.TinhTrangDongGoi == false)
+                                    {
+                                        <td>
+                                            @*@Html.DisplayFor(modelItem => item.HuyDon)*@
+                                            <a href="/Orders/HuyDon/@item.IDOrder">@(item.HuyDon.GetValueOrDefault()? "Bạn Đã Hủy Đơn Hàng Này" : "Hủy Đơn ")</a>
+                                        </td>
+
+                                    }
+                                    else if (item.TinhTrangGiao == false || item.TinhTrangGiao == true)
+                                    {
+
+                                        <td><a href="#">không thể hủy đơn hàng</a></td>
+
+                                    }
+
+                                }
+
+                                @if (item.HuyDon == true || item.HuyDon == false)
+                                {
+                                    <td style="font-weight:bold">
+                                        <a href="/Orders/Delete/@item.IDOrder" style="color:red">Delete</a>
+                                        @*@Html.ActionLink("Delete", "Delete", new { id = item.IDOrder })*@
                                     </td>
                                 }
-
-
-
-
-                                if (item.TinhTrangDongGoi == false)
-                                {
-                                    <td>
-                                        @*@Html.DisplayFor(modelItem => item.HuyDon)*@
-                                        <a href="/Orders/HuyDon/@item.IDOrder">@(item.HuyDon.GetValueOrDefault()? "Bạn Đã Hủy Đơn Hàng Này" : "Hủy Đơn ")</a>
-                                    </td>
-
-                                }
-                                else if (item.TinhTrangGiao == false || item.TinhTrangGiao == true)
-                                {
-
-                                    <td><a href="#">không thể hủy đơn hàng</a></td>
-
-                                }
-
-                            }
-
-                            @if (item.HuyDon == true || item.HuyDon == false)
-                            {
-                                <td style="font-weight:bold">
-                                    <a href="/Orders/Delete/@item.IDOrder" style="color:red">Delete</a>
-                                    @*@Html.ActionLink("Delete", "Delete", new { id = item.IDOrder })*@
-                                </td>
-                            }
-                            @*else
-                                {
-                                    <td><a href="#">Hủy Đơn Trước Khi Xóa</a></td>
-                                }*@
+                                @*else
+                        {
+                            <td><a href="#">Hủy Đơn Trước Khi Xóa</a></td>
+                        }*@
 
 
 
 
 
 
-                            @*<td>
-                                    @Html.DisplayFor(modelItem => item.User.FirstName)
-                                </td>*@
-                            @*<td>
-                                    @Html.ActionLink("Edit", "Edit", new { id = item.IDOrder }) |
-                                    @Html.ActionLink("Details", "Details", new { id = item.IDOrder }) |
-                                    @Html.ActionLink("Delete", "Delete", new { id = item.IDOrder })
-                                </td>*@
-                        <td> <a href="/OrderDetails/Index/@item.IDOrder">Xem chi tiết</a></td>
-                        </tr>
+                                @*<td>
+                            @Html.DisplayFor(modelItem => item.User.FirstName)
+                        </td>*@
+                                @*<td>
+                            @Html.ActionLink("Edit", "Edit", new { id = item.IDOrder }) |
+                            @Html.ActionLink("Details", "Details", new { id = item.IDOrder }) |
+                            @Html.ActionLink("Delete", "Delete", new { id = item.IDOrder })
+                        </td>*@
+                                <td> <a href="/OrderDetails/Index/@item.IDOrder">Xem chi tiết</a></td>
+                            </tr>
+                        }
+
                     }
 
                 }
@@ -467,8 +663,8 @@
                         Xóa Đơn Hàng
                     </th>
                     @*<th>
-            @Html.DisplayNameFor(model => model.User.FirstName)
-        </th>*@
+                            @Html.DisplayNameFor(model => model.User.FirstName)
+                        </th>*@
                     <th></th>
                 </tr>
 
