@@ -52,11 +52,18 @@ namespace WebsiteBicycleStore.Controllers
         {
             if (ModelState.IsValid)
             {
-                user.DiemTichLuy = 0;
-                if (user.DiemTichLuy==0)
+                
+                if (user.IDPhanLoai==4)
                 {
-                    user.IDPhanLoai = 1;
-                }              
+                    user.DiemTichLuy = 0;
+                }
+                if (user.IDPhanLoai == 1)
+                {
+                    user.DiemTichLuy = 0;
+                }
+
+
+
                 db.Users.Add(user);
                 db.SaveChanges();
                 return RedirectToAction("Index");

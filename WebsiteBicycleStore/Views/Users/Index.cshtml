@@ -53,7 +53,7 @@
             <li><a href="/Products/Index">Sản Phẩm</a></li>
             <li><a href="/Categories/Index">Loại Sản Phẩm</a></li>
             <li><a href="/Orders/Index">Đơn Hàng</a></li>
-            <li><a href="/OrderDetails/Index">Chi Tiết Đơn hàng</a></li>
+            <li><a href="#">Chi Tiết Đơn hàng</a></li>
         </ul>
     </div>
     <div class="col-md-10 content">
@@ -83,42 +83,44 @@
                             @Html.DisplayNameFor(model => model.DiemTichLuy)
                         </th>
                         <th>
-                            @Html.DisplayNameFor(model => model.LoaiNguoiDung.TenPhanLoai)
+                            Phân Loại Người Dùng
+                            @*@Html.DisplayNameFor(model => model.LoaiNguoiDung.TenPhanLoai)*@
                         </th>
                         <th></th>
                     </tr>
 
                     @foreach (var item in Model)
                     {
-                        if (item.IDPhanLoai==1 || item.IDPhanLoai == 2 || item.IDPhanLoai == 3)
+                        if (item.IDPhanLoai != 4)
                         {
-
+                            <tr>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.FirstName)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.LastName)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Email)
+                                </td>
+                                <td>
+                                    <input type="password" value="@Html.DisplayFor(modelItem => item.Password)" id="myInput" disabled />
+                                    @*@Html.DisplayFor(modelItem => item.Password)*@
+                                </td>
+                                <td style="text-align:center">
+                                    @Html.DisplayFor(modelItem => item.DiemTichLuy)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.LoaiNguoiDung.TenPhanLoai)
+                                </td>
+                                <td>
+                                    @*@Html.ActionLink("Edit", "Edit", new { id = item.IDUser }) |*@
+                                    @*@Html.ActionLink("Details", "Details", new { id = item.IDUser }) |*@
+                                    @Html.ActionLink("Delete", "Delete", new { id = item.IDUser })
+                                </td>
+                            </tr>
                         }
-                        <tr>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.FirstName)
-                            </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.LastName)
-                            </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.Email)
-                            </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.Password)
-                            </td>
-                            <td style="text-align:center">
-                                @Html.DisplayFor(modelItem => item.DiemTichLuy)
-                            </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.LoaiNguoiDung.TenPhanLoai)
-                            </td>
-                            <td>
-                                @Html.ActionLink("Edit", "Edit", new { id = item.IDUser }) |
-                                    @Html.ActionLink("Details", "Details", new { id = item.IDUser }) |
-                                @Html.ActionLink("Delete", "Delete", new { id = item.IDUser })
-                            </td>
-                        </tr>
+
                     }
 
                 </table>
@@ -155,9 +157,9 @@
                         <th>
                             @Html.DisplayNameFor(model => model.Password)
                         </th>
-                        <th style="text-align:center">
+                        @*<th style="text-align:center">
                             @Html.DisplayNameFor(model => model.DiemTichLuy)
-                        </th>
+                        </th>*@
                         <th>
                             @Html.DisplayNameFor(model => model.LoaiNguoiDung.TenPhanLoai)
                         </th>
@@ -179,14 +181,16 @@
                                     @Html.DisplayFor(modelItem => item.Email)
                                 </td>
                                 <td>
-                                    @Html.DisplayFor(modelItem => item.Password)
+                                    <input type="password" value="@Html.DisplayFor(modelItem => item.Password)" id="myInput" disabled />
+                                    @*@Html.Password(item.Password)*@
                                 </td>
-                                <td style="text-align:center">
+                                @*<td style="text-align:center">
                                     @Html.DisplayFor(modelItem => item.DiemTichLuy)
-                                </td>
-                                <td>
-                                    @Html.DisplayFor(modelItem => item.LoaiNguoiDung.TenPhanLoai)
-                                </td>
+                                </td>*@
+                            <td>
+                                
+                                @Html.DisplayFor(modelItem => item.LoaiNguoiDung.TenPhanLoai)
+                            </td>
                                 <td>
                                     @*@Html.ActionLink("Edit", "Edit", new { id = item.IDUser }) |
                         @Html.ActionLink("Details", "Details", new { id = item.IDUser }) |*@
