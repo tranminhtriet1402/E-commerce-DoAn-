@@ -49,6 +49,7 @@
     <div class="col-md-2 sidebar">
         <ul class="nav nav-pills nav-stacked">
             <li class="active"><a href="/Users/Index">Khách Hàng</a></li>
+            <li><a href="/LoaiNguoiDungs/Index">Loại Khách Hàng</a></li>
             <li><a href="/Products/Index">Sản Phẩm</a></li>
             <li><a href="/Categories/Index">Loại Sản Phẩm</a></li>
             <li><a href="/Orders/Index">Đơn Hàng</a></li>
@@ -58,11 +59,11 @@
     <div class="col-md-10 content">
         <div class="panel panel-default">
             <div class="panel-heading">
-                Đơn hàng
+                Khách Hàng
             </div>
             <div class="panel-body">
                 <div>
-                    <h4>Thông tin khách hàng @Html.DisplayFor(model => model.LastName)</h4>
+                    <h4>User</h4>
                     <hr />
                     <dl class="dl-horizontal">
                         <dt>
@@ -97,6 +98,22 @@
                             @Html.DisplayFor(model => model.Password)
                         </dd>
 
+                        <dt>
+                            @Html.DisplayNameFor(model => model.DiemTichLuy)
+                        </dt>
+
+                        <dd>
+                            @Html.DisplayFor(model => model.DiemTichLuy)
+                        </dd>
+
+                        <dt>
+                            @Html.DisplayNameFor(model => model.LoaiNguoiDung.TenPhanLoai)
+                        </dt>
+
+                        <dd>
+                            @Html.DisplayFor(model => model.LoaiNguoiDung.TenPhanLoai)
+                        </dd>
+
                     </dl>
                 </div>
                 <p>
@@ -104,8 +121,6 @@
                     @Html.ActionLink("Back to List", "Index")
                 </p>
             </div>
-
-
         </div>
     </div>
     <footer class="pull-left footer">
@@ -115,4 +130,6 @@
         </p>
     </footer>
 </div>
+
+
 

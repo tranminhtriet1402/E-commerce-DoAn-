@@ -49,6 +49,7 @@
     <div class="col-md-2 sidebar">
         <ul class="nav nav-pills nav-stacked">
             <li class="active"><a href="/Users/Index">Khách Hàng</a></li>
+            <li><a href="/LoaiNguoiDungs/Index">Loại Khách Hàng</a></li>
             <li><a href="/Products/Index">Sản Phẩm</a></li>
             <li><a href="/Categories/Index">Loại Sản Phẩm</a></li>
             <li><a href="/Orders/Index">Đơn Hàng</a></li>
@@ -58,7 +59,7 @@
     <div class="col-md-10 content">
         <div class="panel panel-default">
             <div class="panel-heading">
-                Đơn hàng
+                Khách Hàng
             </div>
             <div class="panel-body">
                 @using (Html.BeginForm())
@@ -101,6 +102,22 @@
                             </div>
                         </div>
 
+                        @*<div class="form-group">
+                            @Html.LabelFor(model => model.DiemTichLuy, htmlAttributes: new { @class = "control-label col-md-2" })
+                            <div class="col-md-10">
+                                @Html.EditorFor(model => model.DiemTichLuy, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.DiemTichLuy, "", new { @class = "text-danger" })
+                            </div>
+                        </div>*@
+
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.IDPhanLoai, "IDPhanLoai", htmlAttributes: new { @class = "control-label col-md-2" })
+                            <div class="col-md-10">
+                                @Html.DropDownList("IDPhanLoai", null, htmlAttributes: new { @class = "form-control" })
+                                @Html.ValidationMessageFor(model => model.IDPhanLoai, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+
                         <div class="form-group">
                             <div class="col-md-offset-2 col-md-10">
                                 <input type="submit" value="Create" class="btn btn-default" />
@@ -113,9 +130,8 @@
                     @Html.ActionLink("Back to List", "Index")
                 </div>
 
+
             </div>
-
-
         </div>
     </div>
     <footer class="pull-left footer">

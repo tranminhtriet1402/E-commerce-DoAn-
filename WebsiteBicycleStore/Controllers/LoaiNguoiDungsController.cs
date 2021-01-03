@@ -10,117 +10,107 @@ using WebsiteBicycleStore.Models;
 
 namespace WebsiteBicycleStore.Controllers
 {
-    public class OrderDetailsController : Controller
+    public class LoaiNguoiDungsController : Controller
     {
         private DB_BicycleStoreEntities db = new DB_BicycleStoreEntities();
 
-        // GET: OrderDetails
-        public ActionResult Index(int id)
+        // GET: LoaiNguoiDungs
+        public ActionResult Index()
         {
-            //var orderDetails = db.OrderDetails.Include(o => o.Order).Include(o => o.Product);
-            var orderDetails = db.OrderDetails.Where(s=>s.IDOrder==id);
-            return View(orderDetails.ToList());
+            return View(db.LoaiNguoiDungs.ToList());
         }
 
-        // GET: OrderDetails/Details/5
+        // GET: LoaiNguoiDungs/Details/5
         public ActionResult Details(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            OrderDetail orderDetail = db.OrderDetails.Find(id);
-            if (orderDetail == null)
+            LoaiNguoiDung loaiNguoiDung = db.LoaiNguoiDungs.Find(id);
+            if (loaiNguoiDung == null)
             {
                 return HttpNotFound();
             }
-            return View(orderDetail);
+            return View(loaiNguoiDung);
         }
 
-        // GET: OrderDetails/Create
+        // GET: LoaiNguoiDungs/Create
         public ActionResult Create()
         {
-            ViewBag.IDOrder = new SelectList(db.Orders, "IDOrder", "Email");
-            ViewBag.IDProduct = new SelectList(db.Products, "IDProduct", "NameProduct");
             return View();
         }
 
-        // POST: OrderDetails/Create
+        // POST: LoaiNguoiDungs/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "ID,IDOrder,IDProduct,UnitPriceSale,QuantitySale,ngayDat,ngayNhan,imgPro,namePro")] OrderDetail orderDetail)
+        public ActionResult Create([Bind(Include = "IDPhanLoai,TenPhanLoai")] LoaiNguoiDung loaiNguoiDung)
         {
             if (ModelState.IsValid)
             {
-                db.OrderDetails.Add(orderDetail);
+                db.LoaiNguoiDungs.Add(loaiNguoiDung);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
 
-            ViewBag.IDOrder = new SelectList(db.Orders, "IDOrder", "Email", orderDetail.IDOrder);
-            ViewBag.IDProduct = new SelectList(db.Products, "IDProduct", "NameProduct", orderDetail.IDProduct);
-            return View(orderDetail);
+            return View(loaiNguoiDung);
         }
 
-        // GET: OrderDetails/Edit/5
+        // GET: LoaiNguoiDungs/Edit/5
         public ActionResult Edit(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            OrderDetail orderDetail = db.OrderDetails.Find(id);
-            if (orderDetail == null)
+            LoaiNguoiDung loaiNguoiDung = db.LoaiNguoiDungs.Find(id);
+            if (loaiNguoiDung == null)
             {
                 return HttpNotFound();
             }
-            ViewBag.IDOrder = new SelectList(db.Orders, "IDOrder", "Email", orderDetail.IDOrder);
-            ViewBag.IDProduct = new SelectList(db.Products, "IDProduct", "NameProduct", orderDetail.IDProduct);
-            return View(orderDetail);
+            return View(loaiNguoiDung);
         }
 
-        // POST: OrderDetails/Edit/5
+        // POST: LoaiNguoiDungs/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "ID,IDOrder,IDProduct,UnitPriceSale,QuantitySale,ngayDat,ngayNhan,imgPro,namePro")] OrderDetail orderDetail)
+        public ActionResult Edit([Bind(Include = "IDPhanLoai,TenPhanLoai")] LoaiNguoiDung loaiNguoiDung)
         {
             if (ModelState.IsValid)
             {
-                db.Entry(orderDetail).State = EntityState.Modified;
+                db.Entry(loaiNguoiDung).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            ViewBag.IDOrder = new SelectList(db.Orders, "IDOrder", "Email", orderDetail.IDOrder);
-            ViewBag.IDProduct = new SelectList(db.Products, "IDProduct", "NameProduct", orderDetail.IDProduct);
-            return View(orderDetail);
+            return View(loaiNguoiDung);
         }
 
-        // GET: OrderDetails/Delete/5
+        // GET: LoaiNguoiDungs/Delete/5
         public ActionResult Delete(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            OrderDetail orderDetail = db.OrderDetails.Find(id);
-            if (orderDetail == null)
+            LoaiNguoiDung loaiNguoiDung = db.LoaiNguoiDungs.Find(id);
+            if (loaiNguoiDung == null)
             {
                 return HttpNotFound();
             }
-            return View(orderDetail);
+            return View(loaiNguoiDung);
         }
 
-        // POST: OrderDetails/Delete/5
+        // POST: LoaiNguoiDungs/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            OrderDetail orderDetail = db.OrderDetails.Find(id);
-            db.OrderDetails.Remove(orderDetail);
+            LoaiNguoiDung loaiNguoiDung = db.LoaiNguoiDungs.Find(id);
+            db.LoaiNguoiDungs.Remove(loaiNguoiDung);
             db.SaveChanges();
             return RedirectToAction("Index");
         }

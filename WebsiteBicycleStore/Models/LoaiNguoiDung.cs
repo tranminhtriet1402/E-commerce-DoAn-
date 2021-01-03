@@ -12,31 +12,21 @@ namespace WebsiteBicycleStore.Models
     using System;
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations.Schema;
-    using System.Web;
 
-    public partial class Product
+    public partial class LoaiNguoiDung
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Product()
+        public LoaiNguoiDung()
         {
-            Images = "~/Content/images/add.png";
+            this.Users = new HashSet<User>();
         }
-
-        public int IDProduct { get; set; }
-        public string NameProduct { get; set; }
-        public Nullable<decimal> UnitPrice { get; set; }
-        public string Images { get; set; }
-        public Nullable<System.DateTime> ProductDate { get; set; }
-        public string Available { get; set; }
-        public Nullable<int> IDCategory { get; set; }
-        public string Descriptions { get; set; }
+    
+        public int IDPhanLoai { get; set; }
+        public string TenPhanLoai { get; set; }
         [NotMapped]
-        public HttpPostedFileBase ImageUpload { get; set; }
+        public List<LoaiNguoiDung> LoaiNguoiDungCollection { get; set; }
 
-        public virtual Category Category { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<OrderDetail> OrderDetails { get; set; }
-
-        public Nullable<int> soLuong { get; set; }
+        public virtual ICollection<User> Users { get; set; }
     }
 }

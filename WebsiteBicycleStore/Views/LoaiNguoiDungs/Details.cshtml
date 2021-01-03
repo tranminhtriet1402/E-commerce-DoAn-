@@ -1,7 +1,7 @@
-﻿@model WebsiteBicycleStore.Models.OrderDetail
+﻿@model WebsiteBicycleStore.Models.LoaiNguoiDung
 
 @{
-    ViewBag.Title = "Delete";
+    ViewBag.Title = "Details";
     Layout = "~/Views/AdminLayout.cshtml";
 }
 <nav class="navbar navbar-default navbar-static-top">
@@ -48,100 +48,37 @@
     <div class="col-md-2 sidebar">
         <ul class="nav nav-pills nav-stacked">
             <li><a href="/Users/Index">Khách Hàng</a></li>
-            <li><a href="/LoaiNguoiDungs/Index">Loại Khách Hàng</a></li>
+            <li class="active"><a href="/LoaiNguoiDungs/Index">Loại Khách Hàng</a></li>
             <li><a href="/Products/Index">Sản Phẩm</a></li>
             <li><a href="/Categories/Index">Loại Sản Phẩm</a></li>
             <li><a href="/Orders/Index">Đơn Hàng</a></li>
-            <li class="active"><a href="/OrderDetails/Index">Chi Tiết Đơn hàng</a></li>
+            <li><a href="/OrderDetails/Index">Chi Tiết Đơn hàng</a></li>
         </ul>
     </div>
     <div class="col-md-10 content">
         <div class="panel panel-default">
             <div class="panel-heading">
-                Chi Tiết Đơn hàng
+                Loại Khách Hàng
             </div>
             <div class="panel-body">
-                <h3>Are you sure you want to delete this?</h3>
                 <div>
-                    <h4>OrderDetail</h4>
                     <hr />
                     <dl class="dl-horizontal">
                         <dt>
-                            @Html.DisplayNameFor(model => model.UnitPriceSale)
+                            @Html.DisplayNameFor(model => model.TenPhanLoai)
                         </dt>
 
                         <dd>
-                            @Html.DisplayFor(model => model.UnitPriceSale)
-                        </dd>
-
-                        <dt>
-                            @Html.DisplayNameFor(model => model.QuantitySale)
-                        </dt>
-
-                        <dd>
-                            @Html.DisplayFor(model => model.QuantitySale)
-                        </dd>
-
-                        <dt>
-                            @Html.DisplayNameFor(model => model.ngayDat)
-                        </dt>
-
-                        <dd>
-                            @Html.DisplayFor(model => model.ngayDat)
-                        </dd>
-
-                        <dt>
-                            @Html.DisplayNameFor(model => model.ngayNhan)
-                        </dt>
-
-                        <dd>
-                            @Html.DisplayFor(model => model.ngayNhan)
-                        </dd>
-
-                        <dt>
-                            @Html.DisplayNameFor(model => model.imgPro)
-                        </dt>
-
-                        <dd>
-                            @Html.DisplayFor(model => model.imgPro)
-                        </dd>
-
-                        <dt>
-                            @Html.DisplayNameFor(model => model.namePro)
-                        </dt>
-
-                        <dd>
-                            @Html.DisplayFor(model => model.namePro)
-                        </dd>
-
-                        <dt>
-                            @Html.DisplayNameFor(model => model.Order.Email)
-                        </dt>
-
-                        <dd>
-                            @Html.DisplayFor(model => model.Order.Email)
-                        </dd>
-
-                        <dt>
-                            @Html.DisplayNameFor(model => model.Product.NameProduct)
-                        </dt>
-
-                        <dd>
-                            @Html.DisplayFor(model => model.Product.NameProduct)
+                            @Html.DisplayFor(model => model.TenPhanLoai)
                         </dd>
 
                     </dl>
-
-                    @using (Html.BeginForm())
-                    {
-                        @Html.AntiForgeryToken()
-
-                        <div class="form-actions no-color">
-                            <input type="submit" value="Delete" class="btn btn-default" /> |
-                            @Html.ActionLink("Back to List", "Index")
-                        </div>
-                    }
                 </div>
+                <p>
+                    @Html.ActionLink("Edit", "Edit", new { id = Model.IDPhanLoai }) |
+                    @Html.ActionLink("Back to List", "Index")
+                </p>
+
             </div>
         </div>
     </div>
@@ -152,6 +89,5 @@
         </p>
     </footer>
 </div>
-<h2>Delete</h2>
 
 

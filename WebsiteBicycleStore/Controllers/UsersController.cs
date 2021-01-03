@@ -17,7 +17,8 @@ namespace WebsiteBicycleStore.Controllers
         // GET: Users
         public ActionResult Index()
         {
-            return View(db.Users.ToList());
+            var users = db.Users.Include(u => u.LoaiNguoiDung);           
+            return View(users.ToList());
         }
 
         // GET: Users/Details/5
@@ -38,6 +39,7 @@ namespace WebsiteBicycleStore.Controllers
         // GET: Users/Create
         public ActionResult Create()
         {
+            ViewBag.IDPhanLoai = new SelectList(db.LoaiNguoiDungs, "IDPhanLoai", "TenPhanLoai");
             return View();
         }
 
@@ -46,15 +48,21 @@ namespace WebsiteBicycleStore.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "IDUser,FirstName,LastName,Email,Password")] User user)
+        public ActionResult Create([Bind(Include = "IDUser,FirstName,LastName,Email,Password,DiemTichLuy,IDPhanLoai")] User user)
         {
             if (ModelState.IsValid)
             {
+                user.DiemTichLuy = 0;
+                if (user.DiemTichLuy==0)
+                {
+                    user.IDPhanLoai = 1;
+                }              
                 db.Users.Add(user);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
 
+            ViewBag.IDPhanLoai = new SelectList(db.LoaiNguoiDungs, "IDPhanLoai", "TenPhanLoai", user.IDPhanLoai);
             return View(user);
         }
 
@@ -70,6 +78,7 @@ namespace WebsiteBicycleStore.Controllers
             {
                 return HttpNotFound();
             }
+            ViewBag.IDPhanLoai = new SelectList(db.LoaiNguoiDungs, "IDPhanLoai", "TenPhanLoai", user.IDPhanLoai);
             return View(user);
         }
 
@@ -78,14 +87,20 @@ namespace WebsiteBicycleStore.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "IDUser,FirstName,LastName,Email,Password")] User user)
+        public ActionResult Edit([Bind(Include = "IDUser,FirstName,LastName,Email,Password,DiemTichLuy,IDPhanLoai")] User user)
         {
             if (ModelState.IsValid)
             {
+                user.DiemTichLuy = 0;
+                if (user.DiemTichLuy == 0)
+                {
+                    user.IDPhanLoai = 1;
+                }
                 db.Entry(user).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
+            ViewBag.IDPhanLoai = new SelectList(db.LoaiNguoiDungs, "IDPhanLoai", "TenPhanLoai", user.IDPhanLoai);
             return View(user);
         }
 

@@ -81,9 +81,22 @@ namespace WebsiteBicycleStore.Controllers
             ViewBag.QuantityCart = total_quantity_item;
             return PartialView("BagCart");
         }
-        public ActionResult CheckOut(FormCollection form)
+        public ActionResult CheckOut(FormCollection form , string email)
         {
-
+            email = Session["Email"].ToString();
+            var diemtichluy = db.Users.Where(s => s.Email.StartsWith(email)).ToList();
+            foreach (var tichluy in diemtichluy)
+            {
+                tichluy.DiemTichLuy += 1;
+                if (tichluy.DiemTichLuy>5)
+                {
+                    tichluy.IDPhanLoai = 2;
+                }
+                else if (tichluy.DiemTichLuy > 20)
+                {
+                    tichluy.IDPhanLoai = 3;
+                }
+            }
             try
             {
                 Cart cart = Session["Cart"] as Cart;
@@ -127,7 +140,7 @@ namespace WebsiteBicycleStore.Controllers
                     _order_Detail.imgPro = item._shopping_product.Images;
                     _order_Detail.QuantitySale = item._shopping_quantity;
                     var check1 = db.Products.Find(item._shopping_product.IDProduct);
-                    check1.soLuong -= cart.Total_Quantity();
+                    check1.soLuong -= item._shopping_quantity;
 
                     db.Entry(check1).State = EntityState.Modified;
                     db.OrderDetails.Add(_order_Detail);
@@ -192,7 +205,7 @@ namespace WebsiteBicycleStore.Controllers
             }
 
         }
-
+      
 
         private Payment payment;
 
@@ -201,6 +214,20 @@ namespace WebsiteBicycleStore.Controllers
         {
             var listItems = new ItemList() { items = new List<Item>() };
 
+            string email = Session["Email"].ToString();
+            var diemtichluy = db.Users.Where(s => s.Email.StartsWith(email)).ToList();
+            foreach (var tichluy in diemtichluy)
+            {
+                tichluy.DiemTichLuy += 1;
+                if (tichluy.DiemTichLuy > 5)
+                {
+                    tichluy.IDPhanLoai = 2;
+                }
+                else if (tichluy.DiemTichLuy > 20)
+                {
+                    tichluy.IDPhanLoai = 3;
+                }
+            }
             Cart cart = Session["Cart"] as Cart;
             Order _order = new Order();
 

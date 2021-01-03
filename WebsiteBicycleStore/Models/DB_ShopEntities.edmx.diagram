@@ -7,13 +7,15 @@
       <Diagram DiagramId="b2316fcfc585470b9413521e11c620e7" Name="Diagram1" ZoomLevel="72">
         <EntityTypeShape EntityType="DB_BicycleStoreModel.Category" Width="1.5" PointX="1.875" PointY="1.375" />
         <EntityTypeShape EntityType="DB_BicycleStoreModel.OrderDetail" Width="1.5" PointX="6.25" PointY="0.75" />
-        <EntityTypeShape EntityType="DB_BicycleStoreModel.User" Width="1.5" PointX="4.875" PointY="4.5" />
         <EntityTypeShape EntityType="DB_BicycleStoreModel.Order" Width="1.5" PointX="9" PointY="1.875" />
         <AssociationConnector Association="DB_BicycleStoreModel.FK__OrderDeta__IDOrd__07C12930" />
-        <AssociationConnector Association="DB_BicycleStoreModel.FK__Orders__IDUser__09A971A2" />
         <EntityTypeShape EntityType="DB_BicycleStoreModel.Product" Width="1.5" PointX="2.75" PointY="3.875" />
         <AssociationConnector Association="DB_BicycleStoreModel.FK__Products__IDCate__0A9D95DB" />
         <AssociationConnector Association="DB_BicycleStoreModel.FK__OrderDeta__IDPro__08B54D69" />
+        <EntityTypeShape EntityType="DB_BicycleStoreModel.LoaiNguoiDung" Width="1.5" PointX="4.5" PointY="8.875" />
+        <EntityTypeShape EntityType="DB_BicycleStoreModel.User" Width="1.5" PointX="6.75" PointY="8.375" />
+        <AssociationConnector Association="DB_BicycleStoreModel.FK__Users__IDPhanLoa__160F4887" />
+        <AssociationConnector Association="DB_BicycleStoreModel.FK__Orders__IDUser__09A971A2" />
         </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

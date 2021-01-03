@@ -19,6 +19,7 @@ namespace WebsiteBicycleStore.Controllers
         // GET: Orders
         public ActionResult Index()
         {
+            
             var orders = db.Orders.Include(o => o.User);
             return View(orders.ToList());
         }
@@ -205,9 +206,10 @@ namespace WebsiteBicycleStore.Controllers
         public ActionResult HuyDon(int? id)
         {           
             var check = db.Orders.Find(id);
-            var count = 0;
+            
             foreach (var ec in db.OrderDetails.Where(x => x.IDOrder == id))
             {
+                var count = 0;
                 count += (int)ec.QuantitySale;
                 var congSL = db.Products.Find(ec.IDProduct);
                 congSL.soLuong += count;

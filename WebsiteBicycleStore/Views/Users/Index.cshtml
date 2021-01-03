@@ -4,6 +4,7 @@
     ViewBag.Title = "Index";
     Layout = "~/Views/AdminLayout.cshtml";
 }
+
 <nav class="navbar navbar-default navbar-static-top">
     <div class="container-fluid">
         <!-- Brand and toggle get grouped for better mobile display -->
@@ -37,11 +38,9 @@
                 </li>
                 @if (@Session["EmailAdmin"] != null)
                 {
-                    <li><a href="@Url.Action("LogOut", "Login_SignUp")">Log Out</a></li>
+                    <li><a href="@Url.Action("LogOut", "Login_SignUp")">LogOut</a></li>
 
                 }
-
-
             </ul>
         </div><!-- /.navbar-collapse -->
     </div><!-- /.container-fluid -->
@@ -50,16 +49,17 @@
     <div class="col-md-2 sidebar">
         <ul class="nav nav-pills nav-stacked">
             <li class="active"><a href="/Users/Index">Khách Hàng</a></li>
+            <li><a href="/LoaiNguoiDungs/Index">Loại Khách Hàng</a></li>
             <li><a href="/Products/Index">Sản Phẩm</a></li>
             <li><a href="/Categories/Index">Loại Sản Phẩm</a></li>
-            <li ><a href="/Orders/Index">Đơn Hàng</a></li>
+            <li><a href="/Orders/Index">Đơn Hàng</a></li>
             <li><a href="/OrderDetails/Index">Chi Tiết Đơn hàng</a></li>
         </ul>
     </div>
     <div class="col-md-10 content">
         <div class="panel panel-default">
             <div class="panel-heading">
-                Đơn hàng
+                Khách Hàng
             </div>
             <div class="panel-body">
                 <p>
@@ -79,11 +79,21 @@
                         <th>
                             @Html.DisplayNameFor(model => model.Password)
                         </th>
+                        <th style="text-align:center">
+                            @Html.DisplayNameFor(model => model.DiemTichLuy)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.LoaiNguoiDung.TenPhanLoai)
+                        </th>
                         <th></th>
                     </tr>
 
                     @foreach (var item in Model)
                     {
+                        if (item.IDPhanLoai==1 || item.IDPhanLoai == 2 || item.IDPhanLoai == 3)
+                        {
+
+                        }
                         <tr>
                             <td>
                                 @Html.DisplayFor(modelItem => item.FirstName)
@@ -97,20 +107,102 @@
                             <td>
                                 @Html.DisplayFor(modelItem => item.Password)
                             </td>
+                            <td style="text-align:center">
+                                @Html.DisplayFor(modelItem => item.DiemTichLuy)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.LoaiNguoiDung.TenPhanLoai)
+                            </td>
                             <td>
                                 @Html.ActionLink("Edit", "Edit", new { id = item.IDUser }) |
-                                @Html.ActionLink("Details", "Details", new { id = item.IDUser }) |
+                                    @Html.ActionLink("Details", "Details", new { id = item.IDUser }) |
                                 @Html.ActionLink("Delete", "Delete", new { id = item.IDUser })
                             </td>
                         </tr>
                     }
 
                 </table>
+
             </div>
-
-
         </div>
     </div>
+
+
+
+    <div class="col-md-2 sidebar">
+        
+    </div>
+    <div class="col-md-10 content">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                Nhân Viên Cửa Hàng
+            </div>
+            <div class="panel-body">
+                <p>
+                    @Html.ActionLink("Create New", "Create")
+                </p>
+                <table class="table">
+                    <tr>
+                        <th>
+                            @Html.DisplayNameFor(model => model.FirstName)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.LastName)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Email)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Password)
+                        </th>
+                        <th style="text-align:center">
+                            @Html.DisplayNameFor(model => model.DiemTichLuy)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.LoaiNguoiDung.TenPhanLoai)
+                        </th>
+                        <th></th>
+                    </tr>
+
+                    @foreach (var item in Model)
+                    {
+                        if (item.IDPhanLoai == 4)
+                        {
+                            <tr>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.FirstName)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.LastName)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Email)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Password)
+                                </td>
+                                <td style="text-align:center">
+                                    @Html.DisplayFor(modelItem => item.DiemTichLuy)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.LoaiNguoiDung.TenPhanLoai)
+                                </td>
+                                <td>
+                                    @*@Html.ActionLink("Edit", "Edit", new { id = item.IDUser }) |
+                        @Html.ActionLink("Details", "Details", new { id = item.IDUser }) |*@
+                                    @Html.ActionLink("Delete", "Delete", new { id = item.IDUser })
+                                </td>
+                            </tr>
+                        }
+
+                    }
+
+                </table>
+
+            </div>
+        </div>
+    </div>
+
     <footer class="pull-left footer">
         <p class="col-md-12">
             <hr class="divider">
@@ -118,4 +210,5 @@
         </p>
     </footer>
 </div>
+
 

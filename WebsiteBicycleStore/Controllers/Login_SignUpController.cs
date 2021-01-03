@@ -67,6 +67,8 @@ namespace WebsiteBicycleStore.Controllers
             {
                 if (_user.Password == form["confirmpassword"])
                 {
+                    _user.DiemTichLuy = 0;
+                    _user.IDPhanLoai = 1;
                     _db.Configuration.ValidateOnSaveEnabled = false;
                     _db.Users.Add(_user);
                     _db.SaveChanges();

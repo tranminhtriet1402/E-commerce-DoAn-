@@ -1,4 +1,4 @@
-﻿@model WebsiteBicycleStore.Models.Category
+﻿@model WebsiteBicycleStore.Models.LoaiNguoiDung
 
 @{
     ViewBag.Title = "Create";
@@ -38,7 +38,7 @@
                 </li>
                 @if (@Session["EmailAdmin"] != null)
                 {
-                    <li><a href="@Url.Action("LogOut", "Login_SignUp")">Log Out</a></li>
+                    <li><a href="@Url.Action("LogOut", "Login_SignUp")">LogOut</a></li>
 
                 }
             </ul>
@@ -49,9 +49,9 @@
     <div class="col-md-2 sidebar">
         <ul class="nav nav-pills nav-stacked">
             <li><a href="/Users/Index">Khách Hàng</a></li>
-            <li><a href="/LoaiNguoiDungs/Index">Loại Khách Hàng</a></li>
+            <li class="active"><a href="/LoaiNguoiDungs/Index">Loại Khách Hàng</a></li>
             <li><a href="/Products/Index">Sản Phẩm</a></li>
-            <li class="active"><a href="/Categories/Index">Loại Sản Phẩm</a></li>
+            <li><a href="/Categories/Index">Loại Sản Phẩm</a></li>
             <li><a href="/Orders/Index">Đơn Hàng</a></li>
             <li><a href="/OrderDetails/Index">Chi Tiết Đơn hàng</a></li>
         </ul>
@@ -59,7 +59,7 @@
     <div class="col-md-10 content">
         <div class="panel panel-default">
             <div class="panel-heading">
-                Loại Sản Phẩm
+                Loại Khách Hàng
             </div>
             <div class="panel-body">
                 @using (Html.BeginForm())
@@ -67,14 +67,14 @@
                     @Html.AntiForgeryToken()
 
                     <div class="form-horizontal">
-                        <h4>Category</h4>
+                        <h4>LoaiNguoiDung</h4>
                         <hr />
                         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
                         <div class="form-group">
-                            @Html.LabelFor(model => model.NameCategory, htmlAttributes: new { @class = "control-label col-md-2" })
+                            @Html.LabelFor(model => model.TenPhanLoai, htmlAttributes: new { @class = "control-label col-md-2" })
                             <div class="col-md-10">
-                                @Html.EditorFor(model => model.NameCategory, new { htmlAttributes = new { @class = "form-control" } })
-                                @Html.ValidationMessageFor(model => model.NameCategory, "", new { @class = "text-danger" })
+                                @Html.EditorFor(model => model.TenPhanLoai, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.TenPhanLoai, "", new { @class = "text-danger" })
                             </div>
                         </div>
 
@@ -100,4 +100,5 @@
         </p>
     </footer>
 </div>
+
 

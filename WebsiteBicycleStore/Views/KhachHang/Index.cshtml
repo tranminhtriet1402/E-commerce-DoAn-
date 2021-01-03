@@ -83,6 +83,12 @@
                 @Html.DisplayNameFor(model => model.Email)
             </td>
             <td style="background-color:#ff523b">
+                Điểm Tích Lũy
+            </td>
+            <td style="background-color:#ff523b">
+                Loại Khách Hàng
+            </td>
+            <td style="background-color:#ff523b">
                 @Html.DisplayNameFor(model => model.Password)
             </td>
             <td style="text-align:left;background-color:#ff523b">Show password</td>
@@ -100,6 +106,12 @@
                 </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.Email)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.DiemTichLuy)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.LoaiNguoiDung.TenPhanLoai)
                 </td>
                 <td>
                     <input type="password" value="@Html.DisplayFor(modelItem => item.Password)" id="myInput" />
