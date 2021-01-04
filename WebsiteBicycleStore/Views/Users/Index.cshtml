@@ -91,7 +91,7 @@
 
                     @foreach (var item in Model)
                     {
-                        if (item.IDPhanLoai != 4)
+                        if (item.IDPhanLoai == 1 || item.IDPhanLoai == 2 || item.IDPhanLoai == 3)
                         {
                             <tr>
                                 <td>
@@ -168,7 +168,7 @@
 
                     @foreach (var item in Model)
                     {
-                        if (item.IDPhanLoai == 4)
+                        if (item.IDPhanLoai != 1 && item.IDPhanLoai != 3 && item.IDPhanLoai != 2)
                         {
                             <tr>
                                 <td>
