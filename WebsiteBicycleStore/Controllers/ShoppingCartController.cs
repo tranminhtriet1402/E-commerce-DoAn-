@@ -38,26 +38,31 @@ namespace WebsiteBicycleStore.Controllers
             }
             return RedirectToAction("ShowToCart", "ShoppingCart");
         }
-        public ActionResult ShowToCart(string email)
+        public ActionResult ShowToCart()
         {
-            email = Session["Email"].ToString();
-            var diemtichluy = db.Users.Where(s => s.Email.StartsWith(email)).ToList();
-            foreach (var tichluy in diemtichluy)
+            if (Session["Email"] != null)
             {
-                if (tichluy.IDPhanLoai==2)
+                string email = Session["Email"].ToString();
+                var diemtichluy = db.Users.Where(s => s.Email.StartsWith(email)).ToList();
+                foreach (var tichluy in diemtichluy)
                 {
-                    ViewBag.phanloai = "Khách Hàng Vip";
+                    if (tichluy.IDPhanLoai == 2)
+                    {
+                        ViewBag.phanloai = "Khách Hàng Vip";
+                    }
+                    else if (tichluy.IDPhanLoai == 1)
+                    {
+                        ViewBag.phanloai = "Khách Hàng Thường";
+                    }
+                    else if (tichluy.IDPhanLoai == 3)
+                    {
+                        ViewBag.phanloai = "Khách Hàng SVIP";
+                    }
+
                 }
-                else if (tichluy.IDPhanLoai == 1)
-                {
-                    ViewBag.phanloai = "Khách Hàng Thường";
-                }
-                else if (tichluy.IDPhanLoai == 3)
-                {
-                    ViewBag.phanloai = "Khách Hàng SVIP";
-                }
-                
             }
+
+           
             if (Session["Cart"] == null)
             {
                 return RedirectToAction("ShowToCart", "ShoppingCart");
@@ -99,9 +104,9 @@ namespace WebsiteBicycleStore.Controllers
             ViewBag.QuantityCart = total_quantity_item;
             return PartialView("BagCart");
         }
-        public ActionResult CheckOut(FormCollection form , string email)
+        public ActionResult CheckOut(FormCollection form )
         {
-            email = Session["Email"].ToString();
+            string email = Session["Email"].ToString();
             var diemtichluy = db.Users.Where(s => s.Email.StartsWith(email)).ToList();
             foreach (var tichluy in diemtichluy)
             {
@@ -321,8 +326,9 @@ namespace WebsiteBicycleStore.Controllers
         private Payment CreatePayment(APIContext apiContext, string redirectUrl)
         {
             var listItems = new ItemList() { items = new List<Item>() };
-
             string email = Session["Email"].ToString();
+
+           
             var diemtichluy = db.Users.Where(s => s.Email.StartsWith(email)).ToList();
             foreach (var tichluy in diemtichluy)
             {
